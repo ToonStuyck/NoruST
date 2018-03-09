@@ -1,0 +1,75 @@
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.csprojResolveAssemblyReference.cache
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.BoxWhiskerPlotForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.CorrelationCovarianceForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.DataSetManagerForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.DiscriminantAnalysisForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.DummyForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.TimeSeriesGraphForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.HistogramForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.LagForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.OneVariableSummaryForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.ForecastForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.RunsTestForRandomnessForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.RegressionForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.SampleSizeEstimationForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.LogisticRegressionForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.ScatterplotForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Properties.Resources.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Ribbon.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.csproj.GenerateResource.Cache
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\NoruST.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\NoruST.pdb
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\NoruST.dll.manifest
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\NoruST.vsto
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\MathNet.Numerics.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.Office.Tools.Common.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.Office.Tools.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.Office.Tools.Excel.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\bin\Debug\MathNet.Numerics.xml
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.dll
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.pdb
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.OneWayAnovaForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.PChartForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.SelectRangeForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.ProcessCapabilityForm.resources
+C:\Users\u0004359\Box Sync\Documents\mystattools\NoruST\obj\Debug\NoruST.Forms.XRChartForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.csprojResolveAssemblyReference.cache
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.BoxWhiskerPlotForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.CorrelationCovarianceForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.DataSetManagerForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.DiscriminantAnalysisForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.DummyForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.ForecastForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.OneWayAnovaForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.PChartForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.SelectRangeForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.HistogramForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.LagForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.OneVariableSummaryForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.RegressionForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.SampleSizeEstimationForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.LogisticRegressionForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.ScatterplotForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.ProcessCapabilityForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.TimeSeriesGraphForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Forms.XRChartForm.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Properties.Resources.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.Ribbon.resources
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.csproj.GenerateResource.Cache
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.csproj.CoreCompileInputs.cache
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\NoruST.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\NoruST.pdb
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\NoruST.dll.manifest
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\NoruST.vsto
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.Office.Tools.Common.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.Office.Tools.Common.v4.0.Utilities.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.Office.Tools.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.Office.Tools.Excel.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\bin\Debug\MathNet.Numerics.xml
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.dll
+D:\Kuleuven\Management\Thesis\ThesisOld\NoruST\obj\Debug\NoruST.pdb
