@@ -185,15 +185,15 @@ namespace NoruST.Presenters
 
             if (dataSet.getVariableNamesInFirstRowOrColumn())
             {
-                xControlLimitFactor = xChartConstants[dataSet.rangeSize() - 1];
-                rControlLimitFactor1 = rChartConstants1[dataSet.rangeSize() - 1];
-                rControlLimitFactor2 = rChartConstants2[dataSet.rangeSize() - 1];
+                xControlLimitFactor = xChartConstants[dataSet.amountOfVariables() - 1];
+                rControlLimitFactor1 = rChartConstants1[dataSet.amountOfVariables() - 1];
+                rControlLimitFactor2 = rChartConstants2[dataSet.amountOfVariables() - 1];
             }
             else
             {
-                xControlLimitFactor = xChartConstants[dataSet.rangeSize()];
-                rControlLimitFactor1 = rChartConstants1[dataSet.rangeSize()];
-                rControlLimitFactor2 = rChartConstants2[dataSet.rangeSize()];
+                xControlLimitFactor = xChartConstants[dataSet.amountOfVariables()];
+                rControlLimitFactor1 = rChartConstants1[dataSet.amountOfVariables()];
+                rControlLimitFactor2 = rChartConstants2[dataSet.amountOfVariables()];
             }
              
             for (counter = 0; counter <= dataSet.rangeSize()-1; counter++)
