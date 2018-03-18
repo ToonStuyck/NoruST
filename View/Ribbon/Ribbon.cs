@@ -58,7 +58,7 @@ namespace NoruST
             btnHistogram.Click += delegate { histogramPresenter.openView(); };
             btnScatterplot.Click += delegate { scatterPlotPresenter.openView(); };
             btnBoxWhiskerPlot.Click += delegate { boxWhiskerPlotPresenter.openView(); };
-            btnSampleSizeEstimation.Click += delegate { sampleSizeEstimationPresenter.openView(); };
+            btnSampleSize.Click += delegate { sampleSizeEstimationPresenter.openView(); };
             btnAnova.Click += delegate { oneWayAnovaPresenter.openView(); };
             btnRunsTestForRandomness.Click += delegate { runsTestForRandomnessPresenter.openView(); };
             btnForecast.Click += delegate { forecastPresenter.openView(); };

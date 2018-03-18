@@ -37,10 +37,6 @@ namespace NoruST.Forms
                 if (selectedVariable() == null) return;
                 presenter.getModel().variable = selectedVariable();
             };
-            uiComboBoxCondition.SelectedValueChanged +=
-                (obj, eventArgs) => presenter.getModel().condition = uiComboBoxCondition.SelectedIndex;
-            uiTextBoxCondition.TextChanged +=
-                (obj, eventArgs) => presenter.getModel().conditionValue = uiTextBoxCondition.Text;
         }
 
         private DataSet selectedDataSet()

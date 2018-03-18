@@ -30,15 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DummyForm));
             this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
-            this.lblCondition = new System.Windows.Forms.Label();
             this.uiButton_Cancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.uiComboBox_Variables = new System.Windows.Forms.ComboBox();
             this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
             this.lblVariable = new System.Windows.Forms.Label();
             this.lblDataSet = new System.Windows.Forms.Label();
-            this.uiComboBoxCondition = new System.Windows.Forms.ComboBox();
-            this.uiTextBoxCondition = new System.Windows.Forms.TextBox();
             this.tlpForm.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,15 +49,12 @@
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tlpForm.Controls.Add(this.lblCondition, 0, 2);
             this.tlpForm.Controls.Add(this.uiButton_Cancel, 4, 3);
             this.tlpForm.Controls.Add(this.btnOk, 3, 3);
             this.tlpForm.Controls.Add(this.uiComboBox_Variables, 1, 1);
             this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
             this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
             this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
-            this.tlpForm.Controls.Add(this.uiComboBoxCondition, 1, 2);
-            this.tlpForm.Controls.Add(this.uiTextBoxCondition, 2, 2);
             this.tlpForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpForm.Location = new System.Drawing.Point(0, 0);
             this.tlpForm.Name = "tlpForm";
@@ -71,20 +65,6 @@
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.Size = new System.Drawing.Size(334, 116);
             this.tlpForm.TabIndex = 20;
-            // 
-            // lblCondition
-            // 
-            this.lblCondition.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCondition.AutoSize = true;
-            this.lblCondition.Location = new System.Drawing.Point(0, 54);
-            this.lblCondition.Margin = new System.Windows.Forms.Padding(0);
-            this.lblCondition.Name = "lblCondition";
-            this.lblCondition.Size = new System.Drawing.Size(51, 31);
-            this.lblCondition.TabIndex = 29;
-            this.lblCondition.Text = "Condition";
-            this.lblCondition.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiButton_Cancel
             // 
@@ -114,10 +94,10 @@
             this.tlpForm.SetColumnSpan(this.uiComboBox_Variables, 4);
             this.uiComboBox_Variables.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiComboBox_Variables.FormattingEnabled = true;
-            this.uiComboBox_Variables.Location = new System.Drawing.Point(56, 30);
+            this.uiComboBox_Variables.Location = new System.Drawing.Point(52, 30);
             this.uiComboBox_Variables.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.uiComboBox_Variables.Name = "uiComboBox_Variables";
-            this.uiComboBox_Variables.Size = new System.Drawing.Size(275, 21);
+            this.uiComboBox_Variables.Size = new System.Drawing.Size(279, 21);
             this.uiComboBox_Variables.TabIndex = 26;
             // 
             // uiComboBox_DataSets
@@ -125,10 +105,10 @@
             this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 4);
             this.uiComboBox_DataSets.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiComboBox_DataSets.FormattingEnabled = true;
-            this.uiComboBox_DataSets.Location = new System.Drawing.Point(56, 3);
+            this.uiComboBox_DataSets.Location = new System.Drawing.Point(52, 3);
             this.uiComboBox_DataSets.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
-            this.uiComboBox_DataSets.Size = new System.Drawing.Size(275, 21);
+            this.uiComboBox_DataSets.Size = new System.Drawing.Size(279, 21);
             this.uiComboBox_DataSets.TabIndex = 25;
             // 
             // lblVariable
@@ -140,7 +120,7 @@
             this.lblVariable.Location = new System.Drawing.Point(0, 27);
             this.lblVariable.Margin = new System.Windows.Forms.Padding(0);
             this.lblVariable.Name = "lblVariable";
-            this.lblVariable.Size = new System.Drawing.Size(51, 27);
+            this.lblVariable.Size = new System.Drawing.Size(47, 27);
             this.lblVariable.TabIndex = 24;
             this.lblVariable.Text = "Variable";
             this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,35 +134,10 @@
             this.lblDataSet.Location = new System.Drawing.Point(0, 0);
             this.lblDataSet.Margin = new System.Windows.Forms.Padding(0);
             this.lblDataSet.Name = "lblDataSet";
-            this.lblDataSet.Size = new System.Drawing.Size(51, 27);
+            this.lblDataSet.Size = new System.Drawing.Size(47, 27);
             this.lblDataSet.TabIndex = 21;
             this.lblDataSet.Text = "Data set";
             this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiComboBoxCondition
-            // 
-            this.uiComboBoxCondition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiComboBoxCondition.FormattingEnabled = true;
-            this.uiComboBoxCondition.Items.AddRange(new object[] {
-            "<",
-            "<=",
-            "=",
-            "=>",
-            ">"});
-            this.uiComboBoxCondition.Location = new System.Drawing.Point(56, 59);
-            this.uiComboBoxCondition.Margin = new System.Windows.Forms.Padding(5);
-            this.uiComboBoxCondition.Name = "uiComboBoxCondition";
-            this.uiComboBoxCondition.Size = new System.Drawing.Size(50, 21);
-            this.uiComboBoxCondition.TabIndex = 30;
-            // 
-            // uiTextBoxCondition
-            // 
-            this.uiTextBoxCondition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiTextBoxCondition.Location = new System.Drawing.Point(116, 59);
-            this.uiTextBoxCondition.Margin = new System.Windows.Forms.Padding(5);
-            this.uiTextBoxCondition.Name = "uiTextBoxCondition";
-            this.uiTextBoxCondition.Size = new System.Drawing.Size(50, 20);
-            this.uiTextBoxCondition.TabIndex = 31;
             // 
             // DummyForm
             // 
@@ -211,8 +166,5 @@
         private System.Windows.Forms.ComboBox uiComboBox_Variables;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button uiButton_Cancel;
-        private System.Windows.Forms.Label lblCondition;
-        private System.Windows.Forms.ComboBox uiComboBoxCondition;
-        private System.Windows.Forms.TextBox uiTextBoxCondition;
     }
 }

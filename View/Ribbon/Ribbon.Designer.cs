@@ -47,29 +47,28 @@
             this.btnDataUtilities = this.Factory.CreateRibbonMenu();
             this.btnDummy = this.Factory.CreateRibbonButton();
             this.btnLag = this.Factory.CreateRibbonButton();
+            this.btnInteraction = this.Factory.CreateRibbonButton();
             this.menuVisualization = this.Factory.CreateRibbonMenu();
             this.btnHistogram = this.Factory.CreateRibbonButton();
             this.btnScatterplot = this.Factory.CreateRibbonButton();
             this.btnBoxWhiskerPlot = this.Factory.CreateRibbonButton();
-            this.btnSampleSizeEstimation = this.Factory.CreateRibbonButton();
             this.menuDescriptiveStatistics = this.Factory.CreateRibbonMenu();
             this.btnOneVariableSummary = this.Factory.CreateRibbonButton();
             this.btnCorrelationAndCovariance = this.Factory.CreateRibbonButton();
             this.menuStatisticalInference = this.Factory.CreateRibbonMenu();
             this.btnAnova = this.Factory.CreateRibbonButton();
-            this.btnInteractionplot = this.Factory.CreateRibbonButton();
+            this.btnSampleSize = this.Factory.CreateRibbonButton();
             this.menuRegression = this.Factory.CreateRibbonMenu();
-            this.btnInteraction = this.Factory.CreateRibbonButton();
             this.btnWhiteTest = this.Factory.CreateRibbonButton();
             this.btnSimpleRegression = this.Factory.CreateRibbonButton();
-            this.menuNormalityTests = this.Factory.CreateRibbonMenu();
-            this.menuClassification = this.Factory.CreateRibbonMenu();
-            this.btnLogisticRegression = this.Factory.CreateRibbonButton();
-            this.btnDiscriminantAnalysis = this.Factory.CreateRibbonButton();
             this.menuTimeseriesandForecasting = this.Factory.CreateRibbonMenu();
             this.btnTimeSeriesGraph = this.Factory.CreateRibbonButton();
             this.btnRunsTestForRandomness = this.Factory.CreateRibbonButton();
             this.btnForecast = this.Factory.CreateRibbonButton();
+            this.menuClassification = this.Factory.CreateRibbonMenu();
+            this.btnLogisticRegression = this.Factory.CreateRibbonButton();
+            this.btnDiscriminantAnalysis = this.Factory.CreateRibbonButton();
+            this.menuNormalityTests = this.Factory.CreateRibbonMenu();
             this.menuStatisticalProcessControl = this.Factory.CreateRibbonMenu();
             this.btnXRChart = this.Factory.CreateRibbonButton();
             this.btnPChart = this.Factory.CreateRibbonButton();
@@ -138,6 +137,8 @@
             this.btnDataSetManager.Image = global::NoruST.Properties.Resources.data_set_manager2_image;
             this.btnDataSetManager.Label = "Data Set Manager";
             this.btnDataSetManager.Name = "btnDataSetManager";
+            this.btnDataSetManager.ScreenTip = "Define a data set and variables, or edit or delete an existing data set and varia" +
+    "bles";
             this.btnDataSetManager.ShowImage = true;
             // 
             // btnDataViewer
@@ -158,19 +159,29 @@
             this.btnDataUtilities.Items.Add(this.btnInteraction);
             this.btnDataUtilities.Label = "Data Utilities";
             this.btnDataUtilities.Name = "btnDataUtilities";
+            this.btnDataUtilities.ScreenTip = "Run a data utility";
             this.btnDataUtilities.ShowImage = true;
             // 
             // btnDummy
             // 
             this.btnDummy.Label = "Dummy...";
             this.btnDummy.Name = "btnDummy";
+            this.btnDummy.ScreenTip = "Creates dummy (0-1) variables based on existing variables ";
             this.btnDummy.ShowImage = true;
             // 
             // btnLag
             // 
             this.btnLag.Label = "Lag...";
             this.btnLag.Name = "btnLag";
+            this.btnLag.ScreenTip = "Creates a new lagged variable based on an existing variable";
             this.btnLag.ShowImage = true;
+            // 
+            // btnInteraction
+            // 
+            this.btnInteraction.Label = "Interaction";
+            this.btnInteraction.Name = "btnInteraction";
+            this.btnInteraction.ScreenTip = "Creates an interaction variable from one or more original variables";
+            this.btnInteraction.ShowImage = true;
             // 
             // menuVisualization
             // 
@@ -179,34 +190,31 @@
             this.menuVisualization.Items.Add(this.btnHistogram);
             this.menuVisualization.Items.Add(this.btnScatterplot);
             this.menuVisualization.Items.Add(this.btnBoxWhiskerPlot);
-            this.menuVisualization.Items.Add(this.btnSampleSizeEstimation);
             this.menuVisualization.Label = "Visualization";
             this.menuVisualization.Name = "menuVisualization";
+            this.menuVisualization.ScreenTip = "Create graphs for variables";
             this.menuVisualization.ShowImage = true;
             // 
             // btnHistogram
             // 
             this.btnHistogram.Label = "Histogram";
             this.btnHistogram.Name = "btnHistogram";
+            this.btnHistogram.ScreenTip = "Creates histograms for variables";
             this.btnHistogram.ShowImage = true;
             // 
             // btnScatterplot
             // 
             this.btnScatterplot.Label = "Scatterplot";
             this.btnScatterplot.Name = "btnScatterplot";
+            this.btnScatterplot.ScreenTip = "Creates scatter plots between pairs of variables";
             this.btnScatterplot.ShowImage = true;
             // 
             // btnBoxWhiskerPlot
             // 
             this.btnBoxWhiskerPlot.Label = "Box-Whisker Plot";
             this.btnBoxWhiskerPlot.Name = "btnBoxWhiskerPlot";
+            this.btnBoxWhiskerPlot.ScreenTip = "Creates Box-Whisker plots for variables";
             this.btnBoxWhiskerPlot.ShowImage = true;
-            // 
-            // btnSampleSizeEstimation
-            // 
-            this.btnSampleSizeEstimation.Label = "Sample Size Estimation";
-            this.btnSampleSizeEstimation.Name = "btnSampleSizeEstimation";
-            this.btnSampleSizeEstimation.ShowImage = true;
             // 
             // menuDescriptiveStatistics
             // 
@@ -214,20 +222,23 @@
             this.menuDescriptiveStatistics.Image = global::NoruST.Properties.Resources.data_viewer;
             this.menuDescriptiveStatistics.Items.Add(this.btnOneVariableSummary);
             this.menuDescriptiveStatistics.Items.Add(this.btnCorrelationAndCovariance);
-            this.menuDescriptiveStatistics.Label = "Descriptive Statistcs";
+            this.menuDescriptiveStatistics.Label = "Descriptive Statistics";
             this.menuDescriptiveStatistics.Name = "menuDescriptiveStatistics";
+            this.menuDescriptiveStatistics.ScreenTip = "Run a descriptive statistics procedure";
             this.menuDescriptiveStatistics.ShowImage = true;
             // 
             // btnOneVariableSummary
             // 
             this.btnOneVariableSummary.Label = "One-Variable Summary";
             this.btnOneVariableSummary.Name = "btnOneVariableSummary";
+            this.btnOneVariableSummary.ScreenTip = "Calculates summary statistics for variables";
             this.btnOneVariableSummary.ShowImage = true;
             // 
             // btnCorrelationAndCovariance
             // 
             this.btnCorrelationAndCovariance.Label = "Correlation and Covariance";
             this.btnCorrelationAndCovariance.Name = "btnCorrelationAndCovariance";
+            this.btnCorrelationAndCovariance.ScreenTip = "Produces a table of correlations and/or a table of covariances between variables";
             this.btnCorrelationAndCovariance.ShowImage = true;
             // 
             // menuStatisticalInference
@@ -235,22 +246,25 @@
             this.menuStatisticalInference.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
             this.menuStatisticalInference.Image = global::NoruST.Properties.Resources.statistical_inference_image;
             this.menuStatisticalInference.Items.Add(this.btnAnova);
-            this.menuStatisticalInference.Items.Add(this.btnInteractionplot);
+            this.menuStatisticalInference.Items.Add(this.btnSampleSize);
             this.menuStatisticalInference.Label = "Statistical Inference";
             this.menuStatisticalInference.Name = "menuStatisticalInference";
+            this.menuStatisticalInference.ScreenTip = "Run a statistical inference procedure";
             this.menuStatisticalInference.ShowImage = true;
             // 
             // btnAnova
             // 
-            this.btnAnova.Label = "Anova";
+            this.btnAnova.Label = "One-Way ANOVA";
             this.btnAnova.Name = "btnAnova";
+            this.btnAnova.ScreenTip = "Performs a one-way ANOVA on variables ";
             this.btnAnova.ShowImage = true;
             // 
-            // btnInteractionplot
+            // btnSampleSize
             // 
-            this.btnInteractionplot.Label = "Interactionplot";
-            this.btnInteractionplot.Name = "btnInteractionplot";
-            this.btnInteractionplot.ShowImage = true;
+            this.btnSampleSize.Label = "Sample Size Selection";
+            this.btnSampleSize.Name = "btnSampleSize";
+            this.btnSampleSize.ScreenTip = "Determines the sample size required to calculate confidence intervals";
+            this.btnSampleSize.ShowImage = true;
             // 
             // menuRegression
             // 
@@ -260,13 +274,8 @@
             this.menuRegression.Items.Add(this.btnSimpleRegression);
             this.menuRegression.Label = "Regression";
             this.menuRegression.Name = "menuRegression";
+            this.menuRegression.ScreenTip = "Run a regression procedure";
             this.menuRegression.ShowImage = true;
-            // 
-            // btnInteraction
-            // 
-            this.btnInteraction.Label = "Interaction";
-            this.btnInteraction.Name = "btnInteraction";
-            this.btnInteraction.ShowImage = true;
             // 
             // btnWhiteTest
             // 
@@ -280,13 +289,39 @@
             this.btnSimpleRegression.Name = "btnSimpleRegression";
             this.btnSimpleRegression.ShowImage = true;
             // 
-            // menuNormalityTests
+            // menuTimeseriesandForecasting
             // 
-            this.menuNormalityTests.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.menuNormalityTests.Label = "Normality Tests";
-            this.menuNormalityTests.Name = "menuNormalityTests";
-            this.menuNormalityTests.ShowImage = true;
-            this.menuNormalityTests.Visible = false;
+            this.menuTimeseriesandForecasting.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.menuTimeseriesandForecasting.Image = global::NoruST.Properties.Resources.time_series_image;
+            this.menuTimeseriesandForecasting.Items.Add(this.btnTimeSeriesGraph);
+            this.menuTimeseriesandForecasting.Items.Add(this.btnRunsTestForRandomness);
+            this.menuTimeseriesandForecasting.Items.Add(this.btnForecast);
+            this.menuTimeseriesandForecasting.Label = "Time Series and Forecasting";
+            this.menuTimeseriesandForecasting.Name = "menuTimeseriesandForecasting";
+            this.menuTimeseriesandForecasting.ScreenTip = "Run a time series or forecasting procedure";
+            this.menuTimeseriesandForecasting.ShowImage = true;
+            // 
+            // btnTimeSeriesGraph
+            // 
+            this.btnTimeSeriesGraph.Label = "Time Series Graph";
+            this.btnTimeSeriesGraph.Name = "btnTimeSeriesGraph";
+            this.btnTimeSeriesGraph.ScreenTip = "Creates a time series graph for variables";
+            this.btnTimeSeriesGraph.ShowImage = true;
+            // 
+            // btnRunsTestForRandomness
+            // 
+            this.btnRunsTestForRandomness.Label = "Runs Test for Randomness";
+            this.btnRunsTestForRandomness.Name = "btnRunsTestForRandomness";
+            this.btnRunsTestForRandomness.ScreenTip = "Performs a runs test to check whether a variable is random";
+            this.btnRunsTestForRandomness.ShowImage = true;
+            this.btnRunsTestForRandomness.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRunsTestForRandomness_Click);
+            // 
+            // btnForecast
+            // 
+            this.btnForecast.Label = "Forecast";
+            this.btnForecast.Name = "btnForecast";
+            this.btnForecast.ScreenTip = "Generates forecasts for time series variables ";
+            this.btnForecast.ShowImage = true;
             // 
             // menuClassification
             // 
@@ -296,49 +331,30 @@
             this.menuClassification.Items.Add(this.btnDiscriminantAnalysis);
             this.menuClassification.Label = "Classification";
             this.menuClassification.Name = "menuClassification";
+            this.menuClassification.ScreenTip = "Run a classification procedure";
             this.menuClassification.ShowImage = true;
             // 
             // btnLogisticRegression
             // 
             this.btnLogisticRegression.Label = "Logistic Regression";
             this.btnLogisticRegression.Name = "btnLogisticRegression";
+            this.btnLogisticRegression.ScreenTip = "Runs a logistic regression on a set of variables";
             this.btnLogisticRegression.ShowImage = true;
             // 
             // btnDiscriminantAnalysis
             // 
             this.btnDiscriminantAnalysis.Label = "Discriminant Analysis";
             this.btnDiscriminantAnalysis.Name = "btnDiscriminantAnalysis";
+            this.btnDiscriminantAnalysis.ScreenTip = "Runs a discriminant analysis on a set of variables";
             this.btnDiscriminantAnalysis.ShowImage = true;
             // 
-            // menuTimeseriesandForecasting
+            // menuNormalityTests
             // 
-            this.menuTimeseriesandForecasting.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.menuTimeseriesandForecasting.Image = global::NoruST.Properties.Resources.time_series_image;
-            this.menuTimeseriesandForecasting.Items.Add(this.btnTimeSeriesGraph);
-            this.menuTimeseriesandForecasting.Items.Add(this.btnRunsTestForRandomness);
-            this.menuTimeseriesandForecasting.Items.Add(this.btnForecast);
-            this.menuTimeseriesandForecasting.Label = "Timeseries and Forecasting";
-            this.menuTimeseriesandForecasting.Name = "menuTimeseriesandForecasting";
-            this.menuTimeseriesandForecasting.ShowImage = true;
-            // 
-            // btnTimeSeriesGraph
-            // 
-            this.btnTimeSeriesGraph.Label = "Time Series Graph";
-            this.btnTimeSeriesGraph.Name = "btnTimeSeriesGraph";
-            this.btnTimeSeriesGraph.ShowImage = true;
-            // 
-            // btnRunsTestForRandomness
-            // 
-            this.btnRunsTestForRandomness.Label = "Runs Test for Randomness";
-            this.btnRunsTestForRandomness.Name = "btnRunsTestForRandomness";
-            this.btnRunsTestForRandomness.ShowImage = true;
-            this.btnRunsTestForRandomness.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRunsTestForRandomness_Click);
-            // 
-            // btnForecast
-            // 
-            this.btnForecast.Label = "Forecast";
-            this.btnForecast.Name = "btnForecast";
-            this.btnForecast.ShowImage = true;
+            this.menuNormalityTests.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.menuNormalityTests.Label = "Normality Tests";
+            this.menuNormalityTests.Name = "menuNormalityTests";
+            this.menuNormalityTests.ShowImage = true;
+            this.menuNormalityTests.Visible = false;
             // 
             // menuStatisticalProcessControl
             // 
@@ -349,18 +365,21 @@
             this.menuStatisticalProcessControl.Items.Add(this.btnProcessCapability);
             this.menuStatisticalProcessControl.Label = "Quality Control";
             this.menuStatisticalProcessControl.Name = "menuStatisticalProcessControl";
+            this.menuStatisticalProcessControl.ScreenTip = "Run a quality control procedure";
             this.menuStatisticalProcessControl.ShowImage = true;
             // 
             // btnXRChart
             // 
             this.btnXRChart.Label = "X/R Chart";
             this.btnXRChart.Name = "btnXRChart";
+            this.btnXRChart.ScreenTip = "Creates X and R control charts for time series variables";
             this.btnXRChart.ShowImage = true;
             // 
             // btnPChart
             // 
             this.btnPChart.Label = "P Chart";
             this.btnPChart.Name = "btnPChart";
+            this.btnPChart.ScreenTip = "Creates P charts for time series variables";
             this.btnPChart.ShowImage = true;
             // 
             // btnProcessCapability
@@ -409,8 +428,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnScatterplot;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnBoxWhiskerPlot;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnCorrelationAndCovariance;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSampleSizeEstimation;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnInteractionplot;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnSampleSize;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnAnova;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnInteraction;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnWhiteTest;
