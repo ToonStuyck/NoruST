@@ -62,7 +62,7 @@ namespace NoruST.Forms
 
         private void uiButton_Ok_Click(object sender, EventArgs e)
         {
-            presenter.createDummy();
+            presenter.createDummy(selectedDataSet());
             Close();
         }
 

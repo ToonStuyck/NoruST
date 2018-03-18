@@ -107,55 +107,16 @@ namespace NoruST.Domain
             recalculateVariables();
         }
 
-        public void addDummy(Variable variable, int condition, string conditionValueString)
+        public void addDummy(Variable variable, DataSet dataSet)
         {
-            if (condition < 0 || condition > 4) return;
-            double conditionValue;
-            if (!Double.TryParse(conditionValueString, out conditionValue)) return;
-            Range source = variable.getRange();
-            Range destination = rangeLayout == COLUMNS
-                ? variable.getRange().shiftRangeByColumns(variables.Count - variables.IndexOf(variable))
-                : variable.getRange().shiftRangeByRows(variables.Count - variables.IndexOf(variable));
-
-            for (int i = 0; i < (rangeLayout == COLUMNS ? variable.getRange().Rows.Count : variable.getRange().Columns.Count); i++)
-            {
-                int sourceRow = rangeLayout == COLUMNS ? source.Row + i : source.Row;
-                int sourceColumn = rangeLayout == COLUMNS ? source.Column : source.Column + i;
-                int destinationRow = rangeLayout == COLUMNS ? destination.Row + i : destination.Row;
-                int destinationColumn = rangeLayout == COLUMNS ? destination.Column : destination.Column + i;
-                double sourceValue = Double.Parse(((Range) worksheet.Cells[sourceRow, sourceColumn]).Value2.ToString());
-                int res = -1;
-                switch (condition)
-                {
-                    case 0: res = sourceValue < conditionValue ? 1 : 0; break;
-                    case 1: res = sourceValue <= conditionValue ? 1 : 0; break;
-                    case 2: res = sourceValue == conditionValue ? 1 : 0; break;
-                    case 3: res = sourceValue >= conditionValue ? 1 : 0; break;
-                    case 4: res = sourceValue > conditionValue ? 1 : 0; break;
-                }
-                worksheet.Cells[destinationRow, destinationColumn] = res;
-            }
-
-            if (!variableNamesInFirstRowOrColumn) return;
-            Range headerLocation = rangeLayout == COLUMNS
-                ? variable.getRange().first().shiftRangeByRows(-1).shiftRangeByColumns(variables.Count - variables.IndexOf(variable))
-                : variable.getRange().first().shiftRangeByColumns(-1).shiftRangeByRows(variables.Count - variables.IndexOf(variable));
-            string headerText = variable.name;
-            switch (condition)
-            {
-                case 0: headerText += " < "; break;
-                case 1: headerText += " <= ";break;
-                case 2: headerText += " = "; break;
-                case 3: headerText += " => "; break;
-                case 4: headerText += " > "; break;
-            }
-            headerText += conditionValueString;
-            headerLocation.Value = headerText;
-
-            range = rangeLayout == COLUMNS
-                ? range.Resize[range.Rows.Count, range.Columns.Count + 1]
-                : range.Resize[range.Rows.Count + 1, range.Columns.Count];
-            recalculateVariables();
+            string ran = variable.Range.ToString();
+            ran = dataSet.getWorksheet().Name + "!$" + ran;
+            int count = dataSet.worksheet.Application.WorksheetFunction.Sum(dataSet.worksheet.Application.WorksheetFunction.IfError(
+                dataSet.worksheet.Application.WorksheetFunction.Frequency(dataSet.worksheet.Application.WorksheetFunction.Match(
+                    ran, ran, 0), dataSet.worksheet.Application.WorksheetFunction.Match(
+                    ran, ran, 0)) > 0, 1));
+            System.Diagnostics.Debug.WriteLine(count);
+            
         }
 
         public int amountOfVariables()

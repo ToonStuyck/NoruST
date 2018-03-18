@@ -38,9 +38,9 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public void createDummy()
+        public void createDummy(DataSet dataSet)
         {
-            model.dataSet.addDummy(model.variable, model.condition, model.conditionValue);
+            model.dataSet.addDummy(model.variable, dataSet);
         }
     }
 }
