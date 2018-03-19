@@ -110,6 +110,7 @@ namespace NoruST.Domain
         public void addDummy(Variable variable, DataSet dataSet)
         {
             string ran = variable.Range.ToString();
+            //dedede
             ran = dataSet.getWorksheet().Name + "!" + ran;
             System.Diagnostics.Debug.WriteLine(ran);
             System.Diagnostics.Debug.WriteLine(dataSet.worksheet.Application.WorksheetFunction.Match(
