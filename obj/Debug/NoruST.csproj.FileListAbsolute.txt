@@ -109,4 +109,3 @@ C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.csproj.CoreCom
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.csproj.CopyComplete
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.dll
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.pdb
-C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.csprojResolveAssemblyReference.cache
