@@ -9,6 +9,7 @@ using static Microsoft.Office.Interop.Excel.XlInsertFormatOrigin;
 using static Microsoft.Office.Interop.Excel.XlInsertShiftDirection;
 using static NoruST.Domain.RangeLayout;
 
+//qsdqsd
 namespace NoruST.Domain
 {
     public class DataSet : INotifyPropertyChanged
