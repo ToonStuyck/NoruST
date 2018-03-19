@@ -110,7 +110,10 @@ namespace NoruST.Domain
         public void addDummy(Variable variable, DataSet dataSet)
         {
             string ran = variable.Range.ToString();
-            ran = dataSet.getWorksheet().Name + "!$" + ran;
+            ran = dataSet.getWorksheet().Name + "!" + ran;
+            System.Diagnostics.Debug.WriteLine(ran);
+            System.Diagnostics.Debug.WriteLine(dataSet.worksheet.Application.WorksheetFunction.Match(
+                    ran, ran, 0));
             int count = dataSet.worksheet.Application.WorksheetFunction.Sum(dataSet.worksheet.Application.WorksheetFunction.IfError(
                 dataSet.worksheet.Application.WorksheetFunction.Frequency(dataSet.worksheet.Application.WorksheetFunction.Match(
                     ran, ran, 0), dataSet.worksheet.Application.WorksheetFunction.Match(
