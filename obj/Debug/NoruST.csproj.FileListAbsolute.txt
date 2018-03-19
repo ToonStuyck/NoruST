@@ -83,6 +83,7 @@ C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\bin\Debug\Microsoft.Office.Tool
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\bin\Debug\Microsoft.Office.Tools.Excel.dll
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\bin\Debug\Microsoft.Office.Tools.v4.0.Framework.dll
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\bin\Debug\Microsoft.VisualStudio.Tools.Applications.Runtime.dll
+C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.csprojResolveAssemblyReference.cache
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.Forms.BoxWhiskerPlotForm.resources
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.Forms.CorrelationCovarianceForm.resources
 C:\Users\stuyc\OneDrive\Documenten\GitHub\NoruST\obj\Debug\NoruST.Forms.DataSetManagerForm.resources
