@@ -29,6 +29,7 @@ namespace NoruST
         private RegressionForm regressionForm;
         private LogisticRegressionForm logisticRegressionForm;
         private DiscriminantAnalysisForm discriminantAnalysisForm;
+        private UnstackedPresenter unstackedPresenter;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -38,6 +39,7 @@ namespace NoruST
             xrChartPresenter = new XRChartPresenter(dataSetManagerPresenter);
             pChartPresenter = new PChartPresenter(dataSetManagerPresenter);
             dummyPresenter = new DummyPresenter(dataSetManagerPresenter);
+            unstackedPresenter = new UnstackedPresenter(dataSetManagerPresenter);
             processCapabilityPresenter = new ProcessCapabilityPresenter(dataSetManagerPresenter);
             timeSeriesGraphPresenter = new TimeSeriesGraphPresenter(dataSetManagerPresenter);
             oneVariableSummaryPresenter = new OneVariableSummaryPresenter(dataSetManagerPresenter);
@@ -69,6 +71,7 @@ namespace NoruST
             btnProcessCapability.Click += delegate { processCapabilityPresenter.openView(); };
             btnTimeSeriesGraph.Click += delegate { timeSeriesGraphPresenter.openView(); };
             btnSimpleRegression.Click += delegate { regressionForm = regressionForm.createAndOrShowForm(); };
+            btnUnstacked.Click += delegate { unstackedPresenter.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)

@@ -246,6 +246,12 @@
     <Compile Include="Forms\ForecastForm.Designer.cs">
       <DependentUpon>ForecastForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\UnstackedForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\UnstackedForm.Designer.cs">
+      <DependentUpon>UnstackedForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\OneWayAnovaForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -359,8 +365,10 @@
     <Compile Include="Models\RunsTestForRandomnessModel.cs" />
     <Compile Include="Models\TimeSeriesGraphModel.cs" />
     <Compile Include="Models\ForecastModel.cs" />
+    <Compile Include="Models\UnstackedModel.cs" />
     <Compile Include="Models\XRChartModel.cs" />
     <Compile Include="Presenters\BoxWhiskerPlotPresenter.cs" />
+    <Compile Include="Presenters\UnstackedPresenter.cs" />
     <Compile Include="Presenters\DataSetManagerPresenter.cs" />
     <Compile Include="Presenters\DummyPresenter.cs" />
     <Compile Include="Presenters\HistogramPresenter.cs" />
@@ -431,6 +439,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TimeSeriesGraphForm.resx">
       <DependentUpon>TimeSeriesGraphForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\UnstackedForm.resx">
+      <DependentUpon>UnstackedForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\XRChartForm.resx">
       <DependentUpon>XRChartForm.cs</DependentUpon>
