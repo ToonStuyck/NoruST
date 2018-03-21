@@ -110,14 +110,38 @@ namespace NoruST.Domain
         public void addDummy(Variable variable, DataSet dataSet)
         {
             string ran = variable.Range.ToString();
-            System.Diagnostics.Debug.WriteLine(ran);
             Array dist= dataSet.getWorksheet().Range[ran].Value;
-            List<String> values = dist.OfType<String>().ToList();
-            dist = values.Distinct<String>().ToArray();
+            int count = 0;
             foreach(var item in dist)
             {
-                System.Diagnostics.Debug.WriteLine(item.ToString());
+                System.Diagnostics.Debug.WriteLine(item.GetType().ToString());
+                if(item.GetType().ToString()=="System.String")
+                {
+                    count = 1;
+                } else
+                {
+                    count = 2;
+                }
+                break;
             }
+            if(count == 1)
+            {
+                List<String> values = dist.OfType<String>().ToList();
+                dist = values.Distinct<String>().ToArray();
+                foreach (var item in dist)
+                {
+                    System.Diagnostics.Debug.WriteLine(item.ToString());
+                }
+            } else
+            {
+                List<Double> values = dist.OfType<Double>().ToList();
+                dist = values.Distinct<Double>().ToArray();
+                foreach (var item in dist)
+                {
+                    System.Diagnostics.Debug.WriteLine(item.ToString());
+                }
+            }
+            
             //System.Diagnostics.Debug.WriteLine(dataSet.getWorksheet().Application.WorksheetFunction.Match(dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0));
             //int count = dataSet.worksheet.Application.WorksheetFunction.Sum(dataSet.worksheet.Application.WorksheetFunction.IfError(
             //    dataSet.worksheet.Application.WorksheetFunction.Frequency(dataSet.worksheet.Application.WorksheetFunction.Match(
