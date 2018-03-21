@@ -22,7 +22,7 @@ namespace NoruST.Domain
         private Range range;
         private string name;
 
-        public DataSet() {}
+        public DataSet() { }
 
         public DataSet(_Worksheet worksheet, Range range, string name, RangeLayout rangeLayout, bool variableNamesInFirstRowOrColumn, List<Variable> variables)
         {
@@ -110,12 +110,12 @@ namespace NoruST.Domain
         public void addDummy(Variable variable, DataSet dataSet)
         {
             string ran = variable.Range.ToString();
-            Array dist= dataSet.getWorksheet().Range[ran].Value;
+            Array dist = dataSet.getWorksheet().Range[ran].Value;
             int count = 0;
-            foreach(var item in dist)
+            foreach (var item in dist)
             {
                 System.Diagnostics.Debug.WriteLine(item.GetType().ToString());
-                if(item.GetType().ToString()=="System.String")
+                if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
                 } else
@@ -124,7 +124,7 @@ namespace NoruST.Domain
                 }
                 break;
             }
-            if(count == 1)
+            if (count == 1)
             {
                 List<String> values = dist.OfType<String>().ToList();
                 dist = values.Distinct<String>().ToArray();
@@ -141,14 +141,18 @@ namespace NoruST.Domain
                     System.Diagnostics.Debug.WriteLine(item.ToString());
                 }
             }
-            
+
             //System.Diagnostics.Debug.WriteLine(dataSet.getWorksheet().Application.WorksheetFunction.Match(dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0));
             //int count = dataSet.worksheet.Application.WorksheetFunction.Sum(dataSet.worksheet.Application.WorksheetFunction.IfError(
             //    dataSet.worksheet.Application.WorksheetFunction.Frequency(dataSet.worksheet.Application.WorksheetFunction.Match(
             //        dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0), dataSet.worksheet.Application.WorksheetFunction.Match(
             //        dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0)) > 0, 1));
             //System.Diagnostics.Debug.WriteLine(count);
-            
+
+        }
+        public void unstacked()
+        {
+
         }
 
         public int amountOfVariables()

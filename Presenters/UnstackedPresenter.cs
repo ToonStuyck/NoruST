@@ -40,7 +40,7 @@ namespace NoruST.Presenters
 
         public void createDummy(DataSet dataSet)
         {
-            model.dataSet.addDummy(model.variable, dataSet);
+            model.dataSet.addunstacked(model.variable, dataSet);
         }
     }
 }
