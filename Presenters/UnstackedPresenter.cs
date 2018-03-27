@@ -22,7 +22,7 @@ namespace NoruST.Presenters
             this.model = new UnstackedModel();
         }
 
-        public UnstackedModel GetModel()
+        public UnstackedModel getModel()
         {
             return model;
         }
@@ -38,9 +38,9 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public void createDummy(DataSet dataSet)
+        public void createUnstacked(DataSet dataSet)
         {
-            //model.dataSet.addunstacked(model.variable, dataSet);
+            model.dataSet.addUnstacked(model.variable, dataSet);
         }
     }
 }

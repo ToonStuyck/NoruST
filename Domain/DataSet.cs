@@ -143,7 +143,7 @@ namespace NoruST.Domain
             String colLetter = dataSet.getVariables()[dataSet.getVariables().Count - 1].Range[1].ToString();
             int columnIndex = ColumnLetterToColumnIndex(colLetter)+1;
             Array dist = dataSet.getWorksheet().Range[ran].Value;
-            int count = 0;
+			int count = 0;
             foreach (var item in dist)
             {
                 if (item.GetType().ToString() == "System.String")
@@ -217,13 +217,14 @@ namespace NoruST.Domain
                     row = row + 1;
                 }
             }
-        }
-        //public void unstacked()
-        //{
+		}
 
-        //}
+		public void addUnstacked(Variable variable, DataSet dataSet)
+		{
+			System.Diagnostics.Debug.WriteLine("DataSet - addUnstacked is uitgevoerd");
+		}
 
-        public int amountOfVariables()
+		public int amountOfVariables()
         {
             return variables.Count();
         }
