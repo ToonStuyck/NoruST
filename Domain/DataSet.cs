@@ -166,6 +166,25 @@ namespace NoruST.Domain
                     worksheet.Cells[row, column] = dataSet.getVariables()[columnIndex2].name + "=" + item.ToString();
                     column = column + 1;
                 }
+                row = 0;
+                while (row < values.Count)
+                {
+                    String temp = values[row];
+                    column = columnIndex;
+                    foreach (var item in dist)
+                    {
+                        if (temp.Equals(item.ToString()))
+                        {
+                            worksheet.Cells[row + 2, column] = "1";
+                        }
+                        else
+                        {
+                            worksheet.Cells[row + 2, column] = "0";
+                        }
+                        column = column + 1;
+                    }
+                    row = row + 1;
+                }
             } else
             {
                 List<Double> values = dist.OfType<Double>().ToList();
@@ -184,7 +203,6 @@ namespace NoruST.Domain
                 {
                     double temp = value[row];
                     column = columnIndex;
-                    System.Diagnostics.Debug.WriteLine(temp);
                     foreach (var item in dist)
                     {
                         if(temp==Convert.ToInt16(item))
