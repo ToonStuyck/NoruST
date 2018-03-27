@@ -107,14 +107,45 @@ namespace NoruST.Domain
             recalculateVariables();
         }
 
+        public static int ColumnLetterToColumnIndex(string columnLetter)
+        {
+            columnLetter = columnLetter.ToUpper();
+            int sum = 0;
+
+            for (int i = 0; i < columnLetter.Length; i++)
+            {
+                sum *= 26;
+                sum += (columnLetter[i] - 'A' + 1);
+            }
+            return sum;
+        }
+
+        static string ColumnIndexToColumnLetter(int colIndex)
+        {
+            int div = colIndex;
+            string colLetter = String.Empty;
+            int mod = 0;
+
+            while (div > 0)
+            {
+                mod = (div - 1) % 26;
+                colLetter = (char)(65 + mod) + colLetter;
+                div = (int)((div - mod) / 26);
+            }
+            return colLetter;
+        }
+
         public void addDummy(Variable variable, DataSet dataSet)
         {
             string ran = variable.Range.ToString();
+            String colLetter2 = variable.Range[1].ToString();
+            int columnIndex2 = ColumnLetterToColumnIndex(colLetter2)-1;
+            String colLetter = dataSet.getVariables()[dataSet.getVariables().Count - 1].Range[1].ToString();
+            int columnIndex = ColumnLetterToColumnIndex(colLetter)+1;
             Array dist = dataSet.getWorksheet().Range[ran].Value;
             int count = 0;
             foreach (var item in dist)
             {
-                System.Diagnostics.Debug.WriteLine(item.GetType().ToString());
                 if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
@@ -128,32 +159,51 @@ namespace NoruST.Domain
             {
                 List<String> values = dist.OfType<String>().ToList();
                 dist = values.Distinct<String>().ToArray();
+                int row = 1;
+                int column = columnIndex;
                 foreach (var item in dist)
                 {
-                    System.Diagnostics.Debug.WriteLine(item.ToString());
+                    worksheet.Cells[row, column] = dataSet.getVariables()[columnIndex2].name + "=" + item.ToString();
+                    column = column + 1;
                 }
             } else
             {
                 List<Double> values = dist.OfType<Double>().ToList();
+                List<Double> value = dist.OfType<Double>().ToList();
+                values.Sort();
                 dist = values.Distinct<Double>().ToArray();
+                int row = 1;
+                int column = columnIndex;
                 foreach (var item in dist)
                 {
-                    System.Diagnostics.Debug.WriteLine(item.ToString());
+                    worksheet.Cells[row, column] = dataSet.getVariables()[columnIndex2].name + "=" + item.ToString();
+                    column = column + 1;
+                }
+                row = 0;
+                while (row < values.Count)
+                {
+                    double temp = value[row];
+                    column = columnIndex;
+                    System.Diagnostics.Debug.WriteLine(temp);
+                    foreach (var item in dist)
+                    {
+                        if(temp==Convert.ToInt16(item))
+                        {
+                            worksheet.Cells[row+2, column] = "1";
+                        } else
+                        {
+                            worksheet.Cells[row+2, column] = "0";
+                        }
+                        column = column + 1;
+                    }
+                    row = row + 1;
                 }
             }
-
-            //System.Diagnostics.Debug.WriteLine(dataSet.getWorksheet().Application.WorksheetFunction.Match(dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0));
-            //int count = dataSet.worksheet.Application.WorksheetFunction.Sum(dataSet.worksheet.Application.WorksheetFunction.IfError(
-            //    dataSet.worksheet.Application.WorksheetFunction.Frequency(dataSet.worksheet.Application.WorksheetFunction.Match(
-            //        dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0), dataSet.worksheet.Application.WorksheetFunction.Match(
-            //        dataSet.getWorksheet().Range[ran], dataSet.getWorksheet().Range[ran], 0)) > 0, 1));
-            //System.Diagnostics.Debug.WriteLine(count);
-
         }
-        public void unstacked()
-        {
+        //public void unstacked()
+        //{
 
-        }
+        //}
 
         public int amountOfVariables()
         {
