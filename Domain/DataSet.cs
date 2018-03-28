@@ -219,10 +219,99 @@ namespace NoruST.Domain
             }
 		}
 
-		public void addUnstacked(Variable variable, DataSet dataSet)
+		public void addUnstacked(Variable category, Variable variable, DataSet dataSet) //cat = gender var = salary
 		{
-			System.Diagnostics.Debug.WriteLine("DataSet - addUnstacked is uitgevoerd");
-		}
+            string ran2 = category.Range.ToString();
+            String colLetterCat = variable.Range[1].ToString();
+            int columnIndexCat = ColumnLetterToColumnIndex(colLetterCat) - 1;
+            Array distCat = dataSet.getWorksheet().Range[ran2].Value;
+
+            string ran = variable.Range.ToString();
+            String colLetterVar = variable.Range[1].ToString();
+            int columnIndexVar = ColumnLetterToColumnIndex(colLetterVar) - 1;
+            Array dist = dataSet.getWorksheet().Range[ran].Value;
+            int count = 0;
+
+            Worksheet newworksheet;
+            newworksheet = dataSet.getWorksheet().Application.Worksheets.Add();
+
+            foreach (var item in distCat)
+            {
+                if (item.GetType().ToString() == "System.String")
+                {
+                    count = 1;
+                }
+                else
+                {
+                    count = 2;
+                }
+                break;
+            }
+            if (count == 1)
+            {
+                List<String> values = distCat.OfType<String>().ToList();
+                distCat = values.Distinct<String>().ToArray();
+                int row = 1;
+                int column = 1;
+                foreach (var item in dist)
+                {
+                    newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
+                    column = column + 1;
+                }
+                //row = 0;
+                //while (row < values.Count)
+                //{
+                //    String temp = values[row];
+                //    column = columnIndex;
+                //    foreach (var item in dist)
+                //    {
+                //        if (temp.Equals(item.ToString()))
+                //        {
+                //            worksheet.Cells[row + 2, column] = "1";
+                //        }
+                //        else
+                //        {
+                //            worksheet.Cells[row + 2, column] = "0";
+                //        }
+                //        column = column + 1;
+                //    }
+                //    row = row + 1;
+                //}
+            }
+            else
+            {
+                List<Double> values = distCat.OfType<Double>().ToList();
+                List<Double> value = distCat.OfType<Double>().ToList();
+                values.Sort();
+                distCat = values.Distinct<Double>().ToArray();
+                int row = 1;
+                int column = 1;
+                foreach (var item in dist)
+                {
+                    newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
+                    column = column + 1;
+                }
+                //row = 0;
+                //while (row < values.Count)
+                //{
+                //    double temp = value[row];
+                //    column = columnIndex;
+                //    foreach (var item in dist)
+                //    {
+                //        if (temp == Convert.ToInt16(item))
+                //        {
+                //            worksheet.Cells[row + 2, column] = "1";
+                //        }
+                //        else
+                //        {
+                //            worksheet.Cells[row + 2, column] = "0";
+                //        }
+                //        column = column + 1;
+                //    }
+                //    row = row + 1;
+                //}
+            }
+        }
 
 		public int amountOfVariables()
         {
