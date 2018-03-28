@@ -6,7 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using NoruST.Forms;
 using NoruST.Models;
+using NoruST.Domain;
 using DataSet = NoruST.Domain.DataSet;
+using System.ComponentModel;
+using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
 
 namespace NoruST.Presenters
 {
@@ -38,9 +42,22 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public void createUnstacked(DataSet dataSet)
+		public bool checkInput(List<Variable> variablesX, List<Variable> variablesY, DataSet dataSet)
+		{
+
+			if (dataSet != null)
+			{
+				createUnstacked(dataSet);
+				return true;
+			}
+			else
+				MessageBox.Show("Please correct all fields to generate Time Series Graph", "Time Series Graph error");
+			return false;
+		}
+
+		public void createUnstacked(DataSet dataSet)
         {
-            model.dataSet.addUnstacked(model.variable, dataSet);
+			//model.dataSet.addUnstacked(model.variable, dataSet);
         }
     }
 }

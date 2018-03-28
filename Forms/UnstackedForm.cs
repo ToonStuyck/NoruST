@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using NoruST.Domain;
 using NoruST.Presenters;
+using System.Collections.Generic;
 
 namespace NoruST.Forms
 {
@@ -23,60 +24,66 @@ namespace NoruST.Forms
 
 		private void bindModelToView()
 		{
-			uiComboBox_DataSets.DataSource = presenter.dataSets();
-			uiComboBox_DataSets.DisplayMember = "name";
-			uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
+			ui_ComboBox_SelectDataSets.DataSource = presenter.dataSets();
+			ui_ComboBox_SelectDataSets.DisplayMember = "name";
+			ui_ComboBox_SelectDataSets.SelectedIndexChanged += (obj, eventArgs) =>
 			{
 				if (selectedDataSet() == null) return;
-				uiComboBox_Variables.DataSource = selectedDataSet().getVariables();
-				uiComboBox_Variables.DisplayMember = "name";
-				uiComboBox_Category.DataSource = selectedDataSet().getVariables();
-				uiComboBox_Category.DisplayMember = "name";
-				presenter.getModel().dataSet = selectedDataSet();
-			};
-			uiComboBox_Variables.SelectedIndexChanged += (obj, eventArgs) =>
-			{
-				if (selectedVariable() == null) return;
-				presenter.getModel().variable = selectedVariable();
-			};
-			uiComboBox_Category.SelectedIndexChanged += (obj, eventArgs) =>
-			{
-				if (selectedVariable() == null) return;
-				presenter.getModel().category = selectedVariable();
+				uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
+				uiDataGridViewColumn_VariableCheckX.Width = 20;
+				uiDataGridViewColumn_VariableCheckY.Width = 20;
+				uiDataGridView_Variables.Columns[2].ReadOnly = true;
+				uiDataGridView_Variables.Columns[3].ReadOnly = true;
 			};
 		}
 
 		private DataSet selectedDataSet()
 		{
-			return (DataSet)uiComboBox_DataSets.SelectedItem;
-		}
-
-		private Variable selectedVariable()
-		{
-			return (Variable)uiComboBox_Variables.SelectedItem;
-		}
-
-		private Variable selectedCategory()
-		{
-			return (Variable)uiComboBox_Category.SelectedItem;
+			return (DataSet)ui_ComboBox_SelectDataSets.SelectedItem;
 		}
 
 		public void selectDataSet(DataSet dataSet)
 		{
-			uiComboBox_DataSets.SelectedItem = null;
-			uiComboBox_DataSets.SelectedItem = dataSet;
+			ui_ComboBox_SelectDataSets.SelectedItem = null;
+			ui_ComboBox_SelectDataSets.SelectedItem = dataSet;
 		}
 
-		private void uiButton_Cancel_Click(object sender, EventArgs e)
+		private void Cancelbutton_clicked(object sender, EventArgs e)
 		{
-            Close();
-        }
+			Close();
+		}
+
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
 
 		private void uiButton_Ok_Click(object sender, EventArgs e)
 		{
-			presenter.createUnstacked(selectedDataSet());
-			Close();
+			List<Variable> variablesX = new List<Variable>();
+			List<Variable> variablesY = new List<Variable>();
+			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
+			{
+				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckX.Name].Value))
+				{
+					presenter.getModel().category = (Variable)row.DataBoundItem;
+
+					//variablesX.Add((Variable)row.DataBoundItem);
+				}
+				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckY.Name].Value))
+				{
+					presenter.getModel().variable = (Variable)row.DataBoundItem;
+					//variablesY.Add((Variable)row.DataBoundItem);
+				}
+			}
+			bool inputOk = presenter.checkInput(variablesX, variablesY, selectedDataSet());
+			if (inputOk)
+			{
+				Close();
+			}
 		}
 
 	}
 }
+
