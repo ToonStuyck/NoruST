@@ -11,7 +11,6 @@ namespace NoruST.Models
     {
         public Domain.DataSet dataSet { get; set; }
         public Variable variable { get; set; }
-        public int condition { get; set; }
-        public string conditionValue { get; set; }
+		public Variable category { get; set; }
     }
 }

@@ -30,12 +30,19 @@ namespace NoruST.Forms
 				if (selectedDataSet() == null) return;
 				uiComboBox_Variables.DataSource = selectedDataSet().getVariables();
 				uiComboBox_Variables.DisplayMember = "name";
+				uiComboBox_Category.DataSource = selectedDataSet().getVariables();
+				uiComboBox_Category.DisplayMember = "name";
 				presenter.getModel().dataSet = selectedDataSet();
 			};
 			uiComboBox_Variables.SelectedIndexChanged += (obj, eventArgs) =>
 			{
 				if (selectedVariable() == null) return;
 				presenter.getModel().variable = selectedVariable();
+			};
+			uiComboBox_Category.SelectedIndexChanged += (obj, eventArgs) =>
+			{
+				if (selectedVariable() == null) return;
+				presenter.getModel().category = selectedVariable();
 			};
 		}
 
@@ -47,6 +54,11 @@ namespace NoruST.Forms
 		private Variable selectedVariable()
 		{
 			return (Variable)uiComboBox_Variables.SelectedItem;
+		}
+
+		private Variable selectedCategory()
+		{
+			return (Variable)uiComboBox_Category.SelectedItem;
 		}
 
 		public void selectDataSet(DataSet dataSet)
@@ -65,5 +77,6 @@ namespace NoruST.Forms
 			presenter.createUnstacked(selectedDataSet());
 			Close();
 		}
+
 	}
 }
