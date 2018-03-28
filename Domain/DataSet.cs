@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Office.Interop.Excel;
 using NoruST.Forms;
+using System.Windows.Forms;
 using static Microsoft.Office.Interop.Excel.XlInsertFormatOrigin;
 using static Microsoft.Office.Interop.Excel.XlInsertShiftDirection;
 using static NoruST.Domain.RangeLayout;
@@ -222,9 +223,10 @@ namespace NoruST.Domain
 		public void addUnstacked(Variable category, Variable variable, DataSet dataSet) //cat = gender var = salary
 		{
             string ran2 = category.Range.ToString();
-            String colLetterCat = variable.Range[1].ToString();
+            String colLetterCat = category.Range[1].ToString();
             int columnIndexCat = ColumnLetterToColumnIndex(colLetterCat) - 1;
             Array distCat = dataSet.getWorksheet().Range[ran2].Value;
+            Array cat = dataSet.getWorksheet().Range[ran2].Value;
 
             string ran = variable.Range.ToString();
             String colLetterVar = variable.Range[1].ToString();
@@ -233,7 +235,17 @@ namespace NoruST.Domain
             int count = 0;
 
             Worksheet newworksheet;
-            newworksheet = dataSet.getWorksheet().Application.Worksheets.Add();
+            try
+            {
+                newworksheet = dataSet.getWorksheet().Application.Worksheets.Add();
+                newworksheet.Name = "Unstack" + dataSet.getVariables()[columnIndexVar].name + "-" + dataSet.getVariables()[columnIndexCat].name;
+            }
+            catch (SystemException e)
+            {
+                MessageBox.Show("Unstacked data already exists, change name of existing worksheet and try again.");
+                return;
+            }
+
 
             foreach (var item in distCat)
             {
@@ -249,67 +261,65 @@ namespace NoruST.Domain
             }
             if (count == 1)
             {
-                List<String> values = distCat.OfType<String>().ToList();
-                distCat = values.Distinct<String>().ToArray();
+                List<String> valuesCat = distCat.OfType<String>().ToList();
+                List<Double> valuesVar = dist.OfType<Double>().ToList();
+                distCat = valuesCat.Distinct<String>().ToArray();
                 int row = 1;
                 int column = 1;
-                foreach (var item in dist)
+                foreach (var item in distCat)
                 {
                     newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
                     column = column + 1;
                 }
-                //row = 0;
-                //while (row < values.Count)
-                //{
-                //    String temp = values[row];
-                //    column = columnIndex;
-                //    foreach (var item in dist)
-                //    {
-                //        if (temp.Equals(item.ToString()))
-                //        {
-                //            worksheet.Cells[row + 2, column] = "1";
-                //        }
-                //        else
-                //        {
-                //            worksheet.Cells[row + 2, column] = "0";
-                //        }
-                //        column = column + 1;
-                //    }
-                //    row = row + 1;
-                //}
+                column = 1;
+                foreach (var item in distCat)
+                {
+                    row = 0;
+                    int counter = row;
+                    while (row < valuesVar.Count)
+                    {
+                        String temp = valuesCat[row];
+                        if (temp.Equals(item.ToString()))
+                        {
+                            newworksheet.Cells[counter + 2, column] = valuesVar[row];
+                            counter = counter + 1;
+                        }
+                        row = row + 1;
+                    }
+                    column = column + 1;
+                }
             }
             else
             {
-                List<Double> values = distCat.OfType<Double>().ToList();
-                List<Double> value = distCat.OfType<Double>().ToList();
-                values.Sort();
-                distCat = values.Distinct<Double>().ToArray();
+                List<Double> valueSortCat = distCat.OfType<Double>().ToList(); // één lijst gaat gesorteerd worden en de andere niet
+                List<Double> valueCat = distCat.OfType<Double>().ToList();
+                List<Double> valuesVar = dist.OfType<Double>().ToList();
+                valueSortCat.Sort();
+                distCat = valueSortCat.Distinct<Double>().ToArray();
                 int row = 1;
                 int column = 1;
-                foreach (var item in dist)
+                foreach (var item in distCat)
                 {
                     newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
                     column = column + 1;
                 }
-                //row = 0;
-                //while (row < values.Count)
-                //{
-                //    double temp = value[row];
-                //    column = columnIndex;
-                //    foreach (var item in dist)
-                //    {
-                //        if (temp == Convert.ToInt16(item))
-                //        {
-                //            worksheet.Cells[row + 2, column] = "1";
-                //        }
-                //        else
-                //        {
-                //            worksheet.Cells[row + 2, column] = "0";
-                //        }
-                //        column = column + 1;
-                //    }
-                //    row = row + 1;
-                //}
+                column = 1;
+                foreach (var item in distCat)
+                {
+                    row = 0;
+                    int counter = row;
+                    while (row < valuesVar.Count)
+                    {
+                        double temp = valueCat[row];
+                        if (temp == Convert.ToDouble(item.ToString()))
+                        {
+                            newworksheet.Cells[counter + 2, column] = valuesVar[row];
+                            counter = counter + 1;
+                        }
+                        row = row + 1;
+                    }
+                    column = column + 1;
+                }
             }
         }
 

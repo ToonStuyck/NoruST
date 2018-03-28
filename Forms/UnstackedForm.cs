@@ -34,6 +34,7 @@ namespace NoruST.Forms
 				uiDataGridViewColumn_VariableCheckY.Width = 20;
 				uiDataGridView_Variables.Columns[2].ReadOnly = true;
 				uiDataGridView_Variables.Columns[3].ReadOnly = true;
+                presenter.getModel().dataSet = selectedDataSet();
 			};
 		}
 

@@ -57,7 +57,7 @@ namespace NoruST.Presenters
 
 		public void createUnstacked(DataSet dataSet)
         {
-			//model.dataSet.addUnstacked(model.variable, dataSet);
+			model.dataSet.addUnstacked(model.category, model.variable, dataSet);
         }
     }
 }
