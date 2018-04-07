@@ -38,7 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
             this.uiDataGridViewColumn_VariableCheckX = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.uiDataGridViewColumn_VariableCheckY = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            //this.uiDataGridViewColumn_VariableCheckY = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             this.SuspendLayout();
@@ -103,8 +103,9 @@
             this.uiDataGridView_Variables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.uiDataGridView_Variables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.uiDataGridView_Variables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.uiDataGridViewColumn_VariableCheckX,
-            this.uiDataGridViewColumn_VariableCheckY});
+            this.uiDataGridViewColumn_VariableCheckX//,
+                                                    //this.uiDataGridViewColumn_VariableCheckY
+            });
             this.uiDataGridView_Variables.Location = new System.Drawing.Point(98, 41);
             this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
             this.uiDataGridView_Variables.RowHeadersVisible = false;
@@ -116,13 +117,7 @@
             this.uiDataGridViewColumn_VariableCheckX.HeaderText = "X";
             this.uiDataGridViewColumn_VariableCheckX.Name = "uiDataGridViewColumn_VariableCheckX";
             this.uiDataGridViewColumn_VariableCheckX.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // uiDataGridViewColumn_VariableCheckY
-            // 
-            this.uiDataGridViewColumn_VariableCheckY.HeaderText = "Y";
-            this.uiDataGridViewColumn_VariableCheckY.Name = "uiDataGridViewColumn_VariableCheckY";
-            this.uiDataGridViewColumn_VariableCheckY.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridViewColumn_VariableCheckY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+           
             // 
             // TimeSeriesGraphForm
             // 

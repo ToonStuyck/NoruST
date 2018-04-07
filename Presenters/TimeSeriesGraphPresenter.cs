@@ -37,13 +37,13 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public bool checkInput(List<Variable> variablesX, List<Variable> variablesY, DataSet dataSet)
+        public bool checkInput(List<Variable> variablesX, DataSet dataSet)
         {
 
             if (dataSet != null)
             {
                 _Worksheet sheet = WorksheetHelper.NewWorksheet("Time Series Graph");
-                generateChart(variablesX, variablesY, sheet, dataSet);
+                generateChart(variablesX, sheet, dataSet);
                 return true;
             }
             else
@@ -52,29 +52,33 @@ namespace NoruST.Presenters
         }
 
 
-        public void generateChart(List<Variable> variablesX, List<Variable> variablesY, _Worksheet sheet, DataSet dataSet)
+        public void generateChart(List<Variable> variablesX, _Worksheet sheet, DataSet dataSet)
         {
             int offsetY = 0;
+            List<int> X = new List<int>();
+            int count = 0;
+            while (X.Count < variablesX.Count)
+            { 
+                X.Add(count + 1);
+                count = count + 1;
+            }
+            System.Diagnostics.Debug.WriteLine(X.ToString());
             foreach (Variable variableX in variablesX)
             {
                 int offsetX = 0;
+                var charts = (ChartObjects)sheet.ChartObjects();
+                var chartObject = charts.Add(offsetX * 450, offsetY * 250, 450, 250);
+                var chart = chartObject.Chart;
+                chart.ChartType = XlChartType.xlXYScatterLinesNoMarkers;
+                chart.ChartWizard(Title: "Time Series " + dataSet.getName() + " - " + variableX.name, HasLegend: false);
+                var seriesCollection = (SeriesCollection)chart.SeriesCollection();
+                var series = seriesCollection.Add();
+                series.Values = variableX.getRange();
+                series.XValues = X.ToArray();
+                series.MarkerStyle = XlMarkerStyle.xlMarkerStyleCircle;
 
-                foreach (Variable variableY in variablesY)
-                {
-                    var charts = (ChartObjects)sheet.ChartObjects();
-                    var chartObject = charts.Add(offsetX * 450, offsetY * 250, 450, 250);
-                    var chart = chartObject.Chart;
-                    chart.ChartType = XlChartType.xlXYScatterLinesNoMarkers;
-                    chart.ChartWizard(Title: "Time Series " + dataSet.getName() + " - " + variableX.name + " vs " + variableY.name, HasLegend: false);
-                    var seriesCollection = (SeriesCollection)chart.SeriesCollection();
-                    var series = seriesCollection.Add();
-                    series.Values = variableY.getRange();
-                    series.XValues = variableX.getRange();
-                    series.MarkerStyle = XlMarkerStyle.xlMarkerStyleCircle;
-
-                    offsetX++;
-                }
-
+                offsetX++;
+                
                 offsetY++;
             }
         }

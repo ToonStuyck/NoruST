@@ -34,9 +34,9 @@ namespace NoruST.Forms
                 if (selectedDataSet() == null) return;
                 uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
                 uiDataGridViewColumn_VariableCheckX.Width = 20;
-                uiDataGridViewColumn_VariableCheckY.Width = 20;
+                //uiDataGridViewColumn_VariableCheckY.Width = 20;
+                uiDataGridView_Variables.Columns[1].ReadOnly = true;
                 uiDataGridView_Variables.Columns[2].ReadOnly = true;
-                uiDataGridView_Variables.Columns[3].ReadOnly = true;
             };
         }
 
@@ -72,12 +72,12 @@ namespace NoruST.Forms
                 {
                     variablesX.Add((Variable)row.DataBoundItem);
                 }
-                if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckY.Name].Value))
-                {
-                    variablesY.Add((Variable)row.DataBoundItem);
-                }
+                //if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckY.Name].Value))
+                //{
+                //    variablesY.Add((Variable)row.DataBoundItem);
+                //}
             }
-           bool inputOk = presenter.checkInput(variablesX, variablesY, selectedDataSet());
+           bool inputOk = presenter.checkInput(variablesX, selectedDataSet());
            if (inputOk)
            {
                Close();

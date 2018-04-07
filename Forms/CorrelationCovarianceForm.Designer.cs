@@ -185,6 +185,9 @@
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tlpForm.Size = new System.Drawing.Size(384, 361);
             this.tlpForm.TabIndex = 20;
+
+
+
             // 
             // CorrelationCovarianceForm
             // 
