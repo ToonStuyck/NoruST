@@ -55,14 +55,6 @@ namespace NoruST.Presenters
         public void generateChart(List<Variable> variablesX, _Worksheet sheet, DataSet dataSet)
         {
             int offsetY = 0;
-            List<int> X = new List<int>();
-            int count = 0;
-            while (X.Count < variablesX.Count)
-            { 
-                X.Add(count + 1);
-                count = count + 1;
-            }
-            System.Diagnostics.Debug.WriteLine(X.ToString());
             foreach (Variable variableX in variablesX)
             {
                 int offsetX = 0;
@@ -74,7 +66,6 @@ namespace NoruST.Presenters
                 var seriesCollection = (SeriesCollection)chart.SeriesCollection();
                 var series = seriesCollection.Add();
                 series.Values = variableX.getRange();
-                series.XValues = X.ToArray();
                 series.MarkerStyle = XlMarkerStyle.xlMarkerStyleCircle;
 
                 offsetX++;
