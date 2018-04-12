@@ -17,7 +17,7 @@ namespace NoruST
         private OneVariableSummaryPresenter oneVariableSummaryPresenter;
         private RunsTestForRandomnessPresenter runsTestForRandomnessPresenter;
         private ForecastPresenter forecastPresenter;
-        private CorrelationCovarianceForm correlationCovarianceForm;
+        private CorrelationCovariancePresenter correlationcovariancePresenter;
         private HistogramPresenter histogramPresenter;
         private ScatterPlotPresenter scatterPlotPresenter;
         private BoxWhiskerPlotPresenter boxWhiskerPlotPresenter;
@@ -39,6 +39,7 @@ namespace NoruST
             xrChartPresenter = new XRChartPresenter(dataSetManagerPresenter);
             pChartPresenter = new PChartPresenter(dataSetManagerPresenter);
             dummyPresenter = new DummyPresenter(dataSetManagerPresenter);
+            correlationcovariancePresenter = new CorrelationCovariancePresenter(dataSetManagerPresenter);
             unstackedPresenter = new UnstackedPresenter(dataSetManagerPresenter);
             processCapabilityPresenter = new ProcessCapabilityPresenter(dataSetManagerPresenter);
             timeSeriesGraphPresenter = new TimeSeriesGraphPresenter(dataSetManagerPresenter);
@@ -56,7 +57,7 @@ namespace NoruST
             btnLag.Click += delegate { lagPresenter.openView(); };
             btnDummy.Click += delegate { dummyPresenter.openView(); };
             btnOneVariableSummary.Click += delegate { oneVariableSummaryPresenter.openView(); };
-            btnCorrelationAndCovariance.Click += delegate { correlationCovarianceForm = correlationCovarianceForm.createAndOrShowForm(); };
+            btnCorrelationAndCovariance.Click += delegate { correlationcovariancePresenter.openView(); };
             btnHistogram.Click += delegate { histogramPresenter.openView(); };
             btnScatterplot.Click += delegate { scatterPlotPresenter.openView(); };
             btnBoxWhiskerPlot.Click += delegate { boxWhiskerPlotPresenter.openView(); };

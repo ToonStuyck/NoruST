@@ -1,56 +1,69 @@
-﻿using NoruST.Models;
-using CorrelationCovariance = NoruST.Analyses.CorrelationCovariance;
+﻿using NoruST.Domain;
+using NoruST.Presenters;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace NoruST.Forms
 {
-    /// <summary>
-    /// <para>The Correlation & Covariance Form.</para>
-    /// <para>Version: 1.0</para>
-    /// <para>&#160;</para>
-    /// <para>Author: Frederik Van de Velde</para>
-    /// <para>&#160;</para>
-    /// <para>Last Updated: Apr 20, 2016</para>
-    /// </summary>
-    public partial class CorrelationCovarianceForm : ExtendedForm
+    public partial class CorrelationCovarianceForm : Form
     {
-        #region Constructors
+        private CorrelationCovariancePresenter presenter;
 
-        /// <summary>
-        /// Constructor of the <see cref="CorrelationCovarianceForm"/> <see cref="System.Windows.Forms.Form"/>.
-        /// </summary>
         public CorrelationCovarianceForm()
         {
             InitializeComponent();
-
-            InitializeView(lstDataSets, dgvDataSet, chkCheckAllOptions, tlpOptions, btnOk, btnCancel);
         }
 
-        #endregion
-
-        #region Overwritten Methods
-
-        /// <summary>
-        /// This adds extra functionality to the DataSet<see cref="System.Windows.Forms.ListBox"/>.
-        /// </summary>
-        public override void DataSetListSelectedIndexChanged()
+        public void setPresenter(CorrelationCovariancePresenter presenter)
         {
-            // Create a data table and add the required columns.
-            CreateDataTable(DataTableColumn.Editable);
-
-            // Update the view with new data.
-            UpdateDataTable(DefaultCheck.Numeric);
+            this.presenter = presenter;
+            bindModelToView();
+            selectDataSet(selectedDataSet());
         }
 
-        /// <summary>
-        /// This adds extra functionality to the Ok <see cref="System.Windows.Forms.Button"/>
-        /// </summary>
-        public override bool OkButtonClick()
+        private void bindModelToView()
         {
-            var doCalculate = new SummaryStatisticsBool(correlation: chkCorrelation.Checked, covariance: chkCovariance.Checked);
-
-            return new CorrelationCovariance().Print(SelectedDataSet, DoInclude, doCalculate);
+            uiComboBox_DataSets.DataSource = presenter.dataSets();
+            uiComboBox_DataSets.DisplayMember = "name";
+            uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
+            {
+                if (selectedDataSet() == null) return;
+                uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
+                uiDataGridViewColumn_VariableCheck.Width = 20;
+                uiDataGridView_Variables.Columns[1].ReadOnly = true;
+                uiDataGridView_Variables.Columns[2].ReadOnly = true;
+            };
         }
 
-        #endregion
+        private DataSet selectedDataSet()
+        {
+            return (DataSet)uiComboBox_DataSets.SelectedItem;
+        }
+
+        public void selectDataSet(DataSet dataSet)
+        {
+            uiComboBox_DataSets.SelectedItem = null;
+            uiComboBox_DataSets.SelectedItem = dataSet;
+        }
+
+        private void btnOk_Click(object sender, System.EventArgs e)
+        {
+            List<Variable> variablesX = new List<Variable>();
+            foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheck.Name].Value))
+                {
+                    variablesX.Add((Variable)row.DataBoundItem);
+                }
+            }
+            presenter.createCorrelationCovariance(variablesX, selectedDataSet());
+            Close();
+        }
+
+        private void uiButton_Cancel_Click(object sender, System.EventArgs e)
+        {
+            Close();
+        }
     }
 }

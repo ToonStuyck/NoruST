@@ -107,7 +107,7 @@ namespace NoruST.Analyses
             var ranges = new List<Range>();
             foreach (var valuesArray in _valuesArray)
                 ranges.Add(valuesArray.Range);
-            var calc = new Models.CorrelationCovariance(ranges, doCalculate);
+            var calc = new Models.CorrelationCovariance();
 
             // Write the values to she sheet.
             for (var i = 0; i < _valuesArray.Count; i++)
