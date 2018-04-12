@@ -203,6 +203,7 @@
     <Compile Include="Controls\PercentageNumericUpDown.Designer.cs">
       <DependentUpon>PercentageNumericUpDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
     <Compile Include="Domain\DataSet.cs" />
     <Compile Include="Domain\DataSetFactory.cs" />
     <Compile Include="Domain\RangeLayout.cs" />
