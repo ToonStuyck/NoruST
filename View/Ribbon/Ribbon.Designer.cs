@@ -42,6 +42,7 @@
             this.separator6 = this.Factory.CreateRibbonSeparator();
             this.separator4 = this.Factory.CreateRibbonSeparator();
             this.separator5 = this.Factory.CreateRibbonSeparator();
+            this.menuNormalityTests = this.Factory.CreateRibbonMenu();
             this.btnDataSetManager = this.Factory.CreateRibbonButton();
             this.btnDataViewer = this.Factory.CreateRibbonButton();
             this.btnDataUtilities = this.Factory.CreateRibbonMenu();
@@ -58,30 +59,29 @@
             this.btnCorrelationAndCovariance = this.Factory.CreateRibbonButton();
             this.menuStatisticalInference = this.Factory.CreateRibbonMenu();
             this.splitButtonConfidence = this.Factory.CreateRibbonSplitButton();
+            this.btnMeanConf = this.Factory.CreateRibbonButton();
+            this.btnProportionConf = this.Factory.CreateRibbonButton();
+            this.splitButton1 = this.Factory.CreateRibbonSplitButton();
+            this.button1 = this.Factory.CreateRibbonButton();
+            this.button2 = this.Factory.CreateRibbonButton();
             this.btnSampleSize = this.Factory.CreateRibbonButton();
             this.btnAnova = this.Factory.CreateRibbonButton();
+            this.button3 = this.Factory.CreateRibbonButton();
             this.menuRegression = this.Factory.CreateRibbonMenu();
             this.btnWhiteTest = this.Factory.CreateRibbonButton();
             this.btnSimpleRegression = this.Factory.CreateRibbonButton();
             this.menuTimeseriesandForecasting = this.Factory.CreateRibbonMenu();
             this.btnTimeSeriesGraph = this.Factory.CreateRibbonButton();
             this.btnRunsTestForRandomness = this.Factory.CreateRibbonButton();
+            this.button4 = this.Factory.CreateRibbonButton();
             this.btnForecast = this.Factory.CreateRibbonButton();
             this.menuClassification = this.Factory.CreateRibbonMenu();
             this.btnLogisticRegression = this.Factory.CreateRibbonButton();
             this.btnDiscriminantAnalysis = this.Factory.CreateRibbonButton();
-            this.menuNormalityTests = this.Factory.CreateRibbonMenu();
             this.menuStatisticalProcessControl = this.Factory.CreateRibbonMenu();
             this.btnXRChart = this.Factory.CreateRibbonButton();
             this.btnPChart = this.Factory.CreateRibbonButton();
             this.btnProcessCapability = this.Factory.CreateRibbonButton();
-            this.btnMean = this.Factory.CreateRibbonButton();
-            this.btnProportion = this.Factory.CreateRibbonButton();
-            this.splitButton1 = this.Factory.CreateRibbonSplitButton();
-            this.button1 = this.Factory.CreateRibbonButton();
-            this.button2 = this.Factory.CreateRibbonButton();
-            this.button3 = this.Factory.CreateRibbonButton();
-            this.button4 = this.Factory.CreateRibbonButton();
             this.tabNoruST.SuspendLayout();
             this.grpData.SuspendLayout();
             this.grpAnalysis.SuspendLayout();
@@ -139,6 +139,14 @@
             // separator5
             // 
             this.separator5.Name = "separator5";
+            // 
+            // menuNormalityTests
+            // 
+            this.menuNormalityTests.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.menuNormalityTests.Label = "Normality Tests";
+            this.menuNormalityTests.Name = "menuNormalityTests";
+            this.menuNormalityTests.ShowImage = true;
+            this.menuNormalityTests.Visible = false;
             // 
             // btnDataSetManager
             // 
@@ -274,10 +282,45 @@
             // 
             // splitButtonConfidence
             // 
-            this.splitButtonConfidence.Items.Add(this.btnMean);
-            this.splitButtonConfidence.Items.Add(this.btnProportion);
+            this.splitButtonConfidence.Items.Add(this.btnMeanConf);
+            this.splitButtonConfidence.Items.Add(this.btnProportionConf);
             this.splitButtonConfidence.Label = "Confidence Intervals";
             this.splitButtonConfidence.Name = "splitButtonConfidence";
+            // 
+            // btnMeanConf
+            // 
+            this.btnMeanConf.Label = "Mean/Std. Deviation";
+            this.btnMeanConf.Name = "btnMeanConf";
+            this.btnMeanConf.ScreenTip = "Calculates confidence intervals of mean and std deviation of variables";
+            this.btnMeanConf.ShowImage = true;
+            // 
+            // btnProportionConf
+            // 
+            this.btnProportionConf.Label = "Proportion";
+            this.btnProportionConf.Name = "btnProportionConf";
+            this.btnProportionConf.ScreenTip = "Calculates confidence intervalrs for proportions";
+            this.btnProportionConf.ShowImage = true;
+            // 
+            // splitButton1
+            // 
+            this.splitButton1.Items.Add(this.button1);
+            this.splitButton1.Items.Add(this.button2);
+            this.splitButton1.Label = "Hypothesis Test";
+            this.splitButton1.Name = "splitButton1";
+            // 
+            // button1
+            // 
+            this.button1.Label = "Mean/Std. Deviation";
+            this.button1.Name = "button1";
+            this.button1.ScreenTip = "Performs a hypothesis test for mean and std. deviation of variables";
+            this.button1.ShowImage = true;
+            // 
+            // button2
+            // 
+            this.button2.Label = "Proportion";
+            this.button2.Name = "button2";
+            this.button2.ScreenTip = "Performs a hypothesis test for proportions";
+            this.button2.ShowImage = true;
             // 
             // btnSampleSize
             // 
@@ -292,6 +335,14 @@
             this.btnAnova.Name = "btnAnova";
             this.btnAnova.ScreenTip = "Performs a one-way ANOVA on variables ";
             this.btnAnova.ShowImage = true;
+            // 
+            // button3
+            // 
+            this.button3.Label = "Chi-square Independence Test";
+            this.button3.Name = "button3";
+            this.button3.ScreenTip = "Test for independence between the row and column attributes of a contingency tabl" +
+    "e";
+            this.button3.ShowImage = true;
             // 
             // menuRegression
             // 
@@ -344,6 +395,13 @@
             this.btnRunsTestForRandomness.ShowImage = true;
             this.btnRunsTestForRandomness.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btnRunsTestForRandomness_Click);
             // 
+            // button4
+            // 
+            this.button4.Label = "Autocorrelation";
+            this.button4.Name = "button4";
+            this.button4.ScreenTip = "Calculates the autocorrelations for variables";
+            this.button4.ShowImage = true;
+            // 
             // btnForecast
             // 
             this.btnForecast.Label = "Forecast";
@@ -376,14 +434,6 @@
             this.btnDiscriminantAnalysis.ScreenTip = "Runs a discriminant analysis on a set of variables";
             this.btnDiscriminantAnalysis.ShowImage = true;
             // 
-            // menuNormalityTests
-            // 
-            this.menuNormalityTests.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.menuNormalityTests.Label = "Normality Tests";
-            this.menuNormalityTests.Name = "menuNormalityTests";
-            this.menuNormalityTests.ShowImage = true;
-            this.menuNormalityTests.Visible = false;
-            // 
             // menuStatisticalProcessControl
             // 
             this.menuStatisticalProcessControl.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -415,56 +465,6 @@
             this.btnProcessCapability.Label = "Process Capability";
             this.btnProcessCapability.Name = "btnProcessCapability";
             this.btnProcessCapability.ShowImage = true;
-            // 
-            // btnMean
-            // 
-            this.btnMean.Label = "Mean/Std. Deviation";
-            this.btnMean.Name = "btnMean";
-            this.btnMean.ScreenTip = "Calculates confidence intervals of mean and std deviation of variables";
-            this.btnMean.ShowImage = true;
-            // 
-            // btnProportion
-            // 
-            this.btnProportion.Label = "Proportion";
-            this.btnProportion.Name = "btnProportion";
-            this.btnProportion.ScreenTip = "Calculates confidence intervalrs for proportions";
-            this.btnProportion.ShowImage = true;
-            // 
-            // splitButton1
-            // 
-            this.splitButton1.Items.Add(this.button1);
-            this.splitButton1.Items.Add(this.button2);
-            this.splitButton1.Label = "Hypothesis Test";
-            this.splitButton1.Name = "splitButton1";
-            // 
-            // button1
-            // 
-            this.button1.Label = "Mean/Std. Deviation";
-            this.button1.Name = "button1";
-            this.button1.ScreenTip = "Performs a hypothesis test for mean and std. deviation of variables";
-            this.button1.ShowImage = true;
-            // 
-            // button2
-            // 
-            this.button2.Label = "Proportion";
-            this.button2.Name = "button2";
-            this.button2.ScreenTip = "Performs a hypothesis test for proportions";
-            this.button2.ShowImage = true;
-            // 
-            // button3
-            // 
-            this.button3.Label = "Chi-square Independence Test";
-            this.button3.Name = "button3";
-            this.button3.ScreenTip = "Test for independence between the row and column attributes of a contingency tabl" +
-    "e";
-            this.button3.ShowImage = true;
-            // 
-            // button4
-            // 
-            this.button4.Label = "Autocorrelation";
-            this.button4.Name = "button4";
-            this.button4.ScreenTip = "Calculates the autocorrelations for variables";
-            this.button4.ShowImage = true;
             // 
             // Ribbon
             // 
@@ -525,8 +525,8 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonMenu menuDescriptiveStatistics;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnUnstacked;
         internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton splitButtonConfidence;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnMean;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnProportion;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnMeanConf;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnProportionConf;
         internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton splitButton1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;

@@ -30,6 +30,7 @@ namespace NoruST
         private LogisticRegressionForm logisticRegressionForm;
         private DiscriminantAnalysisForm discriminantAnalysisForm;
         private UnstackedPresenter unstackedPresenter;
+        private ConfidencePresenter1 confidencePresenter1;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -51,6 +52,7 @@ namespace NoruST
             oneWayAnovaPresenter = new OneWayAnovaPresenter(dataSetManagerPresenter);
             runsTestForRandomnessPresenter = new RunsTestForRandomnessPresenter(dataSetManagerPresenter);
             forecastPresenter = new ForecastPresenter(dataSetManagerPresenter);
+            confidencePresenter1 = new ConfidencePresenter1(dataSetManagerPresenter);
 
             // Add Event Handlers for the click events of the buttons.
             btnDataSetManager.Click += delegate { dataSetManagerPresenter.openDataSetManager(); };
@@ -73,6 +75,7 @@ namespace NoruST
             btnTimeSeriesGraph.Click += delegate { timeSeriesGraphPresenter.openView(); };
             btnSimpleRegression.Click += delegate { regressionForm = regressionForm.createAndOrShowForm(); };
             btnUnstacked.Click += delegate { unstackedPresenter.openView(); };
+            btnMeanConf.Click += delegate { confidencePresenter1.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)

@@ -203,6 +203,14 @@
     <Compile Include="Controls\PercentageNumericUpDown.Designer.cs">
       <DependentUpon>PercentageNumericUpDown.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\confidence1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\confidence1.Designer.cs">
+      <DependentUpon>confidence1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ConfidenceModel1.cs" />
+    <Compile Include="Presenters\ConfidencePresenter1.cs" />
     <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
     <Compile Include="Domain\DataSet.cs" />
     <Compile Include="Domain\DataSetFactory.cs" />
@@ -389,6 +397,9 @@
     </Compile>
     <EmbeddedResource Include="Forms\BoxWhiskerPlotForm.resx">
       <DependentUpon>BoxWhiskerPlotForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\confidence1.resx">
+      <DependentUpon>confidence1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CorrelationCovarianceForm.resx">
       <DependentUpon>CorrelationCovarianceForm.cs</DependentUpon>
