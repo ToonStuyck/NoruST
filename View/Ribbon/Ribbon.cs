@@ -31,6 +31,7 @@ namespace NoruST
         private DiscriminantAnalysisForm discriminantAnalysisForm;
         private UnstackedPresenter unstackedPresenter;
         private ConfidencePresenter1 confidencePresenter1;
+        private ConfidencePresenter2 confidencePresenter2;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -53,6 +54,7 @@ namespace NoruST
             runsTestForRandomnessPresenter = new RunsTestForRandomnessPresenter(dataSetManagerPresenter);
             forecastPresenter = new ForecastPresenter(dataSetManagerPresenter);
             confidencePresenter1 = new ConfidencePresenter1(dataSetManagerPresenter);
+            confidencePresenter2 = new ConfidencePresenter2(dataSetManagerPresenter);
 
             // Add Event Handlers for the click events of the buttons.
             btnDataSetManager.Click += delegate { dataSetManagerPresenter.openDataSetManager(); };
@@ -76,6 +78,7 @@ namespace NoruST
             btnSimpleRegression.Click += delegate { regressionForm = regressionForm.createAndOrShowForm(); };
             btnUnstacked.Click += delegate { unstackedPresenter.openView(); };
             btnMeanConf.Click += delegate { confidencePresenter1.openView(); };
+            btnProportionConf.Click += delegate { confidencePresenter2.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)

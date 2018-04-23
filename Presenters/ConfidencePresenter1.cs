@@ -64,10 +64,7 @@ namespace NoruST.Presenters
                 {
                     PrintCategories(worksheet, 5, "Std. Dev", dataSet, variable);
                 }
-                
-                
             }
-            System.Diagnostics.Debug.WriteLine("YES");
         }
 
         private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet, Variable variable)
