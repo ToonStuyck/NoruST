@@ -72,6 +72,12 @@ namespace NoruST.Presenters
 
         private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet, Variable variable)
         {
+            double alpha = (100.0 - model.mean) / 200.0;
+            double norm = _sheet.Application.WorksheetFunction.NormSInv(alpha);
+            var stdValue = (_sheet.Cells[4, 2] as Range).Value;
+            double std = Convert.ToDouble(stdValue);
+            double sqrt = Math.Sqrt(Convert.ToDouble((_sheet.Cells[2,2] as Range).Value));
+            double avr = Convert.ToDouble((_sheet.Cells[3, 2] as Range).Value);
             var row = rowIn;
             _sheet.Cells[row, 1] = "Confidence level ("+ input + ")";
             if (input.Equals("mean"))
@@ -84,21 +90,25 @@ namespace NoruST.Presenters
             _sheet.Cells[row, 1] = "Lower limit";
             if (input.Equals("mean"))
             {
-                _sheet.Cells[row++, 2] = "=CONFIDENCE("+ 0.95.ToString() + ";" + 39921.92.ToString()+ ";" + 208.ToString() +")";
+                double tmp = avr - Math.Abs((norm * std / sqrt));
+                _sheet.Cells[row++, 2] = tmp; 
             }
             else
             {
-                _sheet.Cells[row++, 2] = model.std.ToString();
+                double tmp = std - Math.Abs((norm * std / sqrt));
+                _sheet.Cells[row++, 2] = tmp;
             }
 
             _sheet.Cells[row, 1] = "Upper limit";
             if (input.Equals("mean"))
             {
-                _sheet.Cells[row++, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + ") + CONFIDENCE(" + (model.mean / 100.0).ToString() + ",AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + "),ROWS(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                double tmp = avr + Math.Abs((norm * std / sqrt));
+                _sheet.Cells[row++, 2] = tmp;
             }
             else
             {
-                _sheet.Cells[row++, 2] = model.std.ToString();
+                double tmp = std + Math.Abs((norm * std / sqrt));
+                _sheet.Cells[row++, 2] = tmp;
             }
         }
     }
