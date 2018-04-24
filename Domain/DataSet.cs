@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using Microsoft.Office.Interop.Excel;
 using NoruST.Forms;
+using NoruST.Presenters;
 using System.Windows.Forms;
 using static Microsoft.Office.Interop.Excel.XlInsertFormatOrigin;
 using static Microsoft.Office.Interop.Excel.XlInsertShiftDirection;
@@ -186,6 +187,10 @@ namespace NoruST.Domain
                     }
                     row = row + 1;
                 }
+                Range nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column-1));
+                //DataSetManagerPresenter presenter = new DataSetManagerPresenter();
+                //DataSetManagerForm view = new DataSetManagerForm();
+                //presenter.addDataSetCurrentSelection(view);
             } else
             {
                 List<Double> values = dist.OfType<Double>().ToList();
@@ -217,6 +222,10 @@ namespace NoruST.Domain
                     }
                     row = row + 1;
                 }
+                Range newRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column-1));
+                //DataSetManagerPresenter presenter = new DataSetManagerPresenter();
+                //DataSetManagerForm view = new DataSetManagerForm();
+                //presenter.addDataSetCurrentSelection(view);
             }
 		}
 

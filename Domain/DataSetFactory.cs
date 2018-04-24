@@ -13,6 +13,23 @@ namespace NoruST.Domain
             List<Variable> variables = createVariables(worksheet, range, rangeLayout, variableNamesInFirstRowOrColumn);
             return new DataSet(worksheet, range, name, rangeLayout, variableNamesInFirstRowOrColumn, variables);
         }
+
+        public static Range modify(DataSet dataSet, string newRange)
+        {
+            string tmp = dataSet.Range;
+            int temp = tmp.IndexOf(':');
+            int start = tmp.IndexOf('$', temp + 1)+1;
+            char[] ch = tmp.ToCharArray();
+            ch[start] = newRange.ToCharArray()[0];
+            string newtmp = new string(ch);
+            System.Diagnostics.Debug.WriteLine(tmp);
+            System.Diagnostics.Debug.WriteLine(newtmp);
+            Range range = dataSet.getWorksheet().Range[newtmp];
+            range.Select();
+            return range;
+            //List<Variable> variables = createVariables(dataSet.getWorksheet(), range, dataSet.getRangeLayout(), dataSet.getVariableNamesInFirstRowOrColumn());
+            //return new DataSet(dataSet.getWorksheet(), range, dataSet.getName(), dataSet.getRangeLayout(), dataSet.getVariableNamesInFirstRowOrColumn(), variables);
+        }
         //test
 
         public static List<Variable> createVariables(_Worksheet worksheet, Range range, RangeLayout rangeLayout, bool variableNamesInFirstRowOrColumn)

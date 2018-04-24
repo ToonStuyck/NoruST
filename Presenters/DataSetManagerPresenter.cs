@@ -55,6 +55,27 @@ namespace NoruST.Presenters
             view.selectDataSet(newDataSet);
         }
 
+        public void addDataSetCurrentSelection(DataSetManagerForm view)
+        {
+            _Worksheet workSheet = Globals.ExcelAddIn.getActiveWorksheet();
+            Range range = Globals.ExcelAddIn.getCurrentSelectionRange();
+            if (model.hasIntersectionWith(range))
+                if (DataSetManagerForm.ignoreIntersection(model.getFirstIntersectingDataSetWith(range)))
+                    return;
+
+            if (range.Rows.Count == 1 && range.Columns.Count == 1)
+            {
+                range = Globals.ExcelAddIn.getExpandedCurrentRange();
+                range.Select();
+            }
+
+            bool addNewDataSet = (range.Rows.Count != 1 || range.Columns.Count != 1) && DataSetManagerForm.addNewDataSet(range);
+            if (!addNewDataSet) return;
+            DataSet newDataSet = DataSetFactory.create(workSheet, range, "Data Set " + (model.numberOfDataSets() + 1), COLUMNS, true);
+            model.addDataSet(newDataSet);
+            view.selectDataSet(newDataSet);
+        }
+
         public void rangeSelected(string range)
         {
             view.rangeSelected(range);
