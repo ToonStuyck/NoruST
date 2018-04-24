@@ -215,8 +215,15 @@
     <Compile Include="Forms\Confidence2.Designer.cs">
       <DependentUpon>Confidence2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\HypotheseForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\HypotheseForm1.Designer.cs">
+      <DependentUpon>HypotheseForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ConfidenceModel1.cs" />
     <Compile Include="Models\ConfidenceModel2.cs" />
+    <Compile Include="Models\HypotheseModel1.cs" />
     <Compile Include="Presenters\ConfidencePresenter1.cs" />
     <Compile Include="Presenters\ConfidencePresenter2.cs" />
     <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
@@ -385,6 +392,7 @@
     <Compile Include="Models\UnstackedModel.cs" />
     <Compile Include="Models\XRChartModel.cs" />
     <Compile Include="Presenters\BoxWhiskerPlotPresenter.cs" />
+    <Compile Include="Presenters\HypothesePresenter1.cs" />
     <Compile Include="Presenters\UnstackedPresenter.cs" />
     <Compile Include="Presenters\DataSetManagerPresenter.cs" />
     <Compile Include="Presenters\DummyPresenter.cs" />
@@ -426,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ForecastForm.resx">
       <DependentUpon>ForecastForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HypotheseForm1.resx">
+      <DependentUpon>HypotheseForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\OneWayAnovaForm.resx">
       <DependentUpon>OneWayAnovaForm.cs</DependentUpon>

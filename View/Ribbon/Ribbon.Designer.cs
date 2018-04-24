@@ -57,7 +57,7 @@
             this.btnMeanConf = this.Factory.CreateRibbonButton();
             this.btnProportionConf = this.Factory.CreateRibbonButton();
             this.splitButton1 = this.Factory.CreateRibbonSplitButton();
-            this.button1 = this.Factory.CreateRibbonButton();
+            this.btnHypoMean = this.Factory.CreateRibbonButton();
             this.button2 = this.Factory.CreateRibbonButton();
             this.btnSampleSize = this.Factory.CreateRibbonButton();
             this.btnAnova = this.Factory.CreateRibbonButton();
@@ -279,17 +279,17 @@
             // 
             // splitButton1
             // 
-            this.splitButton1.Items.Add(this.button1);
+            this.splitButton1.Items.Add(this.btnHypoMean);
             this.splitButton1.Items.Add(this.button2);
             this.splitButton1.Label = "Hypothesis Test";
             this.splitButton1.Name = "splitButton1";
             // 
-            // button1
+            // btnHypoMean
             // 
-            this.button1.Label = "Mean/Std. Deviation";
-            this.button1.Name = "button1";
-            this.button1.ScreenTip = "Performs a hypothesis test for mean and std. deviation of variables";
-            this.button1.ShowImage = true;
+            this.btnHypoMean.Label = "Mean/Std. Deviation";
+            this.btnHypoMean.Name = "btnHypoMean";
+            this.btnHypoMean.ScreenTip = "Performs a hypothesis test for mean and std. deviation of variables";
+            this.btnHypoMean.ShowImage = true;
             // 
             // button2
             // 
@@ -528,7 +528,7 @@
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnMeanConf;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton btnProportionConf;
         internal Microsoft.Office.Tools.Ribbon.RibbonSplitButton splitButton1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btnHypoMean;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button2;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button3;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton button4;

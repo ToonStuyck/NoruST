@@ -32,6 +32,7 @@ namespace NoruST
         private UnstackedPresenter unstackedPresenter;
         private ConfidencePresenter1 confidencePresenter1;
         private ConfidencePresenter2 confidencePresenter2;
+        private HypothesePresenter1 hypothesePresenter1;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -55,6 +56,7 @@ namespace NoruST
             forecastPresenter = new ForecastPresenter(dataSetManagerPresenter);
             confidencePresenter1 = new ConfidencePresenter1(dataSetManagerPresenter);
             confidencePresenter2 = new ConfidencePresenter2(dataSetManagerPresenter);
+            hypothesePresenter1 = new HypothesePresenter1(dataSetManagerPresenter);
 
             // Add Event Handlers for the click events of the buttons.
             btnDataSetManager.Click += delegate { dataSetManagerPresenter.openDataSetManager(); };
@@ -79,6 +81,7 @@ namespace NoruST
             btnUnstacked.Click += delegate { unstackedPresenter.openView(); };
             btnMeanConf.Click += delegate { confidencePresenter1.openView(); };
             btnProportionConf.Click += delegate { confidencePresenter2.openView(); };
+            btnHypoMean.Click += delegate { hypothesePresenter1.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)
