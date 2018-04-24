@@ -39,23 +39,24 @@
             this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
             this.uiDataGridViewColumn_VariableCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.chkInterquartileRange = new System.Windows.Forms.CheckBox();
-            this.chkMode = new System.Windows.Forms.CheckBox();
-            this.chkThirdQuartile = new System.Windows.Forms.CheckBox();
-            this.chkMeanAbsDev = new System.Windows.Forms.CheckBox();
-            this.chkFirstQuartile = new System.Windows.Forms.CheckBox();
-            this.chkMedian = new System.Windows.Forms.CheckBox();
             this.chkSum = new System.Windows.Forms.CheckBox();
             this.chkKurtosis = new System.Windows.Forms.CheckBox();
-            this.chkCount = new System.Windows.Forms.CheckBox();
-            this.chkSkewness = new System.Windows.Forms.CheckBox();
-            this.chkRange = new System.Windows.Forms.CheckBox();
-            this.chkStandardDev = new System.Windows.Forms.CheckBox();
             this.chkMaximum = new System.Windows.Forms.CheckBox();
             this.chkVariance = new System.Windows.Forms.CheckBox();
             this.chkMinimum = new System.Windows.Forms.CheckBox();
             this.chkMean = new System.Windows.Forms.CheckBox();
             this.chkAll = new System.Windows.Forms.CheckBox();
+            this.chkStandardDev = new System.Windows.Forms.CheckBox();
+            this.chkRange = new System.Windows.Forms.CheckBox();
+            this.chkSkewness = new System.Windows.Forms.CheckBox();
+            this.chkCount = new System.Windows.Forms.CheckBox();
+            this.chkMedian = new System.Windows.Forms.CheckBox();
+            this.chkMeanAbsDev = new System.Windows.Forms.CheckBox();
+            this.chkFirstQuartile = new System.Windows.Forms.CheckBox();
+            this.chkThirdQuartile = new System.Windows.Forms.CheckBox();
+            this.chkInterquartileRange = new System.Windows.Forms.CheckBox();
+            this.chkMode = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -212,6 +213,7 @@
             this.tableLayoutPanel1.Controls.Add(this.chkThirdQuartile, 2, 4);
             this.tableLayoutPanel1.Controls.Add(this.chkInterquartileRange, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.chkMode, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.checkBox1, 1, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(63, 172);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -228,66 +230,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(518, 130);
             this.tableLayoutPanel1.TabIndex = 30;
-            // 
-            // chkInterquartileRange
-            // 
-            this.chkInterquartileRange.AutoSize = true;
-            this.chkInterquartileRange.Location = new System.Drawing.Point(132, 95);
-            this.chkInterquartileRange.Name = "chkInterquartileRange";
-            this.chkInterquartileRange.Size = new System.Drawing.Size(116, 17);
-            this.chkInterquartileRange.TabIndex = 16;
-            this.chkInterquartileRange.Text = "Interquartile Range";
-            this.chkInterquartileRange.UseVisualStyleBackColor = true;
-            // 
-            // chkMode
-            // 
-            this.chkMode.AutoSize = true;
-            this.chkMode.Location = new System.Drawing.Point(390, 95);
-            this.chkMode.Name = "chkMode";
-            this.chkMode.Size = new System.Drawing.Size(53, 17);
-            this.chkMode.TabIndex = 15;
-            this.chkMode.Text = "Mode";
-            this.chkMode.UseVisualStyleBackColor = true;
-            // 
-            // chkThirdQuartile
-            // 
-            this.chkThirdQuartile.AutoSize = true;
-            this.chkThirdQuartile.Location = new System.Drawing.Point(261, 95);
-            this.chkThirdQuartile.Name = "chkThirdQuartile";
-            this.chkThirdQuartile.Size = new System.Drawing.Size(89, 17);
-            this.chkThirdQuartile.TabIndex = 14;
-            this.chkThirdQuartile.Text = "Third Quartile";
-            this.chkThirdQuartile.UseVisualStyleBackColor = true;
-            // 
-            // chkMeanAbsDev
-            // 
-            this.chkMeanAbsDev.AutoSize = true;
-            this.chkMeanAbsDev.Location = new System.Drawing.Point(390, 72);
-            this.chkMeanAbsDev.Name = "chkMeanAbsDev";
-            this.chkMeanAbsDev.Size = new System.Drawing.Size(125, 17);
-            this.chkMeanAbsDev.TabIndex = 13;
-            this.chkMeanAbsDev.Text = "Mean Abs. Deviation";
-            this.chkMeanAbsDev.UseVisualStyleBackColor = true;
-            // 
-            // chkFirstQuartile
-            // 
-            this.chkFirstQuartile.AutoSize = true;
-            this.chkFirstQuartile.Location = new System.Drawing.Point(3, 95);
-            this.chkFirstQuartile.Name = "chkFirstQuartile";
-            this.chkFirstQuartile.Size = new System.Drawing.Size(84, 17);
-            this.chkFirstQuartile.TabIndex = 12;
-            this.chkFirstQuartile.Text = "First Quartile";
-            this.chkFirstQuartile.UseVisualStyleBackColor = true;
-            // 
-            // chkMedian
-            // 
-            this.chkMedian.AutoSize = true;
-            this.chkMedian.Location = new System.Drawing.Point(261, 72);
-            this.chkMedian.Name = "chkMedian";
-            this.chkMedian.Size = new System.Drawing.Size(61, 17);
-            this.chkMedian.TabIndex = 11;
-            this.chkMedian.Text = "Median";
-            this.chkMedian.UseVisualStyleBackColor = true;
             // 
             // chkSum
             // 
@@ -308,46 +250,6 @@
             this.chkKurtosis.TabIndex = 9;
             this.chkKurtosis.Text = "Kurtosis";
             this.chkKurtosis.UseVisualStyleBackColor = true;
-            // 
-            // chkCount
-            // 
-            this.chkCount.AutoSize = true;
-            this.chkCount.Location = new System.Drawing.Point(390, 49);
-            this.chkCount.Name = "chkCount";
-            this.chkCount.Size = new System.Drawing.Size(54, 17);
-            this.chkCount.TabIndex = 8;
-            this.chkCount.Text = "Count";
-            this.chkCount.UseVisualStyleBackColor = true;
-            // 
-            // chkSkewness
-            // 
-            this.chkSkewness.AutoSize = true;
-            this.chkSkewness.Location = new System.Drawing.Point(261, 49);
-            this.chkSkewness.Name = "chkSkewness";
-            this.chkSkewness.Size = new System.Drawing.Size(75, 17);
-            this.chkSkewness.TabIndex = 7;
-            this.chkSkewness.Text = "Skewness";
-            this.chkSkewness.UseVisualStyleBackColor = true;
-            // 
-            // chkRange
-            // 
-            this.chkRange.AutoSize = true;
-            this.chkRange.Location = new System.Drawing.Point(390, 26);
-            this.chkRange.Name = "chkRange";
-            this.chkRange.Size = new System.Drawing.Size(58, 17);
-            this.chkRange.TabIndex = 6;
-            this.chkRange.Text = "Range";
-            this.chkRange.UseVisualStyleBackColor = true;
-            // 
-            // chkStandardDev
-            // 
-            this.chkStandardDev.AutoSize = true;
-            this.chkStandardDev.Location = new System.Drawing.Point(261, 26);
-            this.chkStandardDev.Name = "chkStandardDev";
-            this.chkStandardDev.Size = new System.Drawing.Size(117, 17);
-            this.chkStandardDev.TabIndex = 5;
-            this.chkStandardDev.Text = "Standard Deviation";
-            this.chkStandardDev.UseVisualStyleBackColor = true;
             // 
             // chkMaximum
             // 
@@ -399,6 +301,117 @@
             this.chkAll.Text = "(De)select all";
             this.chkAll.UseVisualStyleBackColor = true;
             this.chkAll.CheckedChanged += new System.EventHandler(this.chkAll_CheckedChanged);
+            // 
+            // chkStandardDev
+            // 
+            this.chkStandardDev.AutoSize = true;
+            this.chkStandardDev.Location = new System.Drawing.Point(261, 26);
+            this.chkStandardDev.Name = "chkStandardDev";
+            this.chkStandardDev.Size = new System.Drawing.Size(117, 17);
+            this.chkStandardDev.TabIndex = 5;
+            this.chkStandardDev.Text = "Standard Deviation";
+            this.chkStandardDev.UseVisualStyleBackColor = true;
+            // 
+            // chkRange
+            // 
+            this.chkRange.AutoSize = true;
+            this.chkRange.Location = new System.Drawing.Point(390, 26);
+            this.chkRange.Name = "chkRange";
+            this.chkRange.Size = new System.Drawing.Size(58, 17);
+            this.chkRange.TabIndex = 6;
+            this.chkRange.Text = "Range";
+            this.chkRange.UseVisualStyleBackColor = true;
+            // 
+            // chkSkewness
+            // 
+            this.chkSkewness.AutoSize = true;
+            this.chkSkewness.Location = new System.Drawing.Point(261, 49);
+            this.chkSkewness.Name = "chkSkewness";
+            this.chkSkewness.Size = new System.Drawing.Size(75, 17);
+            this.chkSkewness.TabIndex = 7;
+            this.chkSkewness.Text = "Skewness";
+            this.chkSkewness.UseVisualStyleBackColor = true;
+            // 
+            // chkCount
+            // 
+            this.chkCount.AutoSize = true;
+            this.chkCount.Location = new System.Drawing.Point(390, 49);
+            this.chkCount.Name = "chkCount";
+            this.chkCount.Size = new System.Drawing.Size(54, 17);
+            this.chkCount.TabIndex = 8;
+            this.chkCount.Text = "Count";
+            this.chkCount.UseVisualStyleBackColor = true;
+            // 
+            // chkMedian
+            // 
+            this.chkMedian.AutoSize = true;
+            this.chkMedian.Location = new System.Drawing.Point(261, 72);
+            this.chkMedian.Name = "chkMedian";
+            this.chkMedian.Size = new System.Drawing.Size(61, 17);
+            this.chkMedian.TabIndex = 11;
+            this.chkMedian.Text = "Median";
+            this.chkMedian.UseVisualStyleBackColor = true;
+            // 
+            // chkMeanAbsDev
+            // 
+            this.chkMeanAbsDev.AutoSize = true;
+            this.chkMeanAbsDev.Location = new System.Drawing.Point(390, 72);
+            this.chkMeanAbsDev.Name = "chkMeanAbsDev";
+            this.chkMeanAbsDev.Size = new System.Drawing.Size(125, 17);
+            this.chkMeanAbsDev.TabIndex = 13;
+            this.chkMeanAbsDev.Text = "Mean Abs. Deviation";
+            this.chkMeanAbsDev.UseVisualStyleBackColor = true;
+            // 
+            // chkFirstQuartile
+            // 
+            this.chkFirstQuartile.AutoSize = true;
+            this.chkFirstQuartile.Location = new System.Drawing.Point(3, 95);
+            this.chkFirstQuartile.Name = "chkFirstQuartile";
+            this.chkFirstQuartile.Size = new System.Drawing.Size(84, 17);
+            this.chkFirstQuartile.TabIndex = 12;
+            this.chkFirstQuartile.Text = "First Quartile";
+            this.chkFirstQuartile.UseVisualStyleBackColor = true;
+            // 
+            // chkThirdQuartile
+            // 
+            this.chkThirdQuartile.AutoSize = true;
+            this.chkThirdQuartile.Location = new System.Drawing.Point(261, 95);
+            this.chkThirdQuartile.Name = "chkThirdQuartile";
+            this.chkThirdQuartile.Size = new System.Drawing.Size(89, 17);
+            this.chkThirdQuartile.TabIndex = 14;
+            this.chkThirdQuartile.Text = "Third Quartile";
+            this.chkThirdQuartile.UseVisualStyleBackColor = true;
+            // 
+            // chkInterquartileRange
+            // 
+            this.chkInterquartileRange.AutoSize = true;
+            this.chkInterquartileRange.Location = new System.Drawing.Point(132, 95);
+            this.chkInterquartileRange.Name = "chkInterquartileRange";
+            this.chkInterquartileRange.Size = new System.Drawing.Size(116, 17);
+            this.chkInterquartileRange.TabIndex = 16;
+            this.chkInterquartileRange.Text = "Interquartile Range";
+            this.chkInterquartileRange.UseVisualStyleBackColor = true;
+            // 
+            // chkMode
+            // 
+            this.chkMode.AutoSize = true;
+            this.chkMode.Location = new System.Drawing.Point(390, 95);
+            this.chkMode.Name = "chkMode";
+            this.chkMode.Size = new System.Drawing.Size(53, 17);
+            this.chkMode.TabIndex = 15;
+            this.chkMode.Text = "Mode";
+            this.chkMode.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(132, 3);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(115, 17);
+            this.checkBox1.TabIndex = 17;
+            this.checkBox1.Text = "Mean, Std and Var";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // OneVariableSummaryForm
             // 
@@ -452,5 +465,6 @@
         private System.Windows.Forms.CheckBox chkMean;
         private System.Windows.Forms.CheckBox chkAll;
         private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheck;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

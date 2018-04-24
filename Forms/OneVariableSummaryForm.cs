@@ -84,6 +84,13 @@ namespace NoruST.Forms
             chkVariance.Checked = presenter.getModel().variance = chkAll.Checked;
         }
 
+        private void checkBox1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            chkMean.Checked = presenter.getModel().mean = checkBox1.Checked;
+            chkStandardDev.Checked = presenter.getModel().standardDeviation = checkBox1.Checked;
+            chkVariance.Checked = presenter.getModel().variance = checkBox1.Checked;
+        }
+
         private void uiButton_Cancel_Click(object sender, System.EventArgs e)
         {
             Close();
