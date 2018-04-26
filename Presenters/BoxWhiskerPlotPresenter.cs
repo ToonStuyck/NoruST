@@ -161,7 +161,7 @@ namespace NoruST.Presenters
                     }
                 }
             }
-            while (yValues.Count != outliers.Count)
+            for (var i = 0; i < outliers.Count; i++)
             {
                 yValues.Add(0.5);
             }
