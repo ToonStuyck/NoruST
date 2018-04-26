@@ -41,6 +41,7 @@ namespace NoruST.Forms
                 textBox1.DataBindings.Add("Text", presenter.getModel(), "Null");
                 checkBox2.DataBindings.Add("Checked", presenter.getModel(), "equal");
                 checkBox1.DataBindings.Add("Checked", presenter.getModel(), "greater");
+                numericUpDown1.DataBindings.Add("Value", presenter.getModel(), "alpha");
             };
         }
 

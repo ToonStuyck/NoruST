@@ -446,6 +446,9 @@
     <EmbeddedResource Include="Forms\HypotheseForm1.resx">
       <DependentUpon>HypotheseForm1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\HypotheseForm2.resx">
+      <DependentUpon>HypotheseForm2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\OneWayAnovaForm.resx">
       <DependentUpon>OneWayAnovaForm.cs</DependentUpon>
     </EmbeddedResource>

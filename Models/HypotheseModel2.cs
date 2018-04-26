@@ -8,8 +8,9 @@ namespace NoruST.Models
 {
     public class HypotheseModel2
     {
-        public string Null { get; set; }
+        public double Null { get; set; }
         public Boolean equal { get; set; }
         public Boolean greater { get; set; }
+        public int alpha { get; set; }
     }
 }
