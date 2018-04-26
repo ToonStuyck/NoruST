@@ -66,6 +66,25 @@ namespace NoruST.Presenters
 
         private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet, Variable variable)
         {
+            double alpha = (double)model.alpha;
+            int tail = 1;
+            if (input.Equals("equal"))
+            {
+                alpha = alpha / 200.0;
+                tail = 2;
+            }
+            else
+            {
+                alpha = alpha / 100.0;
+                tail = 1;
+            }
+            double mean = (_sheet.Cells[3, 2] as Range).Value;
+            double s = (_sheet.Cells[4, 2] as Range).Value;
+            double n = (_sheet.Cells[2, 2] as Range).Value;
+            double den = (s / Math.Sqrt(n));
+            double mu = Convert.ToDouble(model.Null);
+            double nom = mean - mu;
+            double t = nom / den;
             var row = rowIn;
             _sheet.Cells[row, 1] = "Hypothesized mean";
             _sheet.Cells[row++, 2] = model.Null;
@@ -79,10 +98,28 @@ namespace NoruST.Presenters
             {
                 _sheet.Cells[row++, 2] = "> " +model.Null;
             }
+            _sheet.Cells[row, 1] = "Alpha";
+            _sheet.Cells[row++, 2] = model.alpha;
 
-            _sheet.Cells[row++, 1] = "t-Test Statistic";
+            _sheet.Cells[row, 1] = "t-Test Statistic";
+            _sheet.Cells[row++, 2] = t;
+
+            double p = _sheet.Application.WorksheetFunction.TDist(t, n - 1, tail);
 
             _sheet.Cells[row, 1] = "p-Value";
+            _sheet.Cells[row++, 2] = p;
+
+            _sheet.Cells[row, 1] = "Null Hypothesis";
+            if (p <= alpha)
+            {
+                _sheet.Cells[row, 2] = "Reject";
+            }
+            else
+            {
+                _sheet.Cells[row, 2] = "Accept";
+            }
+
+            
         }
     }
 }

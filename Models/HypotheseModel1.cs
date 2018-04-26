@@ -11,5 +11,6 @@ namespace NoruST.Models
         public string Null { get; set; }
         public Boolean equal { get; set; }
         public Boolean greater { get; set; }
+        public int alpha { get; set; }
     }
 }

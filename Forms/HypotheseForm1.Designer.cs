@@ -41,8 +41,11 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // tlpForm
@@ -59,23 +62,26 @@
             this.tlpForm.Controls.Add(this.label1, 0, 4);
             this.tlpForm.Controls.Add(this.textBox1, 1, 4);
             this.tlpForm.Controls.Add(this.label2, 0, 5);
-            this.tlpForm.Controls.Add(this.uiButton_Cancel, 2, 6);
             this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
-            this.tlpForm.Controls.Add(this.btnOk, 1, 6);
             this.tlpForm.Controls.Add(this.checkBox1, 2, 5);
             this.tlpForm.Controls.Add(this.checkBox2, 1, 5);
+            this.tlpForm.Controls.Add(this.btnOk, 1, 7);
+            this.tlpForm.Controls.Add(this.uiButton_Cancel, 2, 7);
+            this.tlpForm.Controls.Add(this.label3, 0, 6);
+            this.tlpForm.Controls.Add(this.numericUpDown1, 1, 6);
             this.tlpForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpForm.Location = new System.Drawing.Point(0, 0);
             this.tlpForm.Name = "tlpForm";
-            this.tlpForm.RowCount = 7;
+            this.tlpForm.RowCount = 8;
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
-            this.tlpForm.Size = new System.Drawing.Size(334, 267);
+            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
+            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            this.tlpForm.Size = new System.Drawing.Size(334, 311);
             this.tlpForm.TabIndex = 21;
             this.tlpForm.Paint += new System.Windows.Forms.PaintEventHandler(this.tlpForm_Paint);
             // 
@@ -150,7 +156,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 208);
+            this.label2.Location = new System.Drawing.Point(3, 214);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(139, 13);
             this.label2.TabIndex = 34;
@@ -159,7 +165,7 @@
             // uiButton_Cancel
             // 
             this.uiButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uiButton_Cancel.Location = new System.Drawing.Point(242, 237);
+            this.uiButton_Cancel.Location = new System.Drawing.Point(242, 283);
             this.uiButton_Cancel.Name = "uiButton_Cancel";
             this.uiButton_Cancel.Size = new System.Drawing.Size(89, 25);
             this.uiButton_Cancel.TabIndex = 32;
@@ -184,7 +190,7 @@
             // btnOk
             // 
             this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(150, 237);
+            this.btnOk.Location = new System.Drawing.Point(150, 283);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(86, 25);
             this.btnOk.TabIndex = 31;
@@ -196,7 +202,7 @@
             // 
             this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(242, 206);
+            this.checkBox1.Location = new System.Drawing.Point(242, 212);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 37;
@@ -207,18 +213,42 @@
             // 
             this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(148, 206);
+            this.checkBox2.Location = new System.Drawing.Point(148, 212);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(88, 17);
             this.checkBox2.TabIndex = 38;
             this.checkBox2.Text = "Not Equal To";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(3, 256);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(139, 13);
+            this.label3.TabIndex = 39;
+            this.label3.Text = "Alpha";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.numericUpDown1.Location = new System.Drawing.Point(148, 253);
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(88, 20);
+            this.numericUpDown1.TabIndex = 40;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
             // HypotheseForm1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 267);
+            this.ClientSize = new System.Drawing.Size(334, 311);
             this.Controls.Add(this.tlpForm);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(500, 350);
@@ -229,6 +259,7 @@
             this.tlpForm.ResumeLayout(false);
             this.tlpForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,5 +279,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
