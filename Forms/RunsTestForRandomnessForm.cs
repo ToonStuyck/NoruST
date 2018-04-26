@@ -64,7 +64,7 @@ namespace NoruST.Forms
                 }
             }
 
-            bool check = presenter.checkInput(variables, selectedDataSet(), rdbMean.Checked, rdbMedian.Checked, rdbCustomValue.Checked, uiTextBox_CustomCutoffValue.Text);
+            bool check = presenter.checkInput(variables, selectedDataSet(), rdbMean.Checked, rdbMedian.Checked);
             if (check)
             {
                 Close();

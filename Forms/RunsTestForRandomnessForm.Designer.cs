@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RunsTestForRandomnessForm));
             this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
+            this.uiDataGridViewColumn_VariableCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.lblVariable = new System.Windows.Forms.Label();
             this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
             this.lblDataSet = new System.Windows.Forms.Label();
-            this.uiTextBox_CustomCutoffValue = new System.Windows.Forms.TextBox();
             this.rdbMedian = new System.Windows.Forms.RadioButton();
             this.rdbMean = new System.Windows.Forms.RadioButton();
-            this.rdbCustomValue = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.ui_Button_Cancel = new System.Windows.Forms.Button();
-            this.uiDataGridViewColumn_VariableCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -60,6 +57,13 @@
             this.uiDataGridView_Variables.RowHeadersVisible = false;
             this.uiDataGridView_Variables.Size = new System.Drawing.Size(275, 132);
             this.uiDataGridView_Variables.TabIndex = 32;
+            // 
+            // uiDataGridViewColumn_VariableCheck
+            // 
+            this.uiDataGridViewColumn_VariableCheck.FillWeight = 30F;
+            this.uiDataGridViewColumn_VariableCheck.HeaderText = "";
+            this.uiDataGridViewColumn_VariableCheck.Name = "uiDataGridViewColumn_VariableCheck";
+            this.uiDataGridViewColumn_VariableCheck.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // lblVariable
             // 
@@ -97,15 +101,6 @@
             this.lblDataSet.Text = "Data set";
             this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // uiTextBox_CustomCutoffValue
-            // 
-            this.uiTextBox_CustomCutoffValue.Location = new System.Drawing.Point(104, 66);
-            this.uiTextBox_CustomCutoffValue.MaxLength = 5;
-            this.uiTextBox_CustomCutoffValue.Name = "uiTextBox_CustomCutoffValue";
-            this.uiTextBox_CustomCutoffValue.Size = new System.Drawing.Size(67, 20);
-            this.uiTextBox_CustomCutoffValue.TabIndex = 35;
-            this.uiTextBox_CustomCutoffValue.Text = "0";
-            // 
             // rdbMedian
             // 
             this.rdbMedian.AutoSize = true;
@@ -128,20 +123,8 @@
             this.rdbMean.Text = "Mean";
             this.rdbMean.UseVisualStyleBackColor = true;
             // 
-            // rdbCustomValue
-            // 
-            this.rdbCustomValue.AutoSize = true;
-            this.rdbCustomValue.Location = new System.Drawing.Point(6, 68);
-            this.rdbCustomValue.Name = "rdbCustomValue";
-            this.rdbCustomValue.Size = new System.Drawing.Size(89, 17);
-            this.rdbCustomValue.TabIndex = 36;
-            this.rdbCustomValue.Text = "Custom value";
-            this.rdbCustomValue.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.rdbCustomValue);
-            this.groupBox2.Controls.Add(this.uiTextBox_CustomCutoffValue);
             this.groupBox2.Controls.Add(this.rdbMean);
             this.groupBox2.Controls.Add(this.rdbMedian);
             this.groupBox2.Location = new System.Drawing.Point(12, 175);
@@ -171,13 +154,6 @@
             this.ui_Button_Cancel.UseVisualStyleBackColor = true;
             this.ui_Button_Cancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
             // 
-            // uiDataGridViewColumn_VariableCheck
-            // 
-            this.uiDataGridViewColumn_VariableCheck.FillWeight = 30F;
-            this.uiDataGridViewColumn_VariableCheck.HeaderText = "";
-            this.uiDataGridViewColumn_VariableCheck.Name = "uiDataGridViewColumn_VariableCheck";
-            this.uiDataGridViewColumn_VariableCheck.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
             // RunsTestForRandomnessForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -191,7 +167,6 @@
             this.Controls.Add(this.uiComboBox_DataSets);
             this.Controls.Add(this.lblDataSet);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(370, 340);
@@ -212,10 +187,8 @@
         private System.Windows.Forms.Label lblVariable;
         private System.Windows.Forms.ComboBox uiComboBox_DataSets;
         private System.Windows.Forms.Label lblDataSet;
-        private System.Windows.Forms.TextBox uiTextBox_CustomCutoffValue;
         private System.Windows.Forms.RadioButton rdbMedian;
         private System.Windows.Forms.RadioButton rdbMean;
-        private System.Windows.Forms.RadioButton rdbCustomValue;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button ui_Button_Cancel;

@@ -37,7 +37,7 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public bool checkInput(List<Variable> variables, DataSet selectedDataSet, bool rdbMean, bool rdbMedian, bool rdbCustomValue, string CustomCutoffValue)
+        public bool checkInput(List<Variable> variables, DataSet selectedDataSet, bool rdbMean, bool rdbMedian)
         {
             if (variables.Count == 0) return false;
             
@@ -48,7 +48,6 @@ namespace NoruST.Presenters
             worksheet.Cells[row++, column] = "Observations";
             if (rdbMean) worksheet.Cells[row++, column] = "Mean";
             if (rdbMedian) worksheet.Cells[row++, column] = "Median";
-            if (rdbCustomValue) worksheet.Cells[row++, column] = "Custom cutoff Value";
             worksheet.Cells[row++, column] = "Below cutoff";
             worksheet.Cells[row++, column] = "Above cutoff";
             worksheet.Cells[row++, column] = "Number of runs";
@@ -68,7 +67,6 @@ namespace NoruST.Presenters
                 var ntotal = selectedDataSet.rangeSize();
                 if (rdbMean) worksheet.Cells[row++, column] = "=AVERAGE(" + range + ")";
                 if (rdbMedian) worksheet.Cells[row++, column] = "=MEDIAN(" + range + ")";
-                if (rdbCustomValue) worksheet.Cells[row++, column] = CustomCutoffValue;
                 var cutoffValue = (double)worksheet.Cells[row-1, column].Value;
                 int amountOfRuns = calculateRuns(worksheet, selectedDataSet, variable.getRange(), cutoffValue);
                 worksheet.WriteFunction(row++, column, "COUNTIF(" + range + ",\"<\"&" + AddressConverter.CellAddress(row - 2, column) + ")");

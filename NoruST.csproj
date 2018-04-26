@@ -455,6 +455,9 @@
     <EmbeddedResource Include="Forms\PChartForm.resx">
       <DependentUpon>PChartForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RunsTestForRandomnessForm.resx">
+      <DependentUpon>RunsTestForRandomnessForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectRangeForm.resx">
       <DependentUpon>SelectRangeForm.cs</DependentUpon>
     </EmbeddedResource>
