@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using NoruST.Domain;
 using NoruST.Presenters;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace NoruST.Forms
 {
@@ -22,69 +23,91 @@ namespace NoruST.Forms
             selectDataSet(selectedDataSet());
         }
 
-		private void bindModelToView()
-		{
-			ui_ComboBox_SelectDataSets.DataSource = presenter.dataSets();
-			ui_ComboBox_SelectDataSets.DisplayMember = "name";
-			ui_ComboBox_SelectDataSets.SelectedIndexChanged += (obj, eventArgs) =>
-			{
-				if (selectedDataSet() == null) return;
-				uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
-				uiDataGridViewColumn_VariableCheckX.Width = 20;
-				uiDataGridViewColumn_VariableCheckY.Width = 20;
-				uiDataGridView_Variables.Columns[2].ReadOnly = true;
-				uiDataGridView_Variables.Columns[3].ReadOnly = true;
+        private void bindModelToView()
+        {
+            ui_ComboBox_SelectDataSets.DataSource = presenter.dataSets();
+            ui_ComboBox_SelectDataSets.DisplayMember = "name";
+            ui_ComboBox_SelectDataSets.SelectedIndexChanged += (obj, eventArgs) =>
+            {
+                if (selectedDataSet() == null) return;
+                /*uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
+                uiDataGridViewColumn_VariableCheckX.Width = 20;
+                uiDataGridViewColumn_VariableCheckY.Width = 20;
+                uiDataGridView_Variables.Columns[2].ReadOnly = true;
+                uiDataGridView_Variables.Columns[3].ReadOnly = true;*/
+
+                ui_ComboBox_cat.DataSource = selectedDataSet().getVariables();
+                ui_ComboBox_cat.DisplayMember = "name";
+
+                var variableList = new BindingList<Variable>();
+                variableList.Insert(0, new Variable("", null, null));
+                foreach (Variable v in selectedDataSet().getVariables())
+                {
+                    variableList.Add(v);
+                }
+
+                ui_ComboBox_var.DataSource = variableList;
+                ui_ComboBox_var.DisplayMember = "name";
+
                 presenter.getModel().dataSet = selectedDataSet();
-			};
-		}
+            };
 
-		private DataSet selectedDataSet()
-		{
-			return (DataSet)ui_ComboBox_SelectDataSets.SelectedItem;
-		}
+            ui_ComboBox_var.SelectedIndexChanged += (obj, eventArgs) =>
+            {
+                presenter.getModel().variable = selectedVariable();
+            };
 
-		public void selectDataSet(DataSet dataSet)
-		{
-			ui_ComboBox_SelectDataSets.SelectedItem = null;
-			ui_ComboBox_SelectDataSets.SelectedItem = dataSet;
-		}
+            ui_ComboBox_cat.SelectedIndexChanged += (obj, eventArgs) =>
+            {
+                if (selectedCategory() == null) return;
+                presenter.getModel().category = selectedCategory();
+            };
+        }
 
-		private void Cancelbutton_clicked(object sender, EventArgs e)
-		{
-			Close();
-		}
+        private DataSet selectedDataSet()
+        {
+            return (DataSet)ui_ComboBox_SelectDataSets.SelectedItem;
+        }
+
+        private Variable selectedCategory()
+        {
+            return (Variable)ui_ComboBox_cat.SelectedItem;
+        }
+
+        private Variable selectedVariable()
+        {
+            return (Variable)ui_ComboBox_var.SelectedItem;
+        }
+
+        public void selectDataSet(DataSet dataSet)
+        {
+            ui_ComboBox_SelectDataSets.SelectedItem = null;
+            ui_ComboBox_SelectDataSets.SelectedItem = dataSet;
+        }
+
+        private void Cancelbutton_clicked(object sender, EventArgs e)
+        {
+            Close();
+        }
 
 
-		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-		{
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
-		}
+        }
 
-		private void uiButton_Ok_Click(object sender, EventArgs e)
-		{
-			List<Variable> variablesX = new List<Variable>();
-			List<Variable> variablesY = new List<Variable>();
-			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
-			{
-				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckX.Name].Value))
-				{
-					presenter.getModel().category = (Variable)row.DataBoundItem;
+        private void uiButton_Ok_Click(object sender, EventArgs e)
+        {
+            Variable variableX = selectedCategory();
+            Variable variableY = selectedVariable();
 
-					//variablesX.Add((Variable)row.DataBoundItem);
-				}
-				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckY.Name].Value))
-				{
-					presenter.getModel().variable = (Variable)row.DataBoundItem;
-					//variablesY.Add((Variable)row.DataBoundItem);
-				}
-			}
-			bool inputOk = presenter.checkInput(variablesX, variablesY, selectedDataSet());
-			if (inputOk)
-			{
-				Close();
-			}
-		}
+            bool inputOk = presenter.checkInput(selectedDataSet());
+            if (inputOk)
+            {
+                Close();
+            }
+        }
 
-	}
+    }
 }
 

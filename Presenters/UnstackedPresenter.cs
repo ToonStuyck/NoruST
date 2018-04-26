@@ -42,7 +42,7 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-		public bool checkInput(List<Variable> variablesX, List<Variable> variablesY, DataSet dataSet)
+		public bool checkInput(DataSet dataSet)
 		{
 
 			if (dataSet != null)

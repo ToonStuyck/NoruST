@@ -106,6 +106,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -507,6 +508,7 @@
     <EmbeddedResource Include="View\Ribbon\Ribbon.resx">
       <DependentUpon>Ribbon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="NoruST_15_TemporaryKey.pfx" />
     <None Include="NoruST_1_TemporaryKey.pfx" />
     <None Include="NoruST_2_TemporaryKey.pfx" />
     <None Include="NoruST_4_TemporaryKey.pfx" />
@@ -596,10 +598,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NoruST_4_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NoruST_15_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DC7E85F782C2774797C8005183C51B7A5AC9148F</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>03B528660A1B674A08B8C1BB5BAFDAA37BF19651</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
