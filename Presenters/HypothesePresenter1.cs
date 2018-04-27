@@ -43,28 +43,50 @@ namespace NoruST.Presenters
         public void createHypothese(List<Variable> variables, DataSet dataSet)
         {
             _Worksheet worksheet = WorksheetHelper.NewWorksheet("Hypothesis test");
-            foreach (Variable variable in variables)
+            if (variables.Count == 1)
+            {
+                foreach (Variable variable in variables)
+                {
+                    worksheet.Cells[1, 1] = "Hypothesis test";
+                    worksheet.Cells[1, 2] = variable.name;
+                    worksheet.Cells[2, 1] = "Sample size";
+                    worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    worksheet.Cells[3, 1] = "Sample mean";
+                    worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    worksheet.Cells[4, 1] = "Sample Std. Dev";
+                    worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    if (model.equal)
+                    {
+                        PrintCategories(worksheet, 5, "equal", dataSet);
+                    }
+                    else if (model.greater)
+                    {
+                        PrintCategories(worksheet, 5, "greater", dataSet);
+                    }
+                }
+            } else if (variables.Count == 2)
             {
                 worksheet.Cells[1, 1] = "Hypothesis test";
-                worksheet.Cells[1, 2] = variable.name;
+                worksheet.Cells[1, 2] = variables[0].name + " - " + variables[1].name;
                 worksheet.Cells[2, 1] = "Sample size";
-                worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ")";
                 worksheet.Cells[3, 1] = "Sample mean";
-                worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") - AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 worksheet.Cells[4, 1] = "Sample Std. Dev";
-                worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") + STDEV(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 if (model.equal)
                 {
-                    PrintCategories(worksheet, 5, "equal", dataSet, variable);
+                    PrintCategories(worksheet, 5, "equal", dataSet);
                 }
                 else if (model.greater)
                 {
-                    PrintCategories(worksheet, 5, "greater", dataSet, variable);
+                    PrintCategories(worksheet, 5, "greater", dataSet);
                 }
             }
+            
         }
 
-        private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet, Variable variable)
+        private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet)
         {
             double alpha = (double)model.alpha;
             int tail = 1;
@@ -104,7 +126,7 @@ namespace NoruST.Presenters
             _sheet.Cells[row, 1] = "t-Test Statistic";
             _sheet.Cells[row++, 2] = t;
 
-            double p = _sheet.Application.WorksheetFunction.TDist(t, n - 1, tail);
+            double p = _sheet.Application.WorksheetFunction.TDist(Math.Abs(t), n - 1, tail);
 
             _sheet.Cells[row, 1] = "p-Value";
             _sheet.Cells[row++, 2] = p;
