@@ -43,31 +43,60 @@ namespace NoruST.Presenters
         public void createConfidence(List<Variable> variables, DataSet dataSet)
         {
             _Worksheet worksheet = WorksheetHelper.NewWorksheet("Confidence");
-            foreach (Variable variable in variables)
+            if (variables.Count == 1)
+            {
+                foreach (Variable variable in variables)
+                {
+                    worksheet.Cells[1, 1] = "Conf. intervals";
+                    worksheet.Cells[1, 2] = variable.name;
+                    worksheet.Cells[2, 1] = "Sample size";
+                    worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    worksheet.Cells[3, 1] = "Sample mean";
+                    worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    worksheet.Cells[4, 1] = "Sample Std. Dev";
+                    worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                    if (model.useMean && model.useStd)
+                    {
+                        PrintCategories(worksheet, 5, "mean", dataSet);
+                        PrintCategories(worksheet, 8, "Std. Dev", dataSet);
+                    }
+                    else if (model.useMean && !model.useStd)
+                    {
+                        PrintCategories(worksheet, 5, "mean", dataSet);
+                    }
+                    else if (!model.useMean && model.useStd)
+                    {
+                        PrintCategories(worksheet, 5, "Std. Dev", dataSet);
+                    }
+                }
+            } else if (variables.Count == 2)
             {
                 worksheet.Cells[1, 1] = "Conf. intervals";
-                worksheet.Cells[1, 2] = variable.name;
+                worksheet.Cells[1, 2] = variables[0].name + " - " + variables[1].name;
                 worksheet.Cells[2, 1] = "Sample size";
-                worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[2, 2] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ")";
                 worksheet.Cells[3, 1] = "Sample mean";
-                worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") - AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 worksheet.Cells[4, 1] = "Sample Std. Dev";
-                worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variable.Range + ")";
+                worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") + STDEV(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 if (model.useMean && model.useStd)
                 {
-                    PrintCategories(worksheet, 5, "mean", dataSet, variable);
-                    PrintCategories(worksheet, 8, "Std. Dev", dataSet, variable);
-                } else if (model.useMean && !model.useStd)
+                    PrintCategories(worksheet, 5, "mean", dataSet);
+                    PrintCategories(worksheet, 8, "Std. Dev", dataSet);
+                }
+                else if (model.useMean && !model.useStd)
                 {
-                    PrintCategories(worksheet, 5, "mean", dataSet, variable);
-                } else if (!model.useMean && model.useStd)
+                    PrintCategories(worksheet, 5, "mean", dataSet);
+                }
+                else if (!model.useMean && model.useStd)
                 {
-                    PrintCategories(worksheet, 5, "Std. Dev", dataSet, variable);
+                    PrintCategories(worksheet, 5, "Std. Dev", dataSet);
                 }
             }
+            
         }
 
-        private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet, Variable variable)
+        private void PrintCategories(_Worksheet _sheet, int rowIn, String input, DataSet dataSet)
         {
             double alpha = (100.0 - model.mean) / 200.0;
             double norm = _sheet.Application.WorksheetFunction.NormSInv(alpha);
