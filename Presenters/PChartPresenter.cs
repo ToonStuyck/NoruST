@@ -38,7 +38,7 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public bool checkInput(bool rdbAllObservations, bool rdbObservationsInRange, DataSet dataSet, string uiTextBox_StopIndex, string uiTextBox_StartIndex, bool rdbPlotAllObservations, bool rdbPlotRange, string uiTextbox_PlotStopIndex, string uiTextbox_PlotStartIndex)
+        public bool checkInput(List<Variable> variableX, List<Variable> variableY, bool radioButton2, bool rdbAllObservations, bool rdbObservationsInRange, DataSet dataSet, string uiTextBox_StopIndex, string uiTextBox_StartIndex, bool rdbPlotAllObservations, bool rdbPlotRange, string uiTextbox_PlotStopIndex, string uiTextbox_PlotStartIndex)
         {
             int startindex = Convert.ToInt16(uiTextBox_StartIndex);
             int stopindex = Convert.ToInt16(uiTextBox_StopIndex);
@@ -73,7 +73,7 @@ namespace NoruST.Presenters
 
                 _Worksheet sheet = WorksheetHelper.NewWorksheet("P Chart");
 
-                generatePChart(startindex, stopindex, dataSet, sheet, plotstartindex, plotstopindex);
+                generatePChart(variableX, variableY, radioButton2, startindex, stopindex, dataSet, sheet, plotstartindex, plotstopindex);
                 
                 return true;
             }
@@ -82,7 +82,7 @@ namespace NoruST.Presenters
                 return false;
         }
 
-        private void generatePChart(int startindex, int stopindex, DataSet dataSet, _Worksheet sheet, int plotstartindex, int plotstopindex)
+        private void generatePChart(List<Variable> variableX, List<Variable> variableY, bool radioButton2, int startindex, int stopindex, DataSet dataSet, _Worksheet sheet, int plotstartindex, int plotstopindex)
         {
             int index = 0;
             int row = 1;
@@ -96,21 +96,28 @@ namespace NoruST.Presenters
             double[] pChartCorrection = new double[dataSet.rangeSize()];
 
             sheet.Cells[row, column] = "Index";
-            sheet.Cells[row, column + 1] = "Proportion";
-            sheet.Cells[row, column + 2] = "Sample Size";
+            sheet.Cells[row, column + 1] = "Sample Size";
+            sheet.Cells[row, column + 2] = "Proportion";
             
             for(index = 1; index <= dataSet.rangeSize(); index ++)   
             {
                 int temp = index+1;
                 
-                String N = "(" + dataSet.getWorksheet().Name + "!$" + dataSet.getVariables()[0].Range[1] + "$" + temp + ")";
-                String K = "=(" + dataSet.getWorksheet().Name + "!$" + dataSet.getVariables()[1].Range[1] + "$" + temp + ")";
+                String N = "(" + dataSet.getWorksheet().Name + "!$" + variableY[0].Range[1] + "$" + temp + ")";
+                String K = "(" + dataSet.getWorksheet().Name + "!$" + variableX[0].Range[1] + "$" + temp + ")";
 
                 row++;
                 sheet.Cells[row, column] = index;
-                sheet.Cells[row, column + 1] = K + "/" + N;//"=AVERAGE("+ dataSet.getWorksheet().Name + "!" + dataSet.getVariables()[index].Range + ")";
-                sheet.Cells[row, column + 2] = "=(" + dataSet.getWorksheet().Name + "!$" + dataSet.getVariables()[0].Range[1] + "$" + temp + ")";
-                var cellValue = (double)(sheet.Cells[row, column + 1] as Range).Value;
+                sheet.Cells[row, column + 1] = "=(" + dataSet.getWorksheet().Name + "!$" + variableX[0].Range[1] + "$" + temp + ")";
+                if (radioButton2)
+                {
+                    sheet.Cells[row, column + 2] = "=" + N + "/" + K;
+                } else
+                {
+                    sheet.Cells[row, column + 2] = "=(" + dataSet.getWorksheet().Name + "!$" + variableY[0].Range[1] + "$" + temp + ")";
+                }
+                
+                var cellValue = (double)(sheet.Cells[row, column + 2] as Range).Value;
                 if (cellValue < -214682680) cellValue = 0; // if cellValue is the result of a division by 0, set value to 0
                 pValues[index-1] = cellValue;
                 if(cellValue > 1)
@@ -118,7 +125,7 @@ namespace NoruST.Presenters
                     MessageBox.Show("Cannot generate P-Chart; Data in "+ dataSet.Name + " contains samples greater than 1");
                     return;
                 }
-                cellValue = (double)(sheet.Cells[row, column + 2] as Range).Value;
+                cellValue = (double)(sheet.Cells[row, column + 1] as Range).Value;
                 if (cellValue < -214682680) cellValue = 0; // if cellValue is the result of a division by 0, set value to 0
                 sample[index - 1] = cellValue;
             }
@@ -130,7 +137,7 @@ namespace NoruST.Presenters
 
             for (index = 0; index <= dataSet.rangeSize()-1; index++)
             {
-                pChartCorrection[index] = Math.Pow(((pValuesInRange.Average() * (1 - pValuesInRange.Average())) / sample[index]), (0.5));
+                pChartCorrection[index] = Math.Sqrt((pValuesInRange.Average() * (1 - pValuesInRange.Average())) / sample[index]);
                 averageOfPValues[index] = pValuesInRange.Average();
                 pChartUpperControlLimit[index] = pValues.Average() + 3.0*pChartCorrection[index];
                 pChartLowerControlLimit[index] = pValues.Average() - 3.0*pChartCorrection[index];
