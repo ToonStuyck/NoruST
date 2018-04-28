@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using NoruST.Forms;
 using NoruST.Presenters;
 using NoruST.Domain;
-
+using System.Collections.Generic;
 
 namespace NoruST.Forms
 {
@@ -34,7 +34,11 @@ namespace NoruST.Forms
             ui_ComboBox_SelectDataSets.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedDataSet() == null) return;
-                //dataGridView1.DataSource = selectedDataSet().getVariables();
+                uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
+                uiDataGridViewColumn_VariableCheckX.Width = 20;
+                //uiDataGridViewColumn_VariableCheckY.Width = 20;
+                uiDataGridView_Variables.Columns[1].ReadOnly = true;
+                uiDataGridView_Variables.Columns[2].ReadOnly = true;
             };
         }
 
@@ -67,11 +71,21 @@ namespace NoruST.Forms
 
         private void uiButton_Ok_Click(object sender, EventArgs e)
         {
-            bool inputOk = presenter.checkInput(rdbAllObservations.Checked, rdbObservationsInRange.Checked, selectedDataSet(), uiTextBox_StopIndex.Text, uiTextBox_StartIndex.Text, rdbPlotAllObservations.Checked, rdbPlotOnlyObservationsWithin.Checked, uiTextbox_PlotStopIndex.Text, uiTextbox_PlotStartIndex.Text);
+            List<Variable> variables = new List<Variable>();
+            foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
+            {
+                if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckX.Name].Value))
+                {
+                    variables.Add((Variable)row.DataBoundItem);
+                }
+                
+            }
+            bool inputOk = presenter.checkInput(variables, rdbAllObservations.Checked, rdbObservationsInRange.Checked, selectedDataSet(), uiTextBox_StopIndex.Text, uiTextBox_StartIndex.Text, rdbPlotAllObservations.Checked, rdbPlotOnlyObservationsWithin.Checked, uiTextbox_PlotStopIndex.Text, uiTextbox_PlotStartIndex.Text);
             if (inputOk)
             {
                 Close();
             }
+            
         }
 
         private void rdbPlotOnlyObservationsWithin_CheckedChanged(object sender, EventArgs e)

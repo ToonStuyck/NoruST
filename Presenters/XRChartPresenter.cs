@@ -38,7 +38,7 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public bool checkInput(bool rdbAllObservations, bool rdbObservationsInRange, DataSet dataSet, string uiTextBox_StopIndex, string uiTextBox_StartIndex, bool rdbPlotAllObservations, bool rdbPlotObservationsInRange, string uiTextBox_PlotStopIndex, string uiTextBox_PlotStartIndex)
+        public bool checkInput(List<Variable> variables, bool rdbAllObservations, bool rdbObservationsInRange, DataSet dataSet, string uiTextBox_StopIndex, string uiTextBox_StartIndex, bool rdbPlotAllObservations, bool rdbPlotObservationsInRange, string uiTextBox_PlotStopIndex, string uiTextBox_PlotStartIndex)
         {
             int startindex = Convert.ToInt16(uiTextBox_StartIndex);
             int stopindex = Convert.ToInt16(uiTextBox_StopIndex);
@@ -75,7 +75,7 @@ namespace NoruST.Presenters
 
                 _Worksheet sheet = WorksheetHelper.NewWorksheet("XR Chart");
                 
-                generateXRChart(startindex, stopindex, plotstartindex, plotstopindex, dataSet, offset, sheet);
+                generateXRChart(variables, startindex, stopindex, plotstartindex, plotstopindex, dataSet, offset, sheet);
              
                 return true;
             }
@@ -112,7 +112,7 @@ namespace NoruST.Presenters
             return colLetter;
         }
 
-        public void generateXRChart(int startindex, int stopindex, int plotstartindex, int plotstopindex, DataSet dataSet,int offset, _Worksheet sheet)
+        public void generateXRChart(List<Variable> variables, int startindex, int stopindex, int plotstartindex, int plotstopindex, DataSet dataSet,int offset, _Worksheet sheet)
         {
             int counter = 0;    
             int index = 0;
@@ -130,7 +130,7 @@ namespace NoruST.Presenters
             double[] RvaluesInRange = new double[stopindex - startindex]; // +1
             double[] averageOfAveragesInRange = new double[stopindex - startindex]; // +1
             int[] ArrayIndex = new int[plotstopindex - plotstartindex +1]; // +1
-            double[] xChartConstants = new double[25] { 0.0, 1.880, 1.023, 0.729, 0.577, 0.483, 0.419, 0.373, 0.337, 0.308, 0.285, 0.266, 0.249, 0.235, 0.223, 0.212, 0.203, 0.194, 0.187, 0.180, 0.173, 0.167, 0.162, 0.157, 0.153 };
+            double[] xChartConstants = new double[25] { 0.0, 1.128, 1.693, 2.059, 2.326, 2.534, 2.704, 2.847, 2.970, 3.078, 3.173, 3.258, 3.336, 3.407, 3.472, 3.532, 3.588, 3.640, 3.689, 3.735, 3.778, 3.819, 3.858, 3.895, 3.931 };
             double[] rChartConstants1 = new double[25] { 0, 0, 0, 0, 0, 0, 0.076, 0.136, 0.184, 0.223, 0.256, 0.283, 0.307, 0.328, 0.347, 0.363, 0.378, 0.391, 0.403, 0.415, 0.425, 0.434, 0.443, 0.451, 0.459 };
             double[] rChartConstants2 = new double[25] { 0, 3.267, 2.574, 2.282, 2.114, 2.004, 1.924, 1.864, 1.816, 1.777, 1.744, 1.717, 1.693, 1.672, 1.653, 1.637, 1.662, 1.607, 1.597, 1.585, 1.575, 1.566, 1.557, 1.548, 1.541 };
             sheet.Cells[row, column] = "Index";
@@ -140,25 +140,25 @@ namespace NoruST.Presenters
             sheet.Cells[row, column + 4] = "Min";
             sheet.Cells[row, column + 5] = "R";
 
-            string colLetter = dataSet.getVariables()[0].Range[1].ToString();
+            string colLetter = variables[0].Range[1].ToString();
             int columnIndex = ColumnLetterToColumnIndex(colLetter);
-            int columnIndex2 = columnIndex + dataSet.amountOfVariables()-1;
+            int columnIndex2 = columnIndex + variables.Count-1;
             string colLetter2 = ColumnIndexToColumnLetter(columnIndex2);
-            char chstart = dataSet.getVariables()[0].Range[3];
+            char chstart = variables[0].Range[3];
             int start = (int)Char.GetNumericValue(chstart);
-
+            int final = 0;
             for (counter=1; counter <= dataSet.rangeSize(); counter++) //amountOfVariables()
             {
                 row++;
-                for (index = 0; index < dataSet.amountOfVariables(); index ++)
+                for (index = 0; index < variables.Count; index ++)
                 {
                     sheet.Cells[row, column] = counter;
-                    if (dataSet.amountOfVariables() > 1)
+                    if (variables.Count > 1)
                     {
-                        sheet.Cells[row, column + 1] = dataSet.getVariables()[0].name + "-" + dataSet.getVariables()[dataSet.amountOfVariables()-1].name;
+                        sheet.Cells[row, column + 1] = variables[0].name + "-" + variables[variables.Count-1].name;
                     } else
                     {
-                        sheet.Cells[row, column + 1] = dataSet.getVariables()[index].name;
+                        sheet.Cells[row, column + 1] = variables[index].name;
                     } 
                 }
                 int temp = counter;
@@ -175,6 +175,8 @@ namespace NoruST.Presenters
                 averages[counter - 1] = cellValue;
                 cellValue = (double)(sheet.Cells[row, column + 5] as Range).Value;
                 Rvalues[counter - 1] = cellValue;
+                start = start + 1;
+                final = temp;
             }
 
             for (counter = startindex; counter < stopindex; counter++)
@@ -185,22 +187,22 @@ namespace NoruST.Presenters
 
             if (dataSet.getVariableNamesInFirstRowOrColumn())
             {
-                xControlLimitFactor = xChartConstants[dataSet.amountOfVariables() - 1];
-                rControlLimitFactor1 = rChartConstants1[dataSet.amountOfVariables() - 1];
-                rControlLimitFactor2 = rChartConstants2[dataSet.amountOfVariables() - 1];
+                xControlLimitFactor = xChartConstants[variables.Count-1];
+                rControlLimitFactor1 = rChartConstants1[variables.Count-1];
+                rControlLimitFactor2 = rChartConstants2[variables.Count-1];
             }
             else
             {
-                xControlLimitFactor = xChartConstants[dataSet.amountOfVariables()];
-                rControlLimitFactor1 = rChartConstants1[dataSet.amountOfVariables()];
-                rControlLimitFactor2 = rChartConstants2[dataSet.amountOfVariables()];
+                xControlLimitFactor = xChartConstants[variables.Count];
+                rControlLimitFactor1 = rChartConstants1[variables.Count];
+                rControlLimitFactor2 = rChartConstants2[variables.Count];
             }
              
-            for (counter = 0; counter <= dataSet.rangeSize()-1; counter++)
+            for (counter = 0; counter <= final-2; counter++)
             {
                 averageOfAverages[counter] = averageOfAveragesInRange.Average();
-                xChartUpperControlLimit[counter] = averageOfAveragesInRange.Average() + 3.0*(xControlLimitFactor * Rvalues.Average());
-                xChartLowerControlLimit[counter] = averageOfAveragesInRange.Average() - 3.0*(xControlLimitFactor * Rvalues.Average());
+                xChartUpperControlLimit[counter] = averageOfAveragesInRange.Average() + 3.0*(Rvalues.Average()/(xControlLimitFactor*Math.Sqrt(variables.Count)));
+                xChartLowerControlLimit[counter] = averageOfAveragesInRange.Average() - 3.0*(Rvalues.Average() / (xControlLimitFactor * Math.Sqrt(variables.Count)));
                 averageOfRvalues[counter] = RvaluesInRange.Average();
                 rChartUpperControlLimit[counter] = RvaluesInRange.Average() * rControlLimitFactor2;
                 rChartLowerControlLimit[counter] = RvaluesInRange.Average() * rControlLimitFactor1;
