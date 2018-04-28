@@ -34,6 +34,7 @@ namespace NoruST
         private ConfidencePresenter2 confidencePresenter2;
         private HypothesePresenter1 hypothesePresenter1;
         private HypothesePresenter2 hypothesePresenter2;
+        private AutoCorrPresenter autoCorrPresenter;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -59,6 +60,7 @@ namespace NoruST
             confidencePresenter2 = new ConfidencePresenter2(dataSetManagerPresenter);
             hypothesePresenter1 = new HypothesePresenter1(dataSetManagerPresenter);
             hypothesePresenter2 = new HypothesePresenter2(dataSetManagerPresenter);
+            autoCorrPresenter = new AutoCorrPresenter(dataSetManagerPresenter);
 
             // Add Event Handlers for the click events of the buttons.
             btnDataSetManager.Click += delegate { dataSetManagerPresenter.openDataSetManager(); };
@@ -85,6 +87,7 @@ namespace NoruST
             btnProportionConf.Click += delegate { confidencePresenter2.openView(); };
             btnHypoMean.Click += delegate { hypothesePresenter1.openView(); };
             btnHypoProp.Click += delegate { hypothesePresenter2.openView(); };
+            button4.Click += delegate { autoCorrPresenter.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)
