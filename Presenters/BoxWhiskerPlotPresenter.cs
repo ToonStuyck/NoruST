@@ -135,9 +135,14 @@ namespace NoruST.Presenters
             series.MarkerForegroundColor = (int)XlRgbColor.rgbDarkBlue;
 
             // Add all the outliers to the chart as a Scatterplot and change the layout.
-            List<double> outliers = new List<double>();
+            
+            List<List<double>> listOutliers = new List<List<double>>();
+
+            
+            List<List<double>> listY = new List<List<double>>();
             foreach (Variable variable in variables)
             {
+                List<double> outliers = new List<double>();
                 for (var i = 1; i <= variable.getRange().Rows.Count; i++)
                 {
                     try
@@ -160,21 +165,38 @@ namespace NoruST.Presenters
                     {
                     }
                 }
+                listOutliers.Add(outliers);
             }
-            for (var i = 0; i < outliers.Count; i++)
+
+            var sect = 1.0 / (2 * variables.Count);
+            int count = 0;
+            foreach (List<double> lst in listOutliers)
             {
-                yValues.Add(0.5);
+                List<double> yOutliers = new List<double>();
+                double val = (2 * (count + 1) - 1) * sect;
+                for (var i = 0; i < lst.Count; i++)
+                {
+                    yOutliers.Add(val);
+                }
+                count = count + 1;
+                listY.Add(yOutliers);
             }
-            if (outliers.Count > 0)
+
+            count = 0;
+            foreach (List<double> outl in listOutliers)
             {
-                series = seriesCollection.Add();
-                series.ChartType = XlChartType.xlXYScatter;
-                series.Name = "Outliers";
-                series.Values = yValues.ToArray();
-                series.XValues = outliers.ToArray();
-                series.MarkerStyle = XlMarkerStyle.xlMarkerStyleSquare;
-                series.MarkerBackgroundColor = (int)XlRgbColor.rgbDarkRed;
-                series.MarkerForegroundColor = (int)XlRgbColor.rgbDarkRed;
+                if (outl.Count > 0)
+                {
+                    series = seriesCollection.Add();
+                    series.ChartType = XlChartType.xlXYScatter;
+                    series.Name = "Outliers";
+                    series.Values = listY[count].ToArray();
+                    series.XValues = outl.ToArray();
+                    series.MarkerStyle = XlMarkerStyle.xlMarkerStyleSquare;
+                    series.MarkerBackgroundColor = (int)XlRgbColor.rgbDarkRed;
+                    series.MarkerForegroundColor = (int)XlRgbColor.rgbDarkRed;
+                }
+                count = count + 1;
             }
 
             // Hide the secondary axis and set max value.
