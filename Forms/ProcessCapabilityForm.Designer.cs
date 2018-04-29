@@ -41,14 +41,18 @@
             this.variableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
+            this.uiDataGridViewColumn_VariableCheckX = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             this.SuspendLayout();
             // 
             // ui_Button_Cancel
             // 
-            this.ui_Button_Cancel.Location = new System.Drawing.Point(353, 145);
+            this.ui_Button_Cancel.Location = new System.Drawing.Point(353, 325);
             this.ui_Button_Cancel.Name = "ui_Button_Cancel";
             this.ui_Button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.ui_Button_Cancel.TabIndex = 3;
@@ -58,7 +62,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(272, 145);
+            this.btnOk.Location = new System.Drawing.Point(272, 325);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(75, 23);
             this.btnOk.TabIndex = 5;
@@ -72,7 +76,7 @@
             this.groupBox2.Controls.Add(this.lblUpperLimit);
             this.groupBox2.Controls.Add(this.uiTextBox_LowerLimit);
             this.groupBox2.Controls.Add(this.uiTextBox_UpperLimit);
-            this.groupBox2.Location = new System.Drawing.Point(13, 77);
+            this.groupBox2.Location = new System.Drawing.Point(13, 257);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(422, 62);
             this.groupBox2.TabIndex = 6;
@@ -139,20 +143,53 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.uiDataGridView_Variables);
+            this.groupBox3.Controls.Add(this.label1);
             this.groupBox3.Controls.Add(this.ui_ComboBox_SelectDataSets);
             this.groupBox3.Controls.Add(this.label2);
             this.groupBox3.Location = new System.Drawing.Point(12, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(422, 59);
+            this.groupBox3.Size = new System.Drawing.Size(422, 239);
             this.groupBox3.TabIndex = 10;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dataset";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 63);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Select Data";
+            // 
+            // uiDataGridView_Variables
+            // 
+            this.uiDataGridView_Variables.AllowUserToAddRows = false;
+            this.uiDataGridView_Variables.AllowUserToDeleteRows = false;
+            this.uiDataGridView_Variables.AllowUserToResizeColumns = false;
+            this.uiDataGridView_Variables.AllowUserToResizeRows = false;
+            this.uiDataGridView_Variables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.uiDataGridView_Variables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.uiDataGridView_Variables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.uiDataGridViewColumn_VariableCheckX});
+            this.uiDataGridView_Variables.Location = new System.Drawing.Point(116, 63);
+            this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
+            this.uiDataGridView_Variables.RowHeadersVisible = false;
+            this.uiDataGridView_Variables.Size = new System.Drawing.Size(300, 161);
+            this.uiDataGridView_Variables.TabIndex = 31;
+            // 
+            // uiDataGridViewColumn_VariableCheckX
+            // 
+            this.uiDataGridViewColumn_VariableCheckX.HeaderText = "X";
+            this.uiDataGridViewColumn_VariableCheckX.Name = "uiDataGridViewColumn_VariableCheckX";
+            this.uiDataGridViewColumn_VariableCheckX.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // ProcessCapabilityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(447, 180);
+            this.ClientSize = new System.Drawing.Size(447, 355);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnOk);
@@ -169,6 +206,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -185,5 +223,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource variableBindingSource;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView uiDataGridView_Variables;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheckX;
     }
 }

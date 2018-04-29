@@ -38,7 +38,7 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public bool checkInput(DataSet dataSet, string uiTextBox_LowerLimit, string uiTextBox_UpperLimit)
+        public bool checkInput(List<Variable> variables, DataSet dataSet, string uiTextBox_LowerLimit, string uiTextBox_UpperLimit)
         {
             double LSL = Convert.ToDouble(uiTextBox_LowerLimit);
             double USL = Convert.ToDouble(uiTextBox_UpperLimit);
@@ -48,17 +48,17 @@ namespace NoruST.Presenters
 
                 _Worksheet sheet = WorksheetHelper.NewWorksheet("Process Capability");
                 
-                generateProcessCapability(LSL, USL, dataSet, sheet);
+                generateProcessCapability(variables, LSL, USL, dataSet, sheet);
              
                 return true;
             }
             else
-                MessageBox.Show("Please correct all fields to generate X/R-Chart", "XR-Chart error");
+                MessageBox.Show("Please correct all fields to generate X/R-Chart, LSL should be smaller than USL", "XR-Chart error");
             return false;
         }
 
 
-        public void generateProcessCapability(double LSL, double USL, DataSet dataSet, _Worksheet sheet)
+        public void generateProcessCapability(List<Variable> variables, double LSL, double USL, DataSet dataSet, _Worksheet sheet)
         {
             int index = 0;
             int row = 1;
@@ -78,51 +78,72 @@ namespace NoruST.Presenters
             sheet.Cells[row, column] = "Index";
             sheet.Cells[row, column + 1] = "Observation";
             sheet.Cells[row, column + 2] = "Average";
-            sheet.Cells[row, column + 3] = "Max";
-            sheet.Cells[row, column + 4] = "Min";
-            sheet.Cells[row, column + 5] = "R";
+            sheet.Cells[row, column + 3] = "STD DEV";
+            sheet.Cells[row, column + 4] = "Max";
+            sheet.Cells[row, column + 5] = "Min";
+            sheet.Cells[row, column + 6] = "R";
 
-            for (index = 0; index < dataSet.amountOfVariables(); index++)
+            double totMean = 0;
+            double totStd = 0;
+            for (index = 0; index < variables.Count; index++)
             {
                 row++;
                 sheet.Cells[row, column] = index;
-                sheet.Cells[row, column + 1] = dataSet.getVariables()[index].name;
-                sheet.Cells[row, column + 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + dataSet.getVariables()[index].Range + ")";
-                sheet.Cells[row, column + 3] = "=MAX(" + dataSet.getWorksheet().Name + "!" + dataSet.getVariables()[index].Range + ")";
-                sheet.Cells[row, column + 4] = "=MIN(" + dataSet.getWorksheet().Name + "!" + dataSet.getVariables()[index].Range + ")";
-                sheet.Cells[row, column + 5] = (double)(sheet.Cells[row, column + 3] as Range).Value - (double)(sheet.Cells[row, column + 4] as Range).Value;
+                sheet.Cells[row, column + 1] = variables[index].name;
+                sheet.Cells[row, column + 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[index].Range + ")";
+                sheet.Cells[row, column + 3] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variables[index].Range + ")";
+                sheet.Cells[row, column + 4] = "=MAX(" + dataSet.getWorksheet().Name + "!" + variables[index].Range + ")";
+                sheet.Cells[row, column + 5] = "=MIN(" + dataSet.getWorksheet().Name + "!" + variables[index].Range + ")";
+                sheet.Cells[row, column + 6] = (double)(sheet.Cells[row, column + 4] as Range).Value - (double)(sheet.Cells[row, column + 5] as Range).Value;
+                totMean = totMean + Convert.ToDouble((sheet.Cells[row, column + 2] as Range).Value);
+                totStd = totStd + (Convert.ToDouble((sheet.Cells[row, column + 3] as Range).Value));
                 ArrayIndex[index] = index;
                 var cellValue = (double)(sheet.Cells[row, column + 2] as Range).Value;
                 if (cellValue < -214682680) cellValue = 0; // if cellValue is the result of a division by 0, set value to 0
                 averages[index] = cellValue;
-                cellValue = (double)(sheet.Cells[row, column + 5] as Range).Value;
+                cellValue = (double)(sheet.Cells[row, column + 6] as Range).Value;
                 Rvalues[index] = cellValue;
             }
+            totMean = totMean / variables.Count;
+            totStd = totStd / variables.Count;
 
             if (dataSet.getVariableNamesInFirstRowOrColumn())
             {
-                correctionFactor1 = constantC4[dataSet.rangeSize() - 1];
-                correctionFactor2 = constantD2[dataSet.rangeSize() - 1];
+                correctionFactor1 = constantC4[variables.Count - 1];
+                correctionFactor2 = constantD2[variables.Count - 1];
             }
             else
-                correctionFactor1 = constantC4[dataSet.rangeSize()];
-                correctionFactor2 = constantD2[dataSet.rangeSize()];
+                correctionFactor1 = constantC4[variables.Count];
+                correctionFactor2 = constantD2[variables.Count];
 
-            double sigma = Rvalues.Average() / correctionFactor2;
+
+            System.Diagnostics.Debug.WriteLine(totStd);
+            double sigma = totStd;
             double Cp = (USL - LSL) / (6 * sigma);
-            double Cpk = Math.Min((USL - averages.Average()) / (3 * sigma), (averages.Average() - LSL) / (3 * sigma));
+            double Cpk = Math.Min((USL - totMean) / (3 * sigma), (totMean - LSL) / (3 * sigma));
+            double Pbelow = sheet.Application.WorksheetFunction.NormDist(LSL, totMean, totStd, true);
+            double Pabove = 1.0 - sheet.Application.WorksheetFunction.NormDist(USL, totMean, totStd, true);
 
             row = 1;
             column = 1;
-            sheet.Cells[row, column + 7] = "LSL";
-            sheet.Cells[row, column + 8] = "USL";
-            sheet.Cells[row, column + 9] = "Cp";
-            sheet.Cells[row, column + 10] = "Cpk";
+            sheet.Cells[row, column + 8] = "LSL";
+            sheet.Cells[row, column + 9] = "USL";
+            sheet.Cells[row, column + 10] = "Cp";
+            sheet.Cells[row, column + 11] = "Cpk";
+            sheet.Cells[row, column + 12] = "P(below LSL)";
+            sheet.Cells[row, column + 13] = " Per million";
+            sheet.Cells[row, column + 14] = "P(above USL)";
+            sheet.Cells[row, column + 15] = " Per million";
+
             row++;
-            sheet.Cells[row, column + 7] = LSL;
-            sheet.Cells[row, column + 8] = USL;
-            sheet.Cells[row, column + 9] = Cp;
-            sheet.Cells[row, column + 10] = Cpk;
+            sheet.Cells[row, column + 8] = LSL;
+            sheet.Cells[row, column + 9] = USL;
+            sheet.Cells[row, column + 10] = Cp;
+            sheet.Cells[row, column + 11] = Cpk;
+            sheet.Cells[row, column + 12] = Pbelow;
+            sheet.Cells[row, column + 13] = Pbelow * 1000000;
+            sheet.Cells[row, column + 14] = Pabove;
+            sheet.Cells[row, column + 15] = Pabove * 1000000;
         }
     }
 }
