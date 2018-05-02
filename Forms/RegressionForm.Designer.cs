@@ -39,11 +39,11 @@
 			this.chkDisplayRegressionEquation = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
 			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
-			this.lstDataSets = new System.Windows.Forms.ListBox();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.lblDataSet = new System.Windows.Forms.Label();
 			this.lblVariable = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
+			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDataSet)).BeginInit();
 			this.grpOptions.SuspendLayout();
@@ -62,11 +62,11 @@
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.tlpForm.Controls.Add(this.dgvDataSet, 1, 1);
 			this.tlpForm.Controls.Add(this.grpOptions, 1, 1);
-			this.tlpForm.Controls.Add(this.lstDataSets, 1, 0);
 			this.tlpForm.Controls.Add(this.btnOk, 2, 3);
 			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
 			this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
 			this.tlpForm.Controls.Add(this.btnCancel, 3, 3);
+			this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
 			this.tlpForm.Location = new System.Drawing.Point(0, 0);
 			this.tlpForm.Name = "tlpForm";
 			this.tlpForm.RowCount = 4;
@@ -214,16 +214,6 @@
             0,
             0});
 			// 
-			// lstDataSets
-			// 
-			this.tlpForm.SetColumnSpan(this.lstDataSets, 3);
-			this.lstDataSets.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lstDataSets.FormattingEnabled = true;
-			this.lstDataSets.Location = new System.Drawing.Point(63, 3);
-			this.lstDataSets.Name = "lstDataSets";
-			this.lstDataSets.Size = new System.Drawing.Size(531, 24);
-			this.lstDataSets.TabIndex = 15;
-			// 
 			// btnOk
 			// 
 			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -268,6 +258,15 @@
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
 			// 
+			// uiComboBox_DataSets
+			// 
+			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
+			this.uiComboBox_DataSets.FormattingEnabled = true;
+			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
+			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
+			this.uiComboBox_DataSets.Size = new System.Drawing.Size(531, 21);
+			this.uiComboBox_DataSets.TabIndex = 22;
+			// 
 			// RegressionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -295,7 +294,6 @@
 
         private System.Windows.Forms.TableLayoutPanel tlpForm;
         private System.Windows.Forms.DataGridView dgvDataSet;
-        private System.Windows.Forms.ListBox lstDataSets;
 		private System.Windows.Forms.Label lblDataSet;
 		private System.Windows.Forms.Label lblVariable;
 		private System.Windows.Forms.GroupBox grpOptions;
@@ -309,5 +307,6 @@
 		private Controls.PercentageNumericUpDown nudConfidenceLevel;
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Button btnCancel;
+		private System.Windows.Forms.ComboBox uiComboBox_DataSets;
 	}
 }
