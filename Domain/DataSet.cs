@@ -342,6 +342,8 @@ namespace NoruST.Domain
 
         public void Interaction(Variable variable, Variable variable2, DataSet dataSet) //cat = gender var = salary
         {
+            String colLetter = dataSet.getVariables()[dataSet.getVariables().Count - 1].Range[1].ToString();
+            int columnIndex = ColumnLetterToColumnIndex(colLetter) + 1;
             string ran2 = variable.Range.ToString();
             String colLetterCat = variable.Range[1].ToString();
             int columnIndexCat = ColumnLetterToColumnIndex(colLetterCat) - 1;
@@ -353,19 +355,6 @@ namespace NoruST.Domain
             int columnIndexVar = ColumnLetterToColumnIndex(colLetterVar) - 1;
             Array dist = dataSet.getWorksheet().Range[ran].Value;
             int count = 0;
-
-            Worksheet newworksheet;
-            try
-            {
-                newworksheet = dataSet.getWorksheet().Application.Worksheets.Add();
-                newworksheet.Name = "Interaction" + dataSet.getVariables()[columnIndexVar].name + "-" + dataSet.getVariables()[columnIndexCat].name;
-            }
-            catch (SystemException e)
-            {
-                MessageBox.Show("Interaction already exists, change name of existing worksheet and try again.");
-                return;
-            }
-
 
             foreach (var item in distCat)
             {
@@ -379,68 +368,41 @@ namespace NoruST.Domain
                 }
                 break;
             }
+            foreach (var item in dist)
+            {
+                if (item.GetType().ToString() == "System.String")
+                {
+                    count = 1;
+                }
+                else
+                {
+                    count = 2;
+                }
+                break;
+            }
             if (count == 1)
             {
-                List<String> valuesCat = distCat.OfType<String>().ToList();
-                List<Double> valuesVar = dist.OfType<Double>().ToList();
-                distCat = valuesCat.Distinct<String>().ToArray();
-                int row = 1;
-                int column = 1;
-                foreach (var item in distCat)
-                {
-                    newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
-                    column = column + 1;
-                }
-                column = 1;
-                foreach (var item in distCat)
-                {
-                    row = 0;
-                    int counter = row;
-                    while (row < valuesVar.Count)
-                    {
-                        String temp = valuesCat[row];
-                        if (temp.Equals(item.ToString()))
-                        {
-                            newworksheet.Cells[counter + 2, column] = valuesVar[row];
-                            counter = counter + 1;
-                        }
-                        row = row + 1;
-                    }
-                    column = column + 1;
-                }
+                MessageBox.Show("Interaction can only be calculated for numbers.");
+                return;
             }
-            else
+            double[] var1 = distCat.OfType<double>().ToArray();
+            double[] var2 = dist.OfType<double>().ToArray();
+
+            int row = 1;
+            int column = columnIndex;
+
+            worksheet.Cells[row, column] = dataSet.getVariables()[columnIndexCat].name + " - " + dataSet.getVariables()[columnIndexVar].name;
+            row = 0;
+            while (row < var1.Length)
             {
-                List<Double> valueSortCat = distCat.OfType<Double>().ToList(); // één lijst gaat gesorteerd worden en de andere niet
-                List<Double> valueCat = distCat.OfType<Double>().ToList();
-                List<Double> valuesVar = dist.OfType<Double>().ToList();
-                valueSortCat.Sort();
-                distCat = valueSortCat.Distinct<Double>().ToArray();
-                int row = 1;
-                int column = 1;
-                foreach (var item in distCat)
-                {
-                    newworksheet.Cells[row, column] = dataSet.getVariables()[columnIndexVar].name + "(" + item.ToString() + ")";
-                    column = column + 1;
-                }
-                column = 1;
-                foreach (var item in distCat)
-                {
-                    row = 0;
-                    int counter = row;
-                    while (row < valuesVar.Count)
-                    {
-                        double temp = valueCat[row];
-                        if (temp == Convert.ToDouble(item.ToString()))
-                        {
-                            newworksheet.Cells[counter + 2, column] = valuesVar[row];
-                            counter = counter + 1;
-                        }
-                        row = row + 1;
-                    }
-                    column = column + 1;
-                }
+                column = columnIndex;
+                worksheet.Cells[row + 2, column] = var1[row] * var2[row];
+                row = row + 1;
             }
+            DataSet nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column));
+            dataSet.setRange(nwRange.getRange());
+            dataSet.setVariables(nwRange.getVariables());
+
         }
 
         public int amountOfVariables()

@@ -94,7 +94,7 @@
             this.ui_ComboBox_cat.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ui_ComboBox_cat.FormattingEnabled = true;
             this.ui_ComboBox_cat.Location = new System.Drawing.Point(107, 41);
-            this.ui_ComboBox_cat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ui_ComboBox_cat.Margin = new System.Windows.Forms.Padding(2);
             this.ui_ComboBox_cat.Name = "ui_ComboBox_cat";
             this.ui_ComboBox_cat.Size = new System.Drawing.Size(299, 21);
             this.ui_ComboBox_cat.TabIndex = 30;
@@ -105,7 +105,7 @@
             this.ui_ComboBox_var.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ui_ComboBox_var.FormattingEnabled = true;
             this.ui_ComboBox_var.Location = new System.Drawing.Point(107, 67);
-            this.ui_ComboBox_var.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ui_ComboBox_var.Margin = new System.Windows.Forms.Padding(2);
             this.ui_ComboBox_var.Name = "ui_ComboBox_var";
             this.ui_ComboBox_var.Size = new System.Drawing.Size(299, 21);
             this.ui_ComboBox_var.TabIndex = 32;
@@ -142,7 +142,7 @@
             this.MinimizeBox = false;
             this.Name = "InteractionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Unstack";
+            this.Text = "Interaction";
             ((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
