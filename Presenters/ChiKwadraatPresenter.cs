@@ -34,7 +34,7 @@ namespace NoruST.Presenters
 
         public void createChiKwadraatPlot(List<Variable> variables)
         {
-           
+
 
         }
     }

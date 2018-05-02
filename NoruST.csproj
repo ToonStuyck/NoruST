@@ -210,6 +210,12 @@
     <Compile Include="Forms\AutoCorrForm.Designer.cs">
       <DependentUpon>AutoCorrForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\ChiKwadraatForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ChiKwadraatForm.Designer.cs">
+      <DependentUpon>ChiKwadraatForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\confidence1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,7 @@
     <Compile Include="Models\HypotheseModel2.cs" />
     <Compile Include="Models\InteractionModel.cs" />
     <Compile Include="Presenters\AutoCorrPresenter.cs" />
+    <Compile Include="Presenters\ChiKwadraatPresenter.cs" />
     <Compile Include="Presenters\ConfidencePresenter1.cs" />
     <Compile Include="Presenters\ConfidencePresenter2.cs" />
     <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
@@ -439,6 +446,9 @@
     <EmbeddedResource Include="Forms\BoxWhiskerPlotForm.resx">
       <DependentUpon>BoxWhiskerPlotForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ChiKwadraatForm.resx">
+      <DependentUpon>ChiKwadraatForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\confidence1.resx">
       <DependentUpon>confidence1.cs</DependentUpon>
     </EmbeddedResource>
@@ -529,6 +539,7 @@
     </EmbeddedResource>
     <None Include="NoruST_13_TemporaryKey.pfx" />
     <None Include="NoruST_15_TemporaryKey.pfx" />
+    <None Include="NoruST_17_TemporaryKey.pfx" />
     <None Include="NoruST_1_TemporaryKey.pfx" />
     <None Include="NoruST_2_TemporaryKey.pfx" />
     <None Include="NoruST_4_TemporaryKey.pfx" />
@@ -620,10 +631,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NoruST_9_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NoruST_17_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>3F682BBB595D0C8845734C65C9390E1CF93D6B92</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>78ADE4E988071B193B30B02F02AD6779F5E06957</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
