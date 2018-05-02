@@ -14,19 +14,19 @@ using Microsoft.Office.Interop.Excel;
 
 namespace NoruST.Presenters
 {
-    public class UnstackedPresenter
+    public class InteractionPresenter
     {
-        private UnstackedForm view;
-        private UnstackedModel model;
+        private InteractionForm view;
+        private InteractionModel model;
         private DataSetManagerPresenter dataSetPresenter;
 
-        public UnstackedPresenter(DataSetManagerPresenter dataSetPresenter)
+        public InteractionPresenter(DataSetManagerPresenter dataSetPresenter)
         {
             this.dataSetPresenter = dataSetPresenter;
-            this.model = new UnstackedModel();
+            this.model = new InteractionModel();
         }
 
-        public UnstackedModel getModel()
+        public InteractionModel getModel()
         {
             return model;
         }
@@ -42,22 +42,22 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-		public bool checkInput(DataSet dataSet)
-		{
-
-			if (dataSet != null)
-			{
-				createUnstacked(dataSet);
-				return true;
-			}
-			else
-				MessageBox.Show("Please correct all fields to calculate unstacked", "Unstacked error");
-			return false;
-		}
-
-		public void createUnstacked(DataSet dataSet)
+        public bool checkInput(DataSet dataSet)
         {
-			model.dataSet.addUnstacked(model.category, model.variable, dataSet);
+
+            if (dataSet != null)
+            {
+                createUnstacked(dataSet);
+                return true;
+            }
+            else
+                MessageBox.Show("Please correct all fields to generate interaction", "Interaction error");
+            return false;
+        }
+
+        public void createUnstacked(DataSet dataSet)
+        {
+            model.dataSet.Interaction(model.variable, model.variable2, dataSet);
         }
     }
 }
