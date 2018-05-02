@@ -223,10 +223,11 @@
 			this.btnOk.TabIndex = 17;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
-			// 
-			// lblDataSet
-			// 
-			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
+            // 
+            // lblDataSet
+            // 
+            this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDataSet.AutoSize = true;
 			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
 			this.lblDataSet.Name = "lblDataSet";
@@ -257,10 +258,11 @@
 			this.btnCancel.TabIndex = 21;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
-			// 
-			// uiComboBox_DataSets
-			// 
-			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
+            this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
+            // 
+            // uiComboBox_DataSets
+            // 
+            //this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
 			this.uiComboBox_DataSets.FormattingEnabled = true;
 			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
 			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";

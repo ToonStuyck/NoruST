@@ -10,5 +10,6 @@ namespace NoruST.Models
 {
 	public class RegressionModel
 	{
-	}
+        public Domain.DataSet dataSet { get; set; }
+    }
 }

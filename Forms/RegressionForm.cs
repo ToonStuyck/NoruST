@@ -26,84 +26,62 @@ using NoruST.Domain;
 
 namespace NoruST.Forms
 {
-
-	//public partial class RegressionForm : ExtendedForm
 	public partial class RegressionForm : Form
 	{
-		#region Constructors
-
 		private RegressionPresenter presenter;
 
-		/// <summary>
-		/// Constructor of the <see cref="ScatterplotForm"/> <see cref="System.Windows.Forms.Form"/>.
-		/// </summary>
-		public RegressionForm()
+        public void setPresenter(RegressionPresenter regressionPresenter)
+        {
+            this.presenter = regressionPresenter;
+            bindModelToView();
+            selectDataSet(selectedDataSet());
+        }
+
+        public void selectDataSet(DataSet dataSet)
+        {
+            uiComboBox_DataSets.SelectedItem = null;
+            uiComboBox_DataSets.SelectedItem = dataSet;
+        }
+
+        private DataSet selectedDataSet()
+        {
+            return (DataSet)uiComboBox_DataSets.SelectedItem;
+        }
+
+        public RegressionForm()
         {
             InitializeComponent();
-
-            //InitializeView(lstDataSets, dgvDataSet, chkCheckAllOptions, tlpOptions, btnOk, btnCancel);
-			//DIT NOG DOEN!!
         }
 
-		public void setPresenter(RegressionPresenter regPresenter)
-		{
-			this.presenter = regPresenter;
-			bindModelToView();
-			selectDataSet(selectedDataSet());
-		}
-
-		private void bindModelToView()
-		{
-			uiComboBox_DataSets.DataSource = presenter.dataSets();
-			uiComboBox_DataSets.DisplayMember = "name";
-			uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
-			{
-				if (selectedDataSet() == null) return;
-				dgvDataSet.DataSource = selectedDataSet().getVariables();
-				/*uiDataGridViewColumn_VariableCheckX.Width = 20;
-				uiDataGridViewColumn_VariableCheckY.Width = 20;
-				uiDataGridView_Variables.Columns[2].ReadOnly = true;
-				uiDataGridView_Variables.Columns[3].ReadOnly = true;*/
-			};
-		}
-
-		private DataSet selectedDataSet()
-		{
-			return (DataSet)uiComboBox_DataSets.SelectedItem;
-		}
-
-		public void selectDataSet(DataSet dataSet)
-		{
-			uiComboBox_DataSets.SelectedItem = null;
-			uiComboBox_DataSets.SelectedItem = dataSet;
-		}
-
-		#endregion
-
-		#region Overwritten Methods
-
-		/// <summary>
-		/// This adds extra functionality to the DataSet<see cref="ListBox"/>.
-		/// </summary>
-		/*public override void DataSetListSelectedIndexChanged()
+        private void ui_Button_Cancel_Click(object sender, EventArgs e)
         {
-            // Create a data table and add the required columns.
-            CreateDataTable(xy: DataTableColumn.Editable);
-
-            // Update the view with new data.
-            UpdateDataTable();
+            Close();
         }
 
-        /// <summary>
-        /// This adds extra functionality to the Ok <see cref="System.Windows.Forms.Button"/>
-        /// </summary>
-        public override bool OkButtonClick()
+        private void uiButton_Ok_Click(object sender, EventArgs e)
         {
-            return new Regression().Print(SelectedDataSet, DoIncludeX, DoIncludeY, new SummaryStatisticsBool(fittedValuesVsActualYValues: chkFittedValuesVsActualYValues.Checked, residualsVsFittedValues: chkResidualsVsFittedValues.Checked, residualsVsXValues: chkResidualsVsXValues.Checked, displayRegressionEquation: chkDisplayRegressionEquation.Checked), (int)nudConfidenceLevel.Value);
-        }*/
+            
+            
+        }
 
-		#endregion
+        private void bindModelToView()
+        {
+            System.Diagnostics.Debug.WriteLine(presenter.dataSets().Count);
+            uiComboBox_DataSets.DataSource = presenter.dataSets();
+            uiComboBox_DataSets.DisplayMember = "name";
+            //nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+            //rangeDataGridViewTextBoxColumn.DataPropertyName = "Range";
+            uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
+            {
+                if (selectedDataSet() == null) return;
+                dgvDataSet.DataSource = selectedDataSet().getVariables();
+                //uiDataGridViewColumn_VariableCheckX.Width = 20;
+                //uiDataGridViewColumn_VariableCheckY.Width = 20;
+                //uiDataGridView_Variables.Columns[2].ReadOnly = true;
+                //uiDataGridView_Variables.Columns[3].ReadOnly = true;
+            };
+        }
 
 
-	}
+    }
 }

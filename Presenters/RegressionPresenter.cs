@@ -12,6 +12,7 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 
+
 namespace NoruST.Presenters
 {
 	public class RegressionPresenter
@@ -20,15 +21,10 @@ namespace NoruST.Presenters
 		private RegressionModel model;
 		private DataSetManagerPresenter dataSetPresenter;
 
-		public RegressionPresenter(DataSetManagerPresenter presenter)
+		public RegressionPresenter(DataSetManagerPresenter dataSetPresenter)
 		{
-			this.dataSetPresenter = presenter;
+			this.dataSetPresenter = dataSetPresenter;
 			model = new RegressionModel();
-		}
-
-		public RegressionModel getModel()
-		{
-			return model;
 		}
 
 		public void openView()

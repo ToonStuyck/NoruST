@@ -37,6 +37,7 @@ namespace NoruST
         private AutoCorrPresenter autoCorrPresenter;
         private InteractionPresenter interactionPresenter;
         private ChiKwadraatPresenter chiKwadraatPresenter;
+        private RegressionPresenter regressionPresenter;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -65,6 +66,7 @@ namespace NoruST
             autoCorrPresenter = new AutoCorrPresenter(dataSetManagerPresenter);
             interactionPresenter = new InteractionPresenter(dataSetManagerPresenter);
             chiKwadraatPresenter = new ChiKwadraatPresenter(dataSetManagerPresenter);
+            regressionPresenter = new RegressionPresenter(dataSetManagerPresenter);
 
 
             // Add Event Handlers for the click events of the buttons.
@@ -86,7 +88,7 @@ namespace NoruST
             btnPChart.Click += delegate { pChartPresenter.openView(); };
             btnProcessCapability.Click += delegate { processCapabilityPresenter.openView(); };
             btnTimeSeriesGraph.Click += delegate { timeSeriesGraphPresenter.openView(); };
-            btnSimpleRegression.Click += delegate { regressionForm = regressionForm.createAndOrShowForm(); };
+            btnSimpleRegression.Click += delegate { regressionPresenter.openView(); };
             btnUnstacked.Click += delegate { unstackedPresenter.openView(); };
             btnMeanConf.Click += delegate { confidencePresenter1.openView(); };
             btnProportionConf.Click += delegate { confidencePresenter2.openView(); };
