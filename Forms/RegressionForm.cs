@@ -50,6 +50,8 @@ namespace NoruST.Forms
             return new Regression().Print(SelectedDataSet, DoIncludeX, DoIncludeY, new SummaryStatisticsBool(fittedValuesVsActualYValues: chkFittedValuesVsActualYValues.Checked, residualsVsFittedValues: chkResidualsVsFittedValues.Checked, residualsVsXValues: chkResidualsVsXValues.Checked, displayRegressionEquation: chkDisplayRegressionEquation.Checked), (int)nudConfidenceLevel.Value);
         }
 
-        #endregion
-    }
+		#endregion
+
+
+	}
 }

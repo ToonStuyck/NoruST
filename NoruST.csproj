@@ -516,6 +516,7 @@
     <EmbeddedResource Include="View\Ribbon\Ribbon.resx">
       <DependentUpon>Ribbon.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="NoruST_13_TemporaryKey.pfx" />
     <None Include="NoruST_15_TemporaryKey.pfx" />
     <None Include="NoruST_1_TemporaryKey.pfx" />
     <None Include="NoruST_2_TemporaryKey.pfx" />
@@ -607,10 +608,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NoruST_7_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NoruST_13_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>210CC12C7DF8A7963AA73354285151864A5E5957</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>FAAD62F07CB121DC3CFD27D8A534E3D3C6E45AC8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
