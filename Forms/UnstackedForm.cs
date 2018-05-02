@@ -30,22 +30,18 @@ namespace NoruST.Forms
             ui_ComboBox_SelectDataSets.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedDataSet() == null) return;
-                /*uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
-                uiDataGridViewColumn_VariableCheckX.Width = 20;
-                uiDataGridViewColumn_VariableCheckY.Width = 20;
-                uiDataGridView_Variables.Columns[2].ReadOnly = true;
-                uiDataGridView_Variables.Columns[3].ReadOnly = true;*/
+               
 
                 ui_ComboBox_cat.DataSource = selectedDataSet().getVariables();
                 ui_ComboBox_cat.DisplayMember = "name";
 
                 var variableList = new BindingList<Variable>();
-                variableList.Insert(0, new Variable("", null, null));
-                foreach (Variable v in selectedDataSet().getVariables())
+                
+                foreach (Variable v in selectedDataSet().getVariables()) 
                 {
                     variableList.Add(v);
-                }
-
+                } 
+               
                 ui_ComboBox_var.DataSource = variableList;
                 ui_ComboBox_var.DisplayMember = "name";
 
