@@ -252,15 +252,16 @@
     <Compile Include="Models\HypotheseModel1.cs" />
     <Compile Include="Models\HypotheseModel2.cs" />
     <Compile Include="Models\InteractionModel.cs" />
+    <Compile Include="Models\RegressionModel.cs" />
     <Compile Include="Presenters\AutoCorrPresenter.cs" />
     <Compile Include="Presenters\ChiKwadraatPresenter.cs" />
     <Compile Include="Presenters\ConfidencePresenter1.cs" />
     <Compile Include="Presenters\ConfidencePresenter2.cs" />
     <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
-    <Compile Include="Controls\Domain\DataSet.cs" />
-    <Compile Include="Controls\Domain\DataSetFactory.cs" />
-    <Compile Include="Controls\Domain\RangeLayout.cs" />
-    <Compile Include="Controls\Domain\Variable.cs" />
+    <Compile Include="Domain\DataSet.cs" />
+    <Compile Include="Domain\DataSetFactory.cs" />
+    <Compile Include="Domain\RangeLayout.cs" />
+    <Compile Include="Domain\Variable.cs" />
     <Compile Include="Forms\BoxWhiskerPlotForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -425,6 +426,7 @@
     <Compile Include="Presenters\HypothesePresenter1.cs" />
     <Compile Include="Presenters\HypothesePresenter2.cs" />
     <Compile Include="Presenters\InteractionPresenter.cs" />
+    <Compile Include="Presenters\RegressionPresenter.cs" />
     <Compile Include="Presenters\UnstackedPresenter.cs" />
     <Compile Include="Presenters\DataSetManagerPresenter.cs" />
     <Compile Include="Presenters\DummyPresenter.cs" />
