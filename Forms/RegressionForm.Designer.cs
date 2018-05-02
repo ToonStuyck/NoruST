@@ -38,12 +38,12 @@
 			this.chkResidualsVsFittedValues = new System.Windows.Forms.CheckBox();
 			this.chkDisplayRegressionEquation = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
-			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.lblDataSet = new System.Windows.Forms.Label();
 			this.lblVariable = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
+			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDataSet)).BeginInit();
 			this.grpOptions.SuspendLayout();
@@ -53,13 +53,12 @@
 			// 
 			// tlpForm
 			// 
-			this.tlpForm.AutoSize = true;
 			this.tlpForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tlpForm.ColumnCount = 4;
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
+			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 654F));
 			this.tlpForm.Controls.Add(this.dgvDataSet, 1, 1);
 			this.tlpForm.Controls.Add(this.grpOptions, 1, 1);
 			this.tlpForm.Controls.Add(this.btnOk, 2, 3);
@@ -74,7 +73,8 @@
 			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
 			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tlpForm.Size = new System.Drawing.Size(597, 390);
+			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tlpForm.Size = new System.Drawing.Size(388, 390);
 			this.tlpForm.TabIndex = 22;
 			// 
 			// dgvDataSet
@@ -84,12 +84,12 @@
 			this.dgvDataSet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
 			this.dgvDataSet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.tlpForm.SetColumnSpan(this.dgvDataSet, 3);
-			this.dgvDataSet.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgvDataSet.Dock = System.Windows.Forms.DockStyle.Left;
 			this.dgvDataSet.Location = new System.Drawing.Point(63, 33);
-			this.dgvDataSet.MinimumSize = new System.Drawing.Size(300, 0);
+			this.dgvDataSet.MinimumSize = new System.Drawing.Size(100, 0);
 			this.dgvDataSet.Name = "dgvDataSet";
 			this.dgvDataSet.RowHeadersVisible = false;
-			this.dgvDataSet.Size = new System.Drawing.Size(531, 204);
+			this.dgvDataSet.Size = new System.Drawing.Size(197, 204);
 			this.dgvDataSet.TabIndex = 14;
 			// 
 			// grpOptions
@@ -103,7 +103,7 @@
 			this.grpOptions.Controls.Add(this.tlpOptions);
 			this.grpOptions.Location = new System.Drawing.Point(3, 261);
 			this.grpOptions.Name = "grpOptions";
-			this.grpOptions.Size = new System.Drawing.Size(591, 96);
+			this.grpOptions.Size = new System.Drawing.Size(911, 96);
 			this.grpOptions.TabIndex = 18;
 			this.grpOptions.TabStop = false;
 			// 
@@ -132,7 +132,7 @@
 			this.tlpOptions.Controls.Add(this.chkDisplayRegressionEquation, 1, 1);
 			this.tlpOptions.Controls.Add(this.lblConfidenceLevel, 0, 2);
 			this.tlpOptions.Controls.Add(this.nudConfidenceLevel, 1, 2);
-			this.tlpOptions.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tlpOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.tlpOptions.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tlpOptions.Location = new System.Drawing.Point(3, 16);
 			this.tlpOptions.Name = "tlpOptions";
@@ -141,7 +141,7 @@
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tlpOptions.Size = new System.Drawing.Size(585, 77);
+			this.tlpOptions.Size = new System.Drawing.Size(905, 77);
 			this.tlpOptions.TabIndex = 32;
 			// 
 			// chkResidualsVsXValues
@@ -151,7 +151,7 @@
 			this.chkResidualsVsXValues.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.chkResidualsVsXValues.Location = new System.Drawing.Point(188, 8);
 			this.chkResidualsVsXValues.Name = "chkResidualsVsXValues";
-			this.chkResidualsVsXValues.Size = new System.Drawing.Size(394, 17);
+			this.chkResidualsVsXValues.Size = new System.Drawing.Size(714, 17);
 			this.chkResidualsVsXValues.TabIndex = 16;
 			this.chkResidualsVsXValues.Text = "Residuals vs X-Values";
 			this.chkResidualsVsXValues.UseVisualStyleBackColor = true;
@@ -185,7 +185,7 @@
 			this.chkDisplayRegressionEquation.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.chkDisplayRegressionEquation.Location = new System.Drawing.Point(188, 31);
 			this.chkDisplayRegressionEquation.Name = "chkDisplayRegressionEquation";
-			this.chkDisplayRegressionEquation.Size = new System.Drawing.Size(394, 17);
+			this.chkDisplayRegressionEquation.Size = new System.Drawing.Size(714, 17);
 			this.chkDisplayRegressionEquation.TabIndex = 18;
 			this.chkDisplayRegressionEquation.Text = "Display Regression Equation";
 			this.chkDisplayRegressionEquation.UseVisualStyleBackColor = true;
@@ -201,6 +201,59 @@
 			this.lblConfidenceLevel.Text = "Confidence level (%)";
 			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// btnOk
+			// 
+			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnOk.Location = new System.Drawing.Point(165, 363);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(95, 24);
+			this.btnOk.TabIndex = 17;
+			this.btnOk.Text = "Ok";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
+			// 
+			// lblDataSet
+			// 
+			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.lblDataSet.AutoSize = true;
+			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
+			this.lblDataSet.Name = "lblDataSet";
+			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
+			this.lblDataSet.TabIndex = 19;
+			this.lblDataSet.Text = "Data set";
+			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// lblVariable
+			// 
+			this.lblVariable.AutoSize = true;
+			this.lblVariable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblVariable.Location = new System.Drawing.Point(3, 30);
+			this.lblVariable.Name = "lblVariable";
+			this.lblVariable.Size = new System.Drawing.Size(54, 210);
+			this.lblVariable.TabIndex = 20;
+			this.lblVariable.Text = "Variable";
+			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.btnCancel.Location = new System.Drawing.Point(266, 363);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(118, 24);
+			this.btnCancel.TabIndex = 21;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
+			// 
+			// uiComboBox_DataSets
+			// 
+			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
+			this.uiComboBox_DataSets.FormattingEnabled = true;
+			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
+			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
+			this.uiComboBox_DataSets.Size = new System.Drawing.Size(197, 21);
+			this.uiComboBox_DataSets.TabIndex = 22;
+			// 
 			// nudConfidenceLevel
 			// 
 			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -214,67 +267,12 @@
             0,
             0});
 			// 
-			// btnOk
-			// 
-			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnOk.Location = new System.Drawing.Point(440, 363);
-			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(74, 24);
-			this.btnOk.TabIndex = 17;
-			this.btnOk.Text = "Ok";
-			this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
-            // 
-            // lblDataSet
-            // 
-            this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.lblDataSet.AutoSize = true;
-			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
-			this.lblDataSet.Name = "lblDataSet";
-			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
-			this.lblDataSet.TabIndex = 19;
-			this.lblDataSet.Text = "Data set";
-			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// lblVariable
-			// 
-			this.lblVariable.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.lblVariable.AutoSize = true;
-			this.lblVariable.Location = new System.Drawing.Point(7, 128);
-			this.lblVariable.Name = "lblVariable";
-			this.lblVariable.Size = new System.Drawing.Size(45, 13);
-			this.lblVariable.TabIndex = 20;
-			this.lblVariable.Text = "Variable";
-			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// btnCancel
-			// 
-			this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.btnCancel.Location = new System.Drawing.Point(520, 363);
-			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(74, 24);
-			this.btnCancel.TabIndex = 21;
-			this.btnCancel.Text = "Cancel";
-			this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
-            // 
-            // uiComboBox_DataSets
-            // 
-            //this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
-			this.uiComboBox_DataSets.FormattingEnabled = true;
-			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
-			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
-			this.uiComboBox_DataSets.Size = new System.Drawing.Size(531, 21);
-			this.uiComboBox_DataSets.TabIndex = 22;
-			// 
 			// RegressionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
-			this.ClientSize = new System.Drawing.Size(597, 387);
+			this.ClientSize = new System.Drawing.Size(389, 392);
 			this.Controls.Add(this.tlpForm);
 			this.MinimumSize = new System.Drawing.Size(400, 400);
 			this.Name = "RegressionForm";
@@ -288,7 +286,6 @@
 			this.tlpOptions.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudConfidenceLevel)).EndInit();
 			this.ResumeLayout(false);
-			this.PerformLayout();
 
         }
 

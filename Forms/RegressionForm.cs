@@ -66,7 +66,6 @@ namespace NoruST.Forms
 
         private void bindModelToView()
         {
-            System.Diagnostics.Debug.WriteLine(presenter.dataSets().Count);
             uiComboBox_DataSets.DataSource = presenter.dataSets();
             uiComboBox_DataSets.DisplayMember = "name";
             //nameDataGridViewTextBoxColumn.DataPropertyName = "name";
@@ -83,5 +82,5 @@ namespace NoruST.Forms
         }
 
 
-    }
+	}
 }
