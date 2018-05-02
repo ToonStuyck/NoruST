@@ -522,6 +522,7 @@
     <None Include="NoruST_2_TemporaryKey.pfx" />
     <None Include="NoruST_4_TemporaryKey.pfx" />
     <None Include="NoruST_7_TemporaryKey.pfx" />
+    <None Include="NoruST_8_TemporaryKey.pfx" />
     <None Include="NoruST_Key.snk" />
     <None Include="NoruST_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -608,10 +609,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NoruST_16_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NoruST_8_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>BDFEDC8BDA3A76B3E3AD319DE685EFC023E32050</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>ABEC2F50D779F92984E9E2A2D857D4F7086D6C25</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>

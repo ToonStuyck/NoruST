@@ -41,6 +41,11 @@ namespace NoruST.Domain
             return worksheet;
         }
 
+        public void setRange(Range ran)
+        {
+            this.range = ran;
+        }
+
         public Range getRange()
         {
             return range;
@@ -64,6 +69,11 @@ namespace NoruST.Domain
         public BindingList<Variable> getVariables()
         {
             return variables;
+        }
+
+        public void setVariables(BindingList<Variable> variable)
+        {
+            this.variables = variable;
         }
 
         public int rangeSize()
@@ -187,10 +197,9 @@ namespace NoruST.Domain
                     }
                     row = row + 1;
                 }
-                Range nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column-1));
-                //DataSetManagerPresenter presenter = new DataSetManagerPresenter();
-                //DataSetManagerForm view = new DataSetManagerForm();
-                //presenter.addDataSetCurrentSelection(view);
+                DataSet nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column-1));
+                dataSet.setRange(nwRange.getRange());
+                dataSet.setVariables(nwRange.getVariables());
             } else
             {
                 List<Double> values = dist.OfType<Double>().ToList();
@@ -222,10 +231,9 @@ namespace NoruST.Domain
                     }
                     row = row + 1;
                 }
-                Range newRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column-1));
-                //DataSetManagerPresenter presenter = new DataSetManagerPresenter();
-                //DataSetManagerForm view = new DataSetManagerForm();
-                //presenter.addDataSetCurrentSelection(view);
+                DataSet nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column - 1));
+                dataSet.setRange(nwRange.getRange());
+                dataSet.setVariables(nwRange.getVariables());
             }
 		}
 
