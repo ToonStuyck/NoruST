@@ -35,8 +35,8 @@ namespace NoruST.Forms
             uiComboBox_Variables.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedVariable() == null) return;
-                presenter.getModel().variable = selectedVariable();*/
-            //};
+                presenter.getModel().variable = selectedVariable();
+            };*/
 
 
 
@@ -57,19 +57,37 @@ namespace NoruST.Forms
                     uiComboBox_DataSets.SelectedItem = null;
                     uiComboBox_DataSets.SelectedItem = dataSet;
                 }
+*/
 
-                private void ChiSquareCancel_Click(object sender, EventArgs e)
-                {
-                    Close();
-                } 
-
-                private void uiButton_Ok_Click(object sender, EventArgs e)
-                {
-                 presenter.createDummy(selectedDataSet());
-    
-
-                }*/
         }
 
+        private void ChiSquare_OK(object sender, MouseEventArgs e)
+        {
+            // lalala doe iets nuttig
+            Close();
+        }
+
+        private void ChiSquare_Cancel(object sender, MouseEventArgs e)
+        {
+            Close();
+        }
+
+        private void ChiSquare_Colums(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChiSquare_Rows(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChiSquare_both(object sender, EventArgs e)
+        {
+            ChiSquare_Colums(sender,e);
+            ChiSquare_Rows(sender,e);
+        }
     }
 }
+
+

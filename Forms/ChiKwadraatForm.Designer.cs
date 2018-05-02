@@ -62,6 +62,7 @@
             this.RowsIncluded.TabIndex = 2;
             this.RowsIncluded.Text = "Rows Title";
             this.RowsIncluded.UseVisualStyleBackColor = true;
+            this.RowsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_Rows);
             // 
             // ColumsIncluded
             // 
@@ -72,6 +73,7 @@
             this.ColumsIncluded.TabIndex = 1;
             this.ColumsIncluded.Text = "Columns Title";
             this.ColumsIncluded.UseVisualStyleBackColor = true;
+            this.ColumsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_Colums);
             // 
             // RowsAndColumsIncluded
             // 
@@ -82,6 +84,7 @@
             this.RowsAndColumsIncluded.TabIndex = 0;
             this.RowsAndColumsIncluded.Text = "Table includes Row and Column Headers";
             this.RowsAndColumsIncluded.UseVisualStyleBackColor = true;
+            this.RowsAndColumsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_both);
             // 
             // ChiSquareOk
             // 
@@ -91,6 +94,7 @@
             this.ChiSquareOk.TabIndex = 2;
             this.ChiSquareOk.Text = "OK";
             this.ChiSquareOk.UseVisualStyleBackColor = true;
+            this.ChiSquareOk.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ChiSquare_OK);
             // 
             // ChiSquareCancel
             // 
@@ -100,7 +104,7 @@
             this.ChiSquareCancel.TabIndex = 3;
             this.ChiSquareCancel.Text = "Cancel";
             this.ChiSquareCancel.UseVisualStyleBackColor = true;
-            
+            this.ChiSquareCancel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ChiSquare_Cancel);
             // 
             // uiButton_Range
             // 

@@ -257,10 +257,10 @@
     <Compile Include="Presenters\ConfidencePresenter1.cs" />
     <Compile Include="Presenters\ConfidencePresenter2.cs" />
     <Compile Include="Presenters\CorrelationCovariancePresenter.cs" />
-    <Compile Include="Domain\DataSet.cs" />
-    <Compile Include="Domain\DataSetFactory.cs" />
-    <Compile Include="Domain\RangeLayout.cs" />
-    <Compile Include="Domain\Variable.cs" />
+    <Compile Include="Controls\Domain\DataSet.cs" />
+    <Compile Include="Controls\Domain\DataSetFactory.cs" />
+    <Compile Include="Controls\Domain\RangeLayout.cs" />
+    <Compile Include="Controls\Domain\Variable.cs" />
     <Compile Include="Forms\BoxWhiskerPlotForm.cs">
       <SubType>Form</SubType>
     </Compile>
