@@ -35,6 +35,8 @@ namespace NoruST
         private HypothesePresenter1 hypothesePresenter1;
         private HypothesePresenter2 hypothesePresenter2;
         private AutoCorrPresenter autoCorrPresenter;
+        private InteractionPresenter interactionPresenter;
+        private ChiKwadraatPresenter chiKwadraatPresenter;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -61,6 +63,9 @@ namespace NoruST
             hypothesePresenter1 = new HypothesePresenter1(dataSetManagerPresenter);
             hypothesePresenter2 = new HypothesePresenter2(dataSetManagerPresenter);
             autoCorrPresenter = new AutoCorrPresenter(dataSetManagerPresenter);
+            interactionPresenter = new InteractionPresenter(dataSetManagerPresenter);
+            chiKwadraatPresenter = new ChiKwadraatPresenter(dataSetManagerPresenter);
+
 
             // Add Event Handlers for the click events of the buttons.
             btnDataSetManager.Click += delegate { dataSetManagerPresenter.openDataSetManager(); };
@@ -88,6 +93,8 @@ namespace NoruST
             btnHypoMean.Click += delegate { hypothesePresenter1.openView(); };
             btnHypoProp.Click += delegate { hypothesePresenter2.openView(); };
             button4.Click += delegate { autoCorrPresenter.openView(); };
+            btnInteraction.Click += delegate { interactionPresenter.openView(); };
+            button3.Click += delegate { chiKwadraatPresenter.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)
