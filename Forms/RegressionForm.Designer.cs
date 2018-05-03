@@ -29,7 +29,14 @@
         private void InitializeComponent()
         {
 			this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
-			this.dgvDataSet = new System.Windows.Forms.DataGridView();
+			this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
+			this.uiDataGridViewColumn_VariableCheckD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.uiDataGridViewColumn_VariableCheckI = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.btnOk = new System.Windows.Forms.Button();
+			this.lblDataSet = new System.Windows.Forms.Label();
+			this.lblVariable = new System.Windows.Forms.Label();
+			this.btnCancel = new System.Windows.Forms.Button();
+			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
 			this.grpOptions = new System.Windows.Forms.GroupBox();
 			this.chkCheckAllOptions = new System.Windows.Forms.CheckBox();
 			this.tlpOptions = new System.Windows.Forms.TableLayoutPanel();
@@ -39,13 +46,8 @@
 			this.chkDisplayRegressionEquation = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
 			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
-			this.btnOk = new System.Windows.Forms.Button();
-			this.lblDataSet = new System.Windows.Forms.Label();
-			this.lblVariable = new System.Windows.Forms.Label();
-			this.btnCancel = new System.Windows.Forms.Button();
-			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
 			this.tlpForm.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvDataSet)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
 			this.grpOptions.SuspendLayout();
 			this.tlpOptions.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nudConfidenceLevel)).BeginInit();
@@ -59,7 +61,7 @@
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 654F));
-			this.tlpForm.Controls.Add(this.dgvDataSet, 1, 1);
+			this.tlpForm.Controls.Add(this.uiDataGridView_Variables, 1, 1);
 			this.tlpForm.Controls.Add(this.btnOk, 2, 3);
 			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
 			this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
@@ -77,20 +79,90 @@
 			this.tlpForm.Size = new System.Drawing.Size(388, 390);
 			this.tlpForm.TabIndex = 22;
 			// 
-			// dgvDataSet
+			// uiDataGridView_Variables
 			// 
-			this.dgvDataSet.AllowUserToAddRows = false;
-			this.dgvDataSet.AllowUserToDeleteRows = false;
-			this.dgvDataSet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-			this.dgvDataSet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.tlpForm.SetColumnSpan(this.dgvDataSet, 3);
-			this.dgvDataSet.Dock = System.Windows.Forms.DockStyle.Left;
-			this.dgvDataSet.Location = new System.Drawing.Point(63, 33);
-			this.dgvDataSet.MinimumSize = new System.Drawing.Size(100, 0);
-			this.dgvDataSet.Name = "dgvDataSet";
-			this.dgvDataSet.RowHeadersVisible = false;
-			this.dgvDataSet.Size = new System.Drawing.Size(197, 204);
-			this.dgvDataSet.TabIndex = 14;
+			this.uiDataGridView_Variables.AllowUserToAddRows = false;
+			this.uiDataGridView_Variables.AllowUserToDeleteRows = false;
+			this.uiDataGridView_Variables.AllowUserToResizeColumns = false;
+			this.uiDataGridView_Variables.AllowUserToResizeRows = false;
+			this.uiDataGridView_Variables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.uiDataGridView_Variables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.uiDataGridView_Variables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.uiDataGridViewColumn_VariableCheckD,
+            this.uiDataGridViewColumn_VariableCheckI});
+			this.tlpForm.SetColumnSpan(this.uiDataGridView_Variables, 3);
+			this.uiDataGridView_Variables.Dock = System.Windows.Forms.DockStyle.Left;
+			this.uiDataGridView_Variables.Location = new System.Drawing.Point(63, 33);
+			this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
+			this.uiDataGridView_Variables.RowHeadersVisible = false;
+			this.uiDataGridView_Variables.Size = new System.Drawing.Size(321, 204);
+			this.uiDataGridView_Variables.TabIndex = 29;
+			// 
+			// uiDataGridViewColumn_VariableCheckD
+			// 
+			this.uiDataGridViewColumn_VariableCheckD.HeaderText = "D";
+			this.uiDataGridViewColumn_VariableCheckD.Name = "uiDataGridViewColumn_VariableCheckD";
+			this.uiDataGridViewColumn_VariableCheckD.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+			// 
+			// uiDataGridViewColumn_VariableCheckI
+			// 
+			this.uiDataGridViewColumn_VariableCheckI.HeaderText = "I";
+			this.uiDataGridViewColumn_VariableCheckI.Name = "uiDataGridViewColumn_VariableCheckI";
+			this.uiDataGridViewColumn_VariableCheckI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.uiDataGridViewColumn_VariableCheckI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+			// 
+			// btnOk
+			// 
+			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.btnOk.Location = new System.Drawing.Point(165, 363);
+			this.btnOk.Name = "btnOk";
+			this.btnOk.Size = new System.Drawing.Size(95, 24);
+			this.btnOk.TabIndex = 17;
+			this.btnOk.Text = "Ok";
+			this.btnOk.UseVisualStyleBackColor = true;
+			this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
+			// 
+			// lblDataSet
+			// 
+			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.lblDataSet.AutoSize = true;
+			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
+			this.lblDataSet.Name = "lblDataSet";
+			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
+			this.lblDataSet.TabIndex = 19;
+			this.lblDataSet.Text = "Data set";
+			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// lblVariable
+			// 
+			this.lblVariable.AutoSize = true;
+			this.lblVariable.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblVariable.Location = new System.Drawing.Point(3, 30);
+			this.lblVariable.Name = "lblVariable";
+			this.lblVariable.Size = new System.Drawing.Size(54, 210);
+			this.lblVariable.TabIndex = 20;
+			this.lblVariable.Text = "Variable";
+			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// btnCancel
+			// 
+			this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.btnCancel.Location = new System.Drawing.Point(266, 363);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(118, 24);
+			this.btnCancel.TabIndex = 21;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
+			// 
+			// uiComboBox_DataSets
+			// 
+			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
+			this.uiComboBox_DataSets.FormattingEnabled = true;
+			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
+			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
+			this.uiComboBox_DataSets.Size = new System.Drawing.Size(321, 21);
+			this.uiComboBox_DataSets.TabIndex = 22;
 			// 
 			// grpOptions
 			// 
@@ -214,59 +286,6 @@
             0,
             0});
 			// 
-			// btnOk
-			// 
-			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnOk.Location = new System.Drawing.Point(165, 363);
-			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(95, 24);
-			this.btnOk.TabIndex = 17;
-			this.btnOk.Text = "Ok";
-			this.btnOk.UseVisualStyleBackColor = true;
-			this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
-			// 
-			// lblDataSet
-			// 
-			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.lblDataSet.AutoSize = true;
-			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
-			this.lblDataSet.Name = "lblDataSet";
-			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
-			this.lblDataSet.TabIndex = 19;
-			this.lblDataSet.Text = "Data set";
-			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// lblVariable
-			// 
-			this.lblVariable.AutoSize = true;
-			this.lblVariable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblVariable.Location = new System.Drawing.Point(3, 30);
-			this.lblVariable.Name = "lblVariable";
-			this.lblVariable.Size = new System.Drawing.Size(54, 210);
-			this.lblVariable.TabIndex = 20;
-			this.lblVariable.Text = "Variable";
-			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// btnCancel
-			// 
-			this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.btnCancel.Location = new System.Drawing.Point(266, 363);
-			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(118, 24);
-			this.btnCancel.TabIndex = 21;
-			this.btnCancel.Text = "Cancel";
-			this.btnCancel.UseVisualStyleBackColor = true;
-			this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
-			// 
-			// uiComboBox_DataSets
-			// 
-			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
-			this.uiComboBox_DataSets.FormattingEnabled = true;
-			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
-			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
-			this.uiComboBox_DataSets.Size = new System.Drawing.Size(197, 21);
-			this.uiComboBox_DataSets.TabIndex = 22;
-			// 
 			// RegressionForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,7 +298,7 @@
 			this.Text = "NoruST - Regression";
 			this.tlpForm.ResumeLayout(false);
 			this.tlpForm.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvDataSet)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).EndInit();
 			this.grpOptions.ResumeLayout(false);
 			this.grpOptions.PerformLayout();
 			this.tlpOptions.ResumeLayout(false);
@@ -292,7 +311,6 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tlpForm;
-        private System.Windows.Forms.DataGridView dgvDataSet;
 		private System.Windows.Forms.Label lblDataSet;
 		private System.Windows.Forms.Label lblVariable;
 		private System.Windows.Forms.GroupBox grpOptions;
@@ -307,5 +325,8 @@
 		private System.Windows.Forms.Button btnOk;
 		private System.Windows.Forms.Button btnCancel;
 		private System.Windows.Forms.ComboBox uiComboBox_DataSets;
+		private System.Windows.Forms.DataGridView uiDataGridView_Variables;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheckD;
+		private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheckI;
 	}
 }
