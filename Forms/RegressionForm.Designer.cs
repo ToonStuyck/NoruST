@@ -38,12 +38,12 @@
 			this.chkResidualsVsFittedValues = new System.Windows.Forms.CheckBox();
 			this.chkDisplayRegressionEquation = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
+			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.btnOk = new System.Windows.Forms.Button();
 			this.lblDataSet = new System.Windows.Forms.Label();
 			this.lblVariable = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
-			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvDataSet)).BeginInit();
 			this.grpOptions.SuspendLayout();
@@ -60,12 +60,12 @@
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 654F));
 			this.tlpForm.Controls.Add(this.dgvDataSet, 1, 1);
-			this.tlpForm.Controls.Add(this.grpOptions, 1, 1);
 			this.tlpForm.Controls.Add(this.btnOk, 2, 3);
 			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
 			this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
 			this.tlpForm.Controls.Add(this.btnCancel, 3, 3);
 			this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
+			this.tlpForm.Controls.Add(this.grpOptions, 0, 2);
 			this.tlpForm.Location = new System.Drawing.Point(0, 0);
 			this.tlpForm.Name = "tlpForm";
 			this.tlpForm.RowCount = 4;
@@ -201,6 +201,19 @@
 			this.lblConfidenceLevel.Text = "Confidence level (%)";
 			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// nudConfidenceLevel
+			// 
+			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 54);
+			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
+			this.nudConfidenceLevel.Size = new System.Drawing.Size(50, 20);
+			this.nudConfidenceLevel.TabIndex = 21;
+			this.nudConfidenceLevel.Value = new decimal(new int[] {
+            95,
+            0,
+            0,
+            0});
+			// 
 			// btnOk
 			// 
 			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -253,19 +266,6 @@
 			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
 			this.uiComboBox_DataSets.Size = new System.Drawing.Size(197, 21);
 			this.uiComboBox_DataSets.TabIndex = 22;
-			// 
-			// nudConfidenceLevel
-			// 
-			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 54);
-			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
-			this.nudConfidenceLevel.Size = new System.Drawing.Size(50, 20);
-			this.nudConfidenceLevel.TabIndex = 21;
-			this.nudConfidenceLevel.Value = new decimal(new int[] {
-            95,
-            0,
-            0,
-            0});
 			// 
 			// RegressionForm
 			// 

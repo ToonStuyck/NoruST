@@ -23,6 +23,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NoruST.Presenters;
 using NoruST.Domain;
+using Microsoft.Office.Interop.Excel;
 
 namespace NoruST.Forms
 {
@@ -60,7 +61,11 @@ namespace NoruST.Forms
 
         private void uiButton_Ok_Click(object sender, EventArgs e)
         {
-            
+			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
+			List<Variable> variables = new List<Variable>();
+
+			presenter.createRegression(variables);
+			Close();
             
         }
 
