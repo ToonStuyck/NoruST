@@ -228,6 +228,12 @@
     <Compile Include="Forms\Confidence2.Designer.cs">
       <DependentUpon>Confidence2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\DiscriminantAnalyseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DiscriminantAnalyseForm.Designer.cs">
+      <DependentUpon>DiscriminantAnalyseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HypotheseForm1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -249,6 +255,7 @@
     <Compile Include="Models\AutoCorrModel.cs" />
     <Compile Include="Models\ConfidenceModel1.cs" />
     <Compile Include="Models\ConfidenceModel2.cs" />
+    <Compile Include="Models\DiscriminantAnalyseModel.cs" />
     <Compile Include="Models\HypotheseModel1.cs" />
     <Compile Include="Models\HypotheseModel2.cs" />
     <Compile Include="Models\InteractionModel.cs" />
@@ -279,12 +286,6 @@
     </Compile>
     <Compile Include="Forms\DataSetManagerForm.Designer.cs">
       <DependentUpon>DataSetManagerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\DiscriminantAnalysisForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\DiscriminantAnalysisForm.Designer.cs">
-      <DependentUpon>DiscriminantAnalysisForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DummyForm.cs">
       <SubType>Form</SubType>
@@ -423,6 +424,7 @@
     <Compile Include="Models\UnstackedModel.cs" />
     <Compile Include="Models\XRChartModel.cs" />
     <Compile Include="Presenters\BoxWhiskerPlotPresenter.cs" />
+    <Compile Include="Presenters\DiscriminantAnalysePresenter.cs" />
     <Compile Include="Presenters\HypothesePresenter1.cs" />
     <Compile Include="Presenters\HypothesePresenter2.cs" />
     <Compile Include="Presenters\InteractionPresenter.cs" />
@@ -463,8 +465,8 @@
     <EmbeddedResource Include="Forms\DataSetManagerForm.resx">
       <DependentUpon>DataSetManagerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DiscriminantAnalysisForm.resx">
-      <DependentUpon>DiscriminantAnalysisForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\DiscriminantAnalyseForm.resx">
+      <DependentUpon>DiscriminantAnalyseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DummyForm.resx">
       <DependentUpon>DummyForm.cs</DependentUpon>
@@ -542,6 +544,7 @@
     <None Include="NoruST_10_TemporaryKey.pfx" />
     <None Include="NoruST_13_TemporaryKey.pfx" />
     <None Include="NoruST_15_TemporaryKey.pfx" />
+    <None Include="NoruST_16_TemporaryKey.pfx" />
     <None Include="NoruST_17_TemporaryKey.pfx" />
     <None Include="NoruST_1_TemporaryKey.pfx" />
     <None Include="NoruST_2_TemporaryKey.pfx" />
@@ -634,10 +637,10 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>NoruST_10_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>NoruST_16_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>6DAC707B0FBF85173329CF0292108CB82B019B64</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>0A1F4179531B96A160F0BA69E7190EAE0675AFEE</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>

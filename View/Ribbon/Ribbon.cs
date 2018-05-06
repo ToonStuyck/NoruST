@@ -28,7 +28,6 @@ namespace NoruST
         private ForecastForm forecastForm;
         private RegressionForm regressionForm;
         private LogisticRegressionForm logisticRegressionForm;
-        private DiscriminantAnalysisForm discriminantAnalysisForm;
         private UnstackedPresenter unstackedPresenter;
         private ConfidencePresenter1 confidencePresenter1;
         private ConfidencePresenter2 confidencePresenter2;
@@ -38,6 +37,7 @@ namespace NoruST
         private InteractionPresenter interactionPresenter;
         private ChiKwadraatPresenter chiKwadraatPresenter;
         private RegressionPresenter regressionPresenter;
+        private DiscriminantAnalysePresenter discriminantAnalysePresenter;
 
         private void Ribbon_Load(object sender, RibbonUIEventArgs e)
         {
@@ -67,6 +67,7 @@ namespace NoruST
             interactionPresenter = new InteractionPresenter(dataSetManagerPresenter);
             chiKwadraatPresenter = new ChiKwadraatPresenter(dataSetManagerPresenter);
             regressionPresenter = new RegressionPresenter(dataSetManagerPresenter);
+            discriminantAnalysePresenter = new DiscriminantAnalysePresenter(dataSetManagerPresenter);
 
 
             // Add Event Handlers for the click events of the buttons.
@@ -83,7 +84,6 @@ namespace NoruST
             btnRunsTestForRandomness.Click += delegate { runsTestForRandomnessPresenter.openView(); };
             btnForecast.Click += delegate { forecastPresenter.openView(); };
             btnLogisticRegression.Click += delegate { logisticRegressionForm = logisticRegressionForm.createAndOrShowForm(); };
-            btnDiscriminantAnalysis.Click += delegate { discriminantAnalysisForm = discriminantAnalysisForm.createAndOrShowForm(); };
             btnXRChart.Click += delegate { xrChartPresenter.openView(); };
             btnPChart.Click += delegate { pChartPresenter.openView(); };
             btnProcessCapability.Click += delegate { processCapabilityPresenter.openView(); };
@@ -97,6 +97,7 @@ namespace NoruST
             button4.Click += delegate { autoCorrPresenter.openView(); };
             btnInteraction.Click += delegate { interactionPresenter.openView(); };
             button3.Click += delegate { chiKwadraatPresenter.openView(); };
+            btnDiscriminantAnalysis.Click += delegate { discriminantAnalysePresenter.openView(); };
         }
 
         private void btnRunsTestForRandomness_Click(object sender, RibbonControlEventArgs e)
