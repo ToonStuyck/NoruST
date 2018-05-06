@@ -12,9 +12,9 @@ using System.ComponentModel;
 using System.Windows.Forms;
 using Microsoft.Office.Interop.Excel;
 using System.Diagnostics;
-
-
-
+using MathNet.Numerics.LinearRegression;
+using MathNet;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace NoruST.Presenters
 {
@@ -52,7 +52,7 @@ namespace NoruST.Presenters
 			int row = 1;
 			int column = 1;
 			sheet.Cells[1, 1] = "Regression Summary";
-			sheet.Cells[2, 1] = "Multiple R";
+			sheet.Cells[2, 1] = "R";
 			sheet.Cells[3, 1] = "R-square";
 			sheet.Cells[4, 1] = "adjusted R-square";
 			sheet.Cells[5, 1] = "stErr of Estimate";
@@ -89,12 +89,6 @@ namespace NoruST.Presenters
 			//sheet.Cells[14, 7] = ""; //value of given confidence interval
 			sheet.Cells[15, 6] = "Lower";
 			sheet.Cells[15, 7] = "Upper";
-			
-
-
-			
-
-
 
 			((Range)sheet.Cells[1, 1]).EntireColumn.AutoFit();
 			((Range)sheet.Cells[1, 2]).EntireColumn.AutoFit();
@@ -116,106 +110,130 @@ namespace NoruST.Presenters
 			//sheet.get_Range("C24", AddressConverter.CellAddress(23 + c, 8, false, false)).Cells.HorizontalAlignment = XlHAlign.xlHAlignRight;
 			Globals.ExcelAddIn.Application.ActiveWindow.DisplayGridlines = false;
 
-			int count = 0;
 			double[] b = new double[variablesI.Count];
-			double meansD = 0;
-			double[] meansI = new double[variablesI.Count];
+            double[] yData = calcYdata(variablesD, dataSet, length);
+            double[,] xData = calcXdata(length, dataSet, variablesI);
 
-			//gemiddelde van elke (independant) kolom wordt berekend
-			foreach (Variable var in variablesI)
-			{
-				string ran = variablesI[count].Range.ToString();
-				Array arr = dataSet.getWorksheet().Range[ran].Value;
-				double[] vals = new double[length];
-				int count2 = 0;
-				foreach (var item in arr)
-				{
-					double temp = Convert.ToDouble(item);
-					vals[count2] = temp;
-					count2 = count2 + 1;
-				}
-
-				meansI[count] = sheet.Application.WorksheetFunction.Average(vals);
-				System.Diagnostics.Debug.WriteLine(meansI[count]);
-				count++;
-			}
-
-			//gemiddelde van elke dependant kolom wordt berekend
-			foreach (Variable var in variablesD)
-			{
-				string ran = variablesD[0].Range.ToString();
-				Array arr = dataSet.getWorksheet().Range[ran].Value;
-				double[] vals = new double[length];
-				int count2 = 0;
-				foreach (var item in arr)
-				{
-					double temp = Convert.ToDouble(item);
-					vals[count2] = temp;
-					count2 = count2 + 1;
-				}
-
-				meansD = sheet.Application.WorksheetFunction.Average(vals);
-				System.Diagnostics.Debug.WriteLine(meansD);
-			}
-
-
-
-			
-			count = 0;
-			double temp1 = 0;
-			double temp2 = 0;
-
-			//bereken (Yi-Ygem)
-
-			foreach (Variable var in variablesD)
-			{
-				string ran = variablesD[0].Range.ToString();
-				Array arr = dataSet.getWorksheet().Range[ran].Value;
-				double[] vals = new double[length];
-				foreach (var item in arr)
-				{
-					double temp = Convert.ToDouble(item);
-					temp2 = temp2 + (temp - meansD);
-				}
-				count++;
-
-			}
-
-			//bereken (Xi-Xgem)
-			count = 0;
-			foreach (Variable var in variablesI)
-			{
-				string ran = variablesI[count].Range.ToString();
-				Array arr = dataSet.getWorksheet().Range[ran].Value;
-				double[] vals = new double[length];
-				foreach (var item in arr)
-				{
-					double temp = Convert.ToDouble(item);
-					temp1 = temp1 + (temp - meansI[count]);
-				}
-				b[count] = (temp1 * temp2)/(length-1) / (temp1 * temp1);	//formule zie slide 6 samenvatting H10, om de b van elke independant value te berekenen
-				count++;
-			}
-
-			//waarde van a berekenen
-			double a = meansD;
-			int i = 0;
-			while (i < b.Length)
-			{
-				a -= b[i] * meansI[i];
-				i++;
-			}
+            b = calculateCoefB(yData, xData, b);
+            double a = b[0];
 
 			sheet.Cells[16, 2] = a;
 			row = 17;
 			foreach (Variable var in variablesI)
 			{
-				sheet.Cells[row, 2] = b[row-17];
+				sheet.Cells[row, 2] = b[row-16];
 				row++;
 			}
 
+            var X = DenseMatrix.OfArray(xData);
+            var B = new DenseVector(b);
+            var Y = new DenseVector(yData);
+            var yh = X.Multiply(B);
+            var er = Y.Subtract(yh);
+            double[] error = er.ToArray();
+
+            double[] yhat = yh.ToArray();
+
+            double R2 = sheet.Application.WorksheetFunction.Correl(yData, yhat);
+            double R = Math.Pow(R2,2);
+            double Radj = 1.0 - ((1-R)*(length-1)/(length-variablesI.Count-1));
+            double err = 0;
+            int i = 0;
+            while (i < error.Length)
+            {
+                err = err + Math.Pow(error[i], 2);
+                i++;
+            }
+            err = Math.Sqrt(err / (length - 4));
+
+            FillR(sheet, R2, R, Radj, err);
+            FillAnova(sheet);
 
 
-		}
+        }
+
+        public void FillAnova(_Worksheet sheet)
+        {
+            sheet.Cells[9, 1] = "ANOVA Table";
+            sheet.Cells[10, 1] = "Explained";
+            sheet.Cells[11, 1] = "Unexplained";
+            sheet.Cells[10, 3] = "Squares";
+            sheet.Cells[11, 3] = "Squares";
+            sheet.Cells[10, 2] = "Freedom";
+            sheet.Cells[11, 2] = "Freedom";
+            sheet.Cells[10, 4] = "Squares";
+            sheet.Cells[11, 4] = "Squares";
+            sheet.Cells[10, 5] = "F-Ratio";
+            sheet.Cells[10, 6] = "p-Value";
+        }
+
+        public void FillR(_Worksheet sheet, double R2, double R, double Radj, double err)
+        {
+            sheet.Cells[2, 2] = R2;
+            sheet.Cells[3, 2] = R;
+            sheet.Cells[4, 2] = Radj;
+            sheet.Cells[5, 2] = err;
+        }
+
+        public double[] calcYdata(List<Variable> variablesD, DataSet dataSet, int length)
+        {
+            //bereken (Yi-Ygem)
+            int count = 0;
+            double[] yData = new double[length];
+            foreach (Variable var in variablesD)
+            {
+                string ran = variablesD[0].Range.ToString();
+                Array arr = dataSet.getWorksheet().Range[ran].Value;
+                double[] vals = new double[length];
+                foreach (var item in arr)
+                {
+                    double temp = Convert.ToDouble(item);
+                    yData[count] = temp;
+                    //temp2[count] = (temp - meansD);
+                    count++;
+                }
+            }
+            return yData;
+        }
+
+        public double[,] calcXdata(int length, DataSet dataSet, List<Variable> variablesI)
+        {
+            int count = 0;
+            double[,] xData = new double[length, variablesI.Count + 1];
+            //bereken (Xi-Xgem)
+            while (count < length)
+            {
+                xData[count, 0] = 1;
+                count++;
+            }
+            count = 0;
+            foreach (Variable var in variablesI)
+            {
+                int i = 0;
+                string ran = variablesI[count].Range.ToString();
+                Array arr = dataSet.getWorksheet().Range[ran].Value;
+                double[] vals = new double[length];
+                foreach (var item in arr)
+                {
+                    double temp = Convert.ToDouble(item);
+                    xData[i, count + 1] = temp;
+                    //xData[count,i] = (temp - meansI[count]);
+                    i++;
+                }
+                count++;
+            }
+            return xData;
+        }
+
+        public double[] calculateCoefB(double[] yData, double[,] xData, double[] b)
+        {
+            var X = DenseMatrix.OfArray(xData);
+            var y = new DenseVector(yData);
+
+            var p = X.QR().Solve(y);
+            b = p.ToArray();
+
+            return b;
+        }
 	}
 }
