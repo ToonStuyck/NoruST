@@ -90,12 +90,7 @@ namespace NoruST.Presenters
 			sheet.Cells[15, 6] = "Lower";
 			sheet.Cells[15, 7] = "Upper";
 
-			((Range)sheet.Cells[1, 1]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 2]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 3]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 4]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 5]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 6]).EntireColumn.AutoFit();
+
 			sheet.get_Range("B1", "J200").Cells.HorizontalAlignment = XlHAlign.xlHAlignCenter;
 			sheet.get_Range("A1", "B1").Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
 			sheet.get_Range("A9", "F9").Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
@@ -149,27 +144,34 @@ namespace NoruST.Presenters
             err = Math.Sqrt(err / (length - 4));
 
 			
-			double f = calculateF(yData, yhat, variablesI.Count(), sheet);
+			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count());
 			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
 
 			FillR(sheet, R2, R, Radj, err);
-            FillAnova(sheet, f);
+            FillAnova(sheet, anovaResults);
 
-			
+
+			((Range)sheet.Cells[1, 1]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 2]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 3]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 4]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 5]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 6]).EntireColumn.AutoFit();
+
 		}
 
-        public void FillAnova(_Worksheet sheet, double f)
+        public void FillAnova(_Worksheet sheet, double[] values)
         {
             sheet.Cells[9, 1] = "ANOVA Table";
             sheet.Cells[10, 1] = "Explained";
             sheet.Cells[11, 1] = "Unexplained";
-            sheet.Cells[10, 3] = "Squares";
-            sheet.Cells[11, 3] = "Squares";
-            sheet.Cells[10, 2] = "Freedom";
-            sheet.Cells[11, 2] = "Freedom";
-            sheet.Cells[10, 4] = "Squares";
-            sheet.Cells[11, 4] = "Squares";
-			sheet.Cells[10, 5] = f.ToString();
+            sheet.Cells[10, 3] = values[3]; //SSR
+			sheet.Cells[11, 3] = values[4]; //SSE
+            sheet.Cells[10, 2] = values[2].ToString();	//k, explained degrees of freedom
+            sheet.Cells[11, 2] = (values[1]-values[2]-1).ToString();	//n-k-1, unexplained degrees of freedom
+            sheet.Cells[10, 4] = values[5]; //MSR
+            sheet.Cells[11, 4] = values[6]; //MSE
+			sheet.Cells[10, 5] = values[0].ToString();	//f-value
 			sheet.Cells[10, 6] = "p-Value";
         }
 
@@ -244,10 +246,11 @@ namespace NoruST.Presenters
 
 		//calculates f-ratio
 		//k = number of explanatory variables
-		// n = sample size
-		public double calculateF(double[] yData, double[] yHoed, int k, _Worksheet sheet)
+		//n = sample size
+		//results = [f-value, n, k, SSR, SSE, MSR, MSE]
+		public double[] calculateAnova(double[] yData, double[] yHoed, int k)
 		{
-			double f = 0;
+			double[] results = new double[7];
 			int n = yData.Length;
 
 			var yDataM = new DenseVector(yData);
@@ -259,14 +262,25 @@ namespace NoruST.Presenters
 			var SSR_sub = yHoedM.Subtract(yGem);	//yHat-yGem
 			var SSR_exp = SSR_sub.PointwiseMultiply(SSR_sub);
 			double MSR = SSR_exp.Sum()/k;
+			System.Diagnostics.Debug.WriteLine("sum of squares explained = {0}", SSR_exp.Sum());
+			System.Diagnostics.Debug.WriteLine("MSR = {0}", MSR);
 
 			var SSE_sub = yDataM.Subtract(yHoedM);	//yi-yHat
 			var SSE_exp = SSE_sub.PointwiseMultiply(SSE_sub);
 			double MSE = SSE_exp.Sum() / ((n - k - 1));
+			System.Diagnostics.Debug.WriteLine("sum of squares explained = {0}", SSE_exp.Sum());
+			System.Diagnostics.Debug.WriteLine("MSR = {0}", MSE);
 
-			f = Math.Round(MSR / MSE, 2);	//Problem: Excel shows value multiplied a factor of more than 1000
-											//Solution: this doesn't happen when value is rounded
-			return f;
+			results[0] = Math.Round(MSR / MSE, 2);  //Problem: Excel shows value multiplied by a factor of more than 1000. 
+													//Solution: this doesn't happen when value is rounded
+			results[1] = n;
+			results[2] = k;
+			results[3] = Math.Round(SSR_exp.Sum(), 2); //sum of squares explained
+			results[4] = Math.Round(SSE_exp.Sum(), 2); //sum of squares unexplained
+			results[5] = Math.Round(MSR, 2); //mean of squares explained
+			results[6] = Math.Round(MSE, 2); //mean of squares unexplained
+
+			return results;
 		}
 	}
 }
