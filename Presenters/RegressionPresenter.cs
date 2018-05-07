@@ -41,7 +41,7 @@ namespace NoruST.Presenters
 			return dataSetPresenter.getModel().getDataSets();
 		}
 
-		//public void createRegression(List<Variable> variables)
+		
 		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet)
 		{
 			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
@@ -117,6 +117,8 @@ namespace NoruST.Presenters
             b = calculateCoefB(yData, xData, b);
             double a = b[0];
 
+			
+
 			sheet.Cells[16, 2] = a;
 			row = 17;
 			foreach (Variable var in variablesI)
@@ -134,7 +136,7 @@ namespace NoruST.Presenters
 
             double[] yhat = yh.ToArray();
 
-            double R2 = sheet.Application.WorksheetFunction.Correl(yData, yhat);
+			double R2 = sheet.Application.WorksheetFunction.Correl(yData, yhat);
             double R = Math.Pow(R2,2);
             double Radj = 1.0 - ((1-R)*(length-1)/(length-variablesI.Count-1));
             double err = 0;
@@ -146,13 +148,17 @@ namespace NoruST.Presenters
             }
             err = Math.Sqrt(err / (length - 4));
 
-            FillR(sheet, R2, R, Radj, err);
-            FillAnova(sheet);
+			
+			double f = calculateF(yData, yhat, variablesI.Count(), sheet);
+			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
 
+			FillR(sheet, R2, R, Radj, err);
+            FillAnova(sheet, f);
 
-        }
+			
+		}
 
-        public void FillAnova(_Worksheet sheet)
+        public void FillAnova(_Worksheet sheet, double f)
         {
             sheet.Cells[9, 1] = "ANOVA Table";
             sheet.Cells[10, 1] = "Explained";
@@ -163,8 +169,8 @@ namespace NoruST.Presenters
             sheet.Cells[11, 2] = "Freedom";
             sheet.Cells[10, 4] = "Squares";
             sheet.Cells[11, 4] = "Squares";
-            sheet.Cells[10, 5] = "F-Ratio";
-            sheet.Cells[10, 6] = "p-Value";
+			sheet.Cells[10, 5] = f.ToString();
+			sheet.Cells[10, 6] = "p-Value";
         }
 
         public void FillR(_Worksheet sheet, double R2, double R, double Radj, double err)
@@ -235,5 +241,32 @@ namespace NoruST.Presenters
 
             return b;
         }
+
+		//calculates f-ratio
+		//k = number of explanatory variables
+		// n = sample size
+		public double calculateF(double[] yData, double[] yHoed, int k, _Worksheet sheet)
+		{
+			double f = 0;
+			int n = yData.Length;
+
+			var yDataM = new DenseVector(yData);
+			double[] yData_temp = yDataM.ToArray();
+			var yHoedM = new DenseVector(yHoed);
+			double[] yHoed_temp = yHoedM.ToArray();
+			double yGem = yData.Average();
+			
+			var SSR_sub = yHoedM.Subtract(yGem);	//yHat-yGem
+			var SSR_exp = SSR_sub.PointwiseMultiply(SSR_sub);
+			double MSR = SSR_exp.Sum()/k;
+
+			var SSE_sub = yDataM.Subtract(yHoedM);	//yi-yHat
+			var SSE_exp = SSE_sub.PointwiseMultiply(SSE_sub);
+			double MSE = SSE_exp.Sum() / ((n - k - 1));
+
+			f = Math.Round(MSR / MSE, 2);	//Problem: Excel shows value multiplied a factor of more than 1000
+											//Solution: this doesn't happen when value is rounded
+			return f;
+		}
 	}
 }
