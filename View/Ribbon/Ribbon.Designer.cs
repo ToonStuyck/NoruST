@@ -311,6 +311,7 @@
             this.btnAnova.Name = "btnAnova";
             this.btnAnova.ScreenTip = "Performs a one-way ANOVA on variables ";
             this.btnAnova.ShowImage = true;
+            this.btnAnova.Visible = false;
             // 
             // button3
             // 
