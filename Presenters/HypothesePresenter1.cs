@@ -73,7 +73,43 @@ namespace NoruST.Presenters
                 worksheet.Cells[3, 1] = "Sample mean";
                 worksheet.Cells[3, 2] = "=AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") - AVERAGE(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 worksheet.Cells[4, 1] = "Sample Std. Dev";
-                worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") + STDEV(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
+
+                int length = Convert.ToInt32((worksheet.Cells[2, 2] as Range).Value);
+                double[] vals1 = new double[length];
+                string ran1 = variables[0].Range.ToString();
+                Array arr1 = dataSet.getWorksheet().Range[ran1].Value;
+
+                double[] vals2 = new double[length];
+                string ran2 = variables[1].Range.ToString();
+                Array arr2 = dataSet.getWorksheet().Range[ran2].Value;
+
+                int count = 0;
+                foreach (var item in arr1)
+                {
+                    double temp = Convert.ToDouble(item);
+                    vals1[count] = temp;
+                    count = count + 1;
+                }
+                count = 0;
+                foreach (var item in arr2)
+                {
+                    double temp = Convert.ToDouble(item);
+                    vals2[count] = temp;
+                    count = count + 1;
+                }
+
+                count = 0;
+                while (count < vals2.Length)
+                {
+                    vals2[count] = vals2[count] - vals1[count];
+                    count++;
+                }
+
+                double std = worksheet.Application.WorksheetFunction.StDev(vals2);
+                worksheet.Cells[4, 2] = std;
+
+
+                //worksheet.Cells[4, 2] = "=STDEV(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ") + STDEV(" + dataSet.getWorksheet().Name + "!" + variables[1].Range + ")";
                 if (model.equal)
                 {
                     PrintCategories(worksheet, 5, "equal", dataSet);
