@@ -81,8 +81,16 @@ namespace NoruST.Domain
             return rangeLayout == COLUMNS ? variables[0].getRange().Rows.Count : variables[0].getRange().Columns.Count;
         }
 
-        public void addLags(Variable variable, int numberOfLags)
+        public void addLags(Variable variable, int numberOfLags, DataSet dataSet)
         {
+            for (int i = 1; i <= numberOfLags; i++)
+            {
+                for (int j = 1; j <= numberOfLags; j++)
+                {
+                    worksheet.Cells[i + 1, range.Columns.Count + j] = 0;
+                }
+            }
+
             for (int i = 1; i <= numberOfLags; i++)
             {
                 Range source = rangeLayout == COLUMNS
@@ -110,13 +118,18 @@ namespace NoruST.Domain
                         .shiftRangeByColumns(-1)
                         .shiftRangeByRows(variables.Count - variables.IndexOf(variable) + i - 1);
                 destination.Value = source.Value + " Lag " + i.ToString();
+                
             }
             Globals.ExcelAddIn.Application.CutCopyMode = XlCutCopyMode.xlCopy;
 
-            range = rangeLayout == COLUMNS
-                ? range.Resize[range.Rows.Count, range.Columns.Count + numberOfLags]
-                : range.Resize[range.Rows.Count + numberOfLags, range.Columns.Count];
-            recalculateVariables();
+            DataSet nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(range.Columns.Count+numberOfLags));
+            dataSet.setRange(nwRange.getRange());
+            dataSet.setVariables(nwRange.getVariables());
+
+            //range = rangeLayout == COLUMNS
+            //    ? range.Resize[range.Rows.Count, range.Columns.Count + numberOfLags]
+            //    : range.Resize[range.Rows.Count + numberOfLags, range.Columns.Count];
+            //recalculateVariables();
         }
 
         public static int ColumnLetterToColumnIndex(string columnLetter)
@@ -266,7 +279,11 @@ namespace NoruST.Domain
 
             foreach (var item in distCat)
             {
-                if (item.GetType().ToString() == "System.String")
+                if (item == null)
+                {
+                    count = 2;
+                }
+                else if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
                 }
@@ -358,7 +375,11 @@ namespace NoruST.Domain
 
             foreach (var item in distCat)
             {
-                if (item.GetType().ToString() == "System.String")
+                if (item == null)
+                {
+                    count = 2;
+                }
+                else if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
                 }
@@ -370,7 +391,11 @@ namespace NoruST.Domain
             }
             foreach (var item in dist)
             {
-                if (item.GetType().ToString() == "System.String")
+                if (item == null)
+                {
+                    count = 2;
+                }
+                else if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
                 }

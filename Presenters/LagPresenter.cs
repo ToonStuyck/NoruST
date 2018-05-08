@@ -38,9 +38,9 @@ namespace NoruST.Presenters
             return dataSetPresenter.getModel().getDataSets();
         }
 
-        public void createLags()
+        public void createLags(DataSet dataSet)
         {
-            model.dataSet.addLags(model.variable, model.numberOfLags);
+            model.dataSet.addLags(model.variable, model.numberOfLags, dataSet);
         }
     }
 }
