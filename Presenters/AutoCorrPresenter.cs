@@ -79,18 +79,21 @@ namespace NoruST.Presenters
             }
 
             
-            double var = sheet.Application.WorksheetFunction.Var_S(vals);
+            double var = sheet.Application.WorksheetFunction.Var(vals);
             while (i <= 12)
             {
-                double[] temp1 = new double[length-i];
-                double[] temp2 = new double[length-i];
-                Array.Copy(vals, i, temp1, 0, length - i);
-                double[] tmp = vals;
-                Array.Reverse(tmp);
-                Array.Copy(tmp, i, temp2, 0, length - i);
-                Array.Reverse(temp2);
+                double[] temp1 = new double[length - i];
+                double[] temp2 = new double[length - i];
+                List<double> valsL = new List<double>(vals);
+                valsL.RemoveRange(0,i);
+                valsL.CopyTo(temp1);
+                List<double> valsL2 = new List<double>(vals);
+                //valsL2.Reverse();
+                valsL2.RemoveRange(length-i, i);
+                //valsL2.Reverse();
+                valsL2.CopyTo(temp2);
 
-                double covar = sheet.Application.WorksheetFunction.Covariance_P(temp1, temp2);
+                double covar = sheet.Application.WorksheetFunction.Covar(temp1, temp2);
 
                 sheet.Cells[rows, 1] = "Lag #" + i;
                 sheet.Cells[rows++, 2] = covar/var;

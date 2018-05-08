@@ -335,13 +335,13 @@
             // 
             // uiDataGridViewColumn_VariableCheckX
             // 
-            this.uiDataGridViewColumn_VariableCheckX.HeaderText = "X";
+            this.uiDataGridViewColumn_VariableCheckX.HeaderText = "Size";
             this.uiDataGridViewColumn_VariableCheckX.Name = "uiDataGridViewColumn_VariableCheckX";
             this.uiDataGridViewColumn_VariableCheckX.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // uiDataGridViewColumn_VariableCheckY
             // 
-            this.uiDataGridViewColumn_VariableCheckY.HeaderText = "Y";
+            this.uiDataGridViewColumn_VariableCheckY.HeaderText = "Value";
             this.uiDataGridViewColumn_VariableCheckY.Name = "uiDataGridViewColumn_VariableCheckY";
             this.uiDataGridViewColumn_VariableCheckY.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.uiDataGridViewColumn_VariableCheckY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
