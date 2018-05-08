@@ -83,6 +83,29 @@ namespace NoruST.Presenters
             sheet.Cells[row, column + 5] = "Min";
             sheet.Cells[row, column + 6] = "R";
 
+            sheet.Cells[100, 100] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variables[0].Range + ")";
+            int length = Convert.ToInt32((sheet.Cells[100, 100] as Range).Value);
+            sheet.Cells[100, 100] = "";
+
+            double temp=0;
+            List<double> allVals = new List<double>();
+            double[] all = new double[length * variables.Count];
+            foreach ( Variable var in variables)
+            {
+                string ran = var.Range.ToString();
+                Array arr = dataSet.getWorksheet().Range[ran].Value;
+                double[] vals = new double[length];
+                int count = 0;
+                foreach (var item in arr)
+                {
+                    temp = Convert.ToDouble(item);
+                    vals[count] = temp;
+                    count++;
+                }
+                allVals.AddRange(vals);
+            }
+            all = allVals.ToArray();
+
             double totMean = 0;
             double totStd = 0;
             for (index = 0; index < variables.Count; index++)
@@ -104,8 +127,10 @@ namespace NoruST.Presenters
                 cellValue = (double)(sheet.Cells[row, column + 6] as Range).Value;
                 Rvalues[index] = cellValue;
             }
-            totMean = totMean / variables.Count;
-            totStd = totStd / variables.Count;
+            totMean = all.Average();
+            totStd = sheet.Application.WorksheetFunction.StDev(all);
+            //totMean = totMean / variables.Count;
+            //totStd = totStd / variables.Count;
 
             if (dataSet.getVariableNamesInFirstRowOrColumn())
             {
