@@ -60,7 +60,7 @@ namespace NoruST.Forms
                     variables.Add((Variable)row.DataBoundItem);
                 }
             }
-            presenter.createHistograms(variables);
+            presenter.createHistograms(variables, selectedDataSet());
             Close();
         }
 
