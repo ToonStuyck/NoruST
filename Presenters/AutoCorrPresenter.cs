@@ -80,8 +80,10 @@ namespace NoruST.Presenters
 
             
             double var = sheet.Application.WorksheetFunction.Var(vals);
+            double average = vals.Average();
             while (i <= 12)
             {
+                double solution = 0;
                 double[] temp1 = new double[length - i];
                 double[] temp2 = new double[length - i];
                 List<double> valsL = new List<double>(vals);
@@ -93,10 +95,18 @@ namespace NoruST.Presenters
                 //valsL2.Reverse();
                 valsL2.CopyTo(temp2);
 
-                double covar = sheet.Application.WorksheetFunction.Covar(temp1, temp2);
+                int j = 0;
+                while (j < valsL2.Count)
+                {
+                    solution = solution + ((temp2[j] - average) * (temp1[j] - average));
+                    j++;
+                }
+
+                solution = solution / var;
+                //double covar = sheet.Application.WorksheetFunction.Covar(temp1, temp2);
 
                 sheet.Cells[rows, 1] = "Lag #" + i;
-                sheet.Cells[rows++, 2] = covar/var;
+                sheet.Cells[rows++, 2] = solution/(length-1);
                 i = i + 1;
             }
         }
