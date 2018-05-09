@@ -57,7 +57,7 @@ namespace NoruST.Forms
 
         private void ui_Button_Cancel_Click(object sender, EventArgs e)
         {
-			Debug.WriteLine("PRINTENNNNNNNNNNNNNNNN");
+			//Debug.WriteLine("PRINTENNNNNNNNNNNNNNNN");
 			Close();
         }
 
@@ -65,7 +65,6 @@ namespace NoruST.Forms
         {
 			List<Variable> variablesD = new List<Variable>();
 			List<Variable> variablesI = new List<Variable>();
-			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
 			List<Variable> variables = new List<Variable>();
 
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)

@@ -105,22 +105,16 @@ namespace NoruST.Presenters
 			//sheet.get_Range("C24", AddressConverter.CellAddress(23 + c, 8, false, false)).Cells.HorizontalAlignment = XlHAlign.xlHAlignRight;
 			Globals.ExcelAddIn.Application.ActiveWindow.DisplayGridlines = false;
 
+
+			//
+			//calculate values of regression
+			//
 			double[] b = new double[variablesI.Count];
             double[] yData = calcYdata(variablesD, dataSet, length);
             double[,] xData = calcXdata(length, dataSet, variablesI);
 
             b = calculateCoefB(yData, xData, b);
             double a = b[0];
-
-			
-
-			sheet.Cells[16, 2] = a;
-			row = 17;
-			foreach (Variable var in variablesI)
-			{
-				sheet.Cells[row, 2] = b[row-16];
-				row++;
-			}
 
             var X = DenseMatrix.OfArray(xData);
             var B = new DenseVector(b);
@@ -144,11 +138,56 @@ namespace NoruST.Presenters
             err = Math.Sqrt(err / (length - 4));
 
 			
-			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count());
+			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count(), sheet);
 			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
+
+			
+			//Calculate regressionTable
+			double MSE = anovaResults[6];
+			var Xt = X.Transpose();
+			var tempM = (Xt.Multiply(X)).Inverse();
+			var variancesM = tempM.Multiply(MSE);
+			double[] variances = variancesM.Diagonal().ToArray();
+			double[] std = new double[variances.Length];
+
+			int index = 0;
+			foreach(double elem in variances)
+			{
+				std[index] = Math.Sqrt(elem);
+				System.Diagnostics.Debug.WriteLine(std[index]);
+				index++;
+			}
+
+			double[] tValue = new double[b.Length];
+			double[] pValue = new double[b.Length];
+			double[] lowerInt = new double[b.Length];
+			double[] higherInt = new double[b.Length];
+			for(index = 0; index < b.Length; index++)
+			{
+				tValue[index] = b[index] / std[index];
+				pValue[index] = sheet.Application.WorksheetFunction.TDist(Math.Abs(tValue[index]), length - variablesI.Count - 1, 2);
+				lowerInt[index] = b[index] - sheet.Application.WorksheetFunction.TInv(1-0.95, length - variablesI.Count - 1)*std[index];
+				higherInt[index] = b[index] + sheet.Application.WorksheetFunction.TInv(1-0.95, length - variablesI.Count - 1)*std[index];
+				//System.Diagnostics.Debug.WriteLine("{0}, p={1}, lower = {2}, n={3}, inv={4}, std={5}, inv2={6}",real_p, pValue[index], lowerInt[index], length - 1, sheet.Application.WorksheetFunction.TInv(1-0.975, length - 1), std[index], sheet.Application.WorksheetFunction.TInv(1 - 0.95, length - 1));
+			}
+
+
+			
+
+			//
+			//print results to excel sheet
+			//
+			sheet.Cells[16, 2] = a;
+			row = 17;
+			foreach (Variable var in variablesI)
+			{
+				sheet.Cells[row, 2] = b[row - 16];
+				row++;
+			}
 
 			FillR(sheet, R2, R, Radj, err);
             FillAnova(sheet, anovaResults);
+			FillRegressionTable(sheet, std, tValue, pValue, lowerInt, higherInt);
 
 
 			((Range)sheet.Cells[1, 1]).EntireColumn.AutoFit();
@@ -172,7 +211,7 @@ namespace NoruST.Presenters
             sheet.Cells[10, 4] = values[5]; //MSR
             sheet.Cells[11, 4] = values[6]; //MSE
 			sheet.Cells[10, 5] = values[0].ToString();	//f-value
-			sheet.Cells[10, 6] = "p-Value";
+			sheet.Cells[10, 6] = (values[7]< 0.0001) ? "<0.0001" : (Math.Round(values[7], 4)).ToString();
         }
 
         public void FillR(_Worksheet sheet, double R2, double R, double Radj, double err)
@@ -183,7 +222,22 @@ namespace NoruST.Presenters
             sheet.Cells[5, 2] = err;
         }
 
-        public double[] calcYdata(List<Variable> variablesD, DataSet dataSet, int length)
+		public void FillRegressionTable(_Worksheet sheet, double[] std, double[] tValue, double[] pValue, double[] lowerInt, double[] higherInt)
+		{
+			int row = 16;
+			foreach(double item in std)
+			{
+				sheet.Cells[row, 3] = std[row - 16];
+				sheet.Cells[row, 4] = tValue[row - 16];
+				sheet.Cells[row, 5] = (pValue[row - 16] < 0.0001) ? "<0.0001" : Math.Round(pValue[row - 16],4).ToString();
+				sheet.Cells[row, 6] = lowerInt[row - 16];
+				sheet.Cells[row, 7] = higherInt[row - 16];
+				row++;
+			}
+		}
+
+
+		public double[] calcYdata(List<Variable> variablesD, DataSet dataSet, int length)
         {
             //bereken (Yi-Ygem)
             int count = 0;
@@ -247,10 +301,10 @@ namespace NoruST.Presenters
 		//calculates f-ratio
 		//k = number of explanatory variables
 		//n = sample size
-		//results = [f-value, n, k, SSR, SSE, MSR, MSE]
-		public double[] calculateAnova(double[] yData, double[] yHoed, int k)
+		//results = [f-value, n, k, SSR, SSE, MSR, MSE, p-value]
+		public double[] calculateAnova(double[] yData, double[] yHoed, int k, _Worksheet sheet)
 		{
-			double[] results = new double[7];
+			double[] results = new double[8];
 			int n = yData.Length;
 
 			var yDataM = new DenseVector(yData);
@@ -271,6 +325,10 @@ namespace NoruST.Presenters
 			System.Diagnostics.Debug.WriteLine("sum of squares explained = {0}", SSE_exp.Sum());
 			System.Diagnostics.Debug.WriteLine("MSR = {0}", MSE);
 
+			double pVal = sheet.Application.WorksheetFunction.F_Dist(results[0], k, n - k, true);
+			
+			
+
 			results[0] = Math.Round(MSR / MSE, 2);  //Problem: Excel shows value multiplied by a factor of more than 1000. 
 													//Solution: this doesn't happen when value is rounded
 			results[1] = n;
@@ -279,6 +337,7 @@ namespace NoruST.Presenters
 			results[4] = Math.Round(SSE_exp.Sum(), 2); //sum of squares unexplained
 			results[5] = Math.Round(MSR, 2); //mean of squares explained
 			results[6] = Math.Round(MSE, 2); //mean of squares unexplained
+			results[7] = pVal;
 
 			return results;
 		}
