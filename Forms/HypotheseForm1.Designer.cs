@@ -36,13 +36,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.uiButton_Cancel = new System.Windows.Forms.Button();
             this.lblDataSet = new System.Windows.Forms.Label();
-            this.btnOk = new System.Windows.Forms.Button();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.uiButton_Cancel = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -69,6 +70,7 @@
             this.tlpForm.Controls.Add(this.uiButton_Cancel, 2, 7);
             this.tlpForm.Controls.Add(this.label3, 0, 6);
             this.tlpForm.Controls.Add(this.numericUpDown1, 1, 6);
+            this.tlpForm.Controls.Add(this.label4, 2, 6);
             this.tlpForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpForm.Location = new System.Drawing.Point(0, 0);
             this.tlpForm.Name = "tlpForm";
@@ -162,17 +164,6 @@
             this.label2.TabIndex = 34;
             this.label2.Text = "Alternative Hypothesis Type";
             // 
-            // uiButton_Cancel
-            // 
-            this.uiButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uiButton_Cancel.Location = new System.Drawing.Point(242, 283);
-            this.uiButton_Cancel.Name = "uiButton_Cancel";
-            this.uiButton_Cancel.Size = new System.Drawing.Size(89, 25);
-            this.uiButton_Cancel.TabIndex = 32;
-            this.uiButton_Cancel.Text = "Annuleren";
-            this.uiButton_Cancel.UseVisualStyleBackColor = true;
-            this.uiButton_Cancel.Click += new System.EventHandler(this.uiButton_Cancel_Click);
-            // 
             // lblDataSet
             // 
             this.lblDataSet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -186,17 +177,6 @@
             this.lblDataSet.TabIndex = 22;
             this.lblDataSet.Text = "Data set";
             this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // btnOk
-            // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(150, 283);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(86, 25);
-            this.btnOk.TabIndex = 31;
-            this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // checkBox1
             // 
@@ -219,6 +199,28 @@
             this.checkBox2.TabIndex = 38;
             this.checkBox2.Text = "Not Equal To";
             this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Location = new System.Drawing.Point(150, 283);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(86, 25);
+            this.btnOk.TabIndex = 31;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // uiButton_Cancel
+            // 
+            this.uiButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.uiButton_Cancel.Location = new System.Drawing.Point(242, 283);
+            this.uiButton_Cancel.Name = "uiButton_Cancel";
+            this.uiButton_Cancel.Size = new System.Drawing.Size(89, 25);
+            this.uiButton_Cancel.TabIndex = 32;
+            this.uiButton_Cancel.Text = "Annuleren";
+            this.uiButton_Cancel.UseVisualStyleBackColor = true;
+            this.uiButton_Cancel.Click += new System.EventHandler(this.uiButton_Cancel_Click);
             // 
             // label3
             // 
@@ -243,6 +245,17 @@
             0,
             0,
             0});
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(242, 254);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 17);
+            this.label4.TabIndex = 41;
+            this.label4.Text = "%";
             // 
             // HypotheseForm1
             // 
@@ -281,5 +294,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label4;
     }
 }

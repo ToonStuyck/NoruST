@@ -157,7 +157,7 @@ namespace NoruST.Presenters
                 _sheet.Cells[row++, 2] = "> " +model.Null;
             }
             _sheet.Cells[row, 1] = "Alpha";
-            _sheet.Cells[row++, 2] = model.alpha;
+            _sheet.Cells[row++, 2] = (double)model.alpha/100.0;
 
             _sheet.Cells[row, 1] = "t-Test Statistic";
             _sheet.Cells[row++, 2] = t;

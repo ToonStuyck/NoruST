@@ -415,6 +415,7 @@
             this.btnLogisticRegression.Name = "btnLogisticRegression";
             this.btnLogisticRegression.ScreenTip = "Runs a logistic regression on a set of variables";
             this.btnLogisticRegression.ShowImage = true;
+            this.btnLogisticRegression.Visible = false;
             // 
             // btnDiscriminantAnalysis
             // 

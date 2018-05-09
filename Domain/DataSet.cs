@@ -83,13 +83,13 @@ namespace NoruST.Domain
 
         public void addLags(Variable variable, int numberOfLags, DataSet dataSet)
         {
-            for (int i = 1; i <= numberOfLags; i++)
-            {
-                for (int j = 1; j <= numberOfLags; j++)
-                {
-                    worksheet.Cells[i + 1, range.Columns.Count + j] = 0;
-                }
-            }
+            //for (int i = 1; i <= numberOfLags; i++)
+            //{
+            //    for (int j = 1; j <= numberOfLags; j++)
+            //    {
+            //        worksheet.Cells[i + 1, range.Columns.Count + j] = 0;
+            //    }
+            //}
 
             for (int i = 1; i <= numberOfLags; i++)
             {
@@ -382,12 +382,14 @@ namespace NoruST.Domain
                 else if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
+                    break;
                 }
                 else
                 {
                     count = 2;
+                    break;
                 }
-                break;
+                
             }
             foreach (var item in dist)
             {
@@ -398,12 +400,13 @@ namespace NoruST.Domain
                 else if (item.GetType().ToString() == "System.String")
                 {
                     count = 1;
+                    break;
                 }
                 else
                 {
                     count = 2;
+                    break;
                 }
-                break;
             }
             if (count == 1)
             {
@@ -413,16 +416,37 @@ namespace NoruST.Domain
             double[] var1 = distCat.OfType<double>().ToArray();
             double[] var2 = dist.OfType<double>().ToArray();
 
+            System.Diagnostics.Debug.WriteLine(var1.Length);
+            System.Diagnostics.Debug.WriteLine(var2.Length);
+
             int row = 1;
             int column = columnIndex;
 
             worksheet.Cells[row, column] = dataSet.getVariables()[columnIndexCat].name + " - " + dataSet.getVariables()[columnIndexVar].name;
             row = 0;
-            while (row < var1.Length)
+
+            int len = var1.Length;
+            if (var2.Length < var1.Length)
             {
-                column = columnIndex;
-                worksheet.Cells[row + 2, column] = var1[row] * var2[row];
-                row = row + 1;
+                len = var2.Length;
+            }
+
+            while (row < len)
+            {
+                if (var1.Length < var2.Length)
+                {
+                    column = columnIndex;
+                    int temp = var2.Length - var1.Length;
+                    worksheet.Cells[row + 2+temp, column] = var1[row] * var2[row+temp];
+                    row = row + 1;
+                }
+                else
+                {
+                    column = columnIndex;
+                    int temp = var1.Length - var2.Length;
+                    worksheet.Cells[row + 2+temp, column] = var1[row+temp] * var2[row];
+                    row = row + 1;
+                }
             }
             DataSet nwRange = DataSetFactory.modify(dataSet, ColumnIndexToColumnLetter(column));
             dataSet.setRange(nwRange.getRange());

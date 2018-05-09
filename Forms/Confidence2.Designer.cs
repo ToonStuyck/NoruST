@@ -38,6 +38,7 @@
             this.lblDataSet = new System.Windows.Forms.Label();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -58,8 +59,9 @@
             this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
             this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
             this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
-            this.tlpForm.Controls.Add(this.numericUpDown1, 1, 2);
             this.tlpForm.Controls.Add(this.checkBox1, 0, 2);
+            this.tlpForm.Controls.Add(this.numericUpDown1, 1, 2);
+            this.tlpForm.Controls.Add(this.label1, 2, 2);
             this.tlpForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpForm.Location = new System.Drawing.Point(0, 0);
             this.tlpForm.Name = "tlpForm";
@@ -107,10 +109,10 @@
             this.uiDataGridViewColumn_VariableCheck});
             this.tlpForm.SetColumnSpan(this.uiDataGridView_Variables, 3);
             this.uiDataGridView_Variables.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uiDataGridView_Variables.Location = new System.Drawing.Point(93, 30);
+            this.uiDataGridView_Variables.Location = new System.Drawing.Point(122, 30);
             this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
             this.uiDataGridView_Variables.RowHeadersVisible = false;
-            this.uiDataGridView_Variables.Size = new System.Drawing.Size(238, 132);
+            this.uiDataGridView_Variables.Size = new System.Drawing.Size(209, 132);
             this.uiDataGridView_Variables.TabIndex = 28;
             // 
             // uiDataGridViewColumn_VariableCheck
@@ -127,7 +129,7 @@
             this.lblVariable.Location = new System.Drawing.Point(5, 32);
             this.lblVariable.Margin = new System.Windows.Forms.Padding(5);
             this.lblVariable.Name = "lblVariable";
-            this.lblVariable.Size = new System.Drawing.Size(80, 13);
+            this.lblVariable.Size = new System.Drawing.Size(109, 13);
             this.lblVariable.TabIndex = 27;
             this.lblVariable.Text = "Variables";
             this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -137,10 +139,10 @@
             this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
             this.uiComboBox_DataSets.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiComboBox_DataSets.FormattingEnabled = true;
-            this.uiComboBox_DataSets.Location = new System.Drawing.Point(95, 3);
+            this.uiComboBox_DataSets.Location = new System.Drawing.Point(124, 3);
             this.uiComboBox_DataSets.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
-            this.uiComboBox_DataSets.Size = new System.Drawing.Size(236, 21);
+            this.uiComboBox_DataSets.Size = new System.Drawing.Size(207, 21);
             this.uiComboBox_DataSets.TabIndex = 26;
             // 
             // lblDataSet
@@ -152,7 +154,7 @@
             this.lblDataSet.Location = new System.Drawing.Point(5, 5);
             this.lblDataSet.Margin = new System.Windows.Forms.Padding(5);
             this.lblDataSet.Name = "lblDataSet";
-            this.lblDataSet.Size = new System.Drawing.Size(80, 17);
+            this.lblDataSet.Size = new System.Drawing.Size(109, 17);
             this.lblDataSet.TabIndex = 22;
             this.lblDataSet.Text = "Data set";
             this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -161,9 +163,9 @@
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown1.Location = new System.Drawing.Point(93, 168);
+            this.numericUpDown1.Location = new System.Drawing.Point(122, 168);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(47, 20);
             this.numericUpDown1.TabIndex = 30;
             this.numericUpDown1.Value = new decimal(new int[] {
             95,
@@ -182,11 +184,22 @@
             this.checkBox1.Location = new System.Drawing.Point(5, 170);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(5);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.Size = new System.Drawing.Size(109, 17);
             this.checkBox1.TabIndex = 33;
-            this.checkBox1.Text = "Confidence";
+            this.checkBox1.Text = "Confidence Level";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(175, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(20, 17);
+            this.label1.TabIndex = 34;
+            this.label1.Text = "%";
             // 
             // Confidence2
             // 
@@ -220,5 +233,6 @@
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button uiButton_Cancel;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label1;
     }
 }
