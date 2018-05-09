@@ -32,11 +32,11 @@
             this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
             this.uiDataGridViewColumn_VariableCheckD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.uiDataGridViewColumn_VariableCheckI = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnOk = new System.Windows.Forms.Button();
             this.lblDataSet = new System.Windows.Forms.Label();
             this.lblVariable = new System.Windows.Forms.Label();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             this.SuspendLayout();
@@ -97,16 +97,6 @@
             this.uiDataGridViewColumn_VariableCheckI.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.uiDataGridViewColumn_VariableCheckI.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // btnOk
-            // 
-            this.btnOk.Location = new System.Drawing.Point(165, 232);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(95, 24);
-            this.btnOk.TabIndex = 17;
-            this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
-            // 
             // lblDataSet
             // 
             this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -129,6 +119,25 @@
             this.lblVariable.Text = "Variable";
             this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiComboBox_DataSets
+            // 
+            this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
+            this.uiComboBox_DataSets.FormattingEnabled = true;
+            this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
+            this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
+            this.uiComboBox_DataSets.Size = new System.Drawing.Size(321, 21);
+            this.uiComboBox_DataSets.TabIndex = 22;
+            // 
+            // btnOk
+            // 
+            this.btnOk.Location = new System.Drawing.Point(165, 232);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(95, 24);
+            this.btnOk.TabIndex = 17;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
+            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(267, 232);
@@ -139,15 +148,6 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.ui_Button_Cancel_Click);
             // 
-            // uiComboBox_DataSets
-            // 
-            this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
-            this.uiComboBox_DataSets.FormattingEnabled = true;
-            this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
-            this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
-            this.uiComboBox_DataSets.Size = new System.Drawing.Size(321, 21);
-            this.uiComboBox_DataSets.TabIndex = 22;
-            // 
             // DiscriminantAnalyseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,7 +157,7 @@
             this.Controls.Add(this.tlpForm);
             this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "DiscriminantAnalyseForm";
-            this.Text = "NoruST - Regression";
+            this.Text = "NoruST - Discriminant Analysis";
             this.tlpForm.ResumeLayout(false);
             this.tlpForm.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).EndInit();
