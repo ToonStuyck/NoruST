@@ -32,8 +32,6 @@ namespace NoruST.Forms
         {
             this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.uiButton_Cancel = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
             this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
             this.uiDataGridViewColumn_VariableCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.lblVariable = new System.Windows.Forms.Label();
@@ -42,6 +40,12 @@ namespace NoruST.Forms
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.uiButton_Cancel = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.tlpForm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -57,26 +61,31 @@ namespace NoruST.Forms
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tlpForm.Controls.Add(this.label4, 3, 3);
             this.tlpForm.Controls.Add(this.checkBox2, 0, 3);
-            this.tlpForm.Controls.Add(this.uiButton_Cancel, 3, 3);
-            this.tlpForm.Controls.Add(this.btnOk, 2, 3);
             this.tlpForm.Controls.Add(this.uiDataGridView_Variables, 1, 1);
             this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
             this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
             this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
-            this.tlpForm.Controls.Add(this.numericUpDown1, 1, 2);
             this.tlpForm.Controls.Add(this.checkBox1, 0, 2);
-            this.tlpForm.Controls.Add(this.numericUpDown2, 1, 3);
+            this.tlpForm.Controls.Add(this.btnOk, 2, 4);
+            this.tlpForm.Controls.Add(this.uiButton_Cancel, 3, 4);
+            this.tlpForm.Controls.Add(this.numericUpDown2, 2, 3);
+            this.tlpForm.Controls.Add(this.label1, 1, 2);
+            this.tlpForm.Controls.Add(this.label2, 1, 3);
+            this.tlpForm.Controls.Add(this.numericUpDown1, 2, 2);
+            this.tlpForm.Controls.Add(this.label3, 3, 2);
             this.tlpForm.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tlpForm.Location = new System.Drawing.Point(0, 0);
             this.tlpForm.Name = "tlpForm";
-            this.tlpForm.RowCount = 4;
+            this.tlpForm.RowCount = 5;
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpForm.Size = new System.Drawing.Size(334, 226);
+            this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpForm.Size = new System.Drawing.Size(334, 261);
             this.tlpForm.TabIndex = 21;
             // 
             // checkBox2
@@ -90,33 +99,10 @@ namespace NoruST.Forms
             this.checkBox2.Location = new System.Drawing.Point(5, 197);
             this.checkBox2.Margin = new System.Windows.Forms.Padding(5);
             this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(63, 24);
+            this.checkBox2.Size = new System.Drawing.Size(63, 17);
             this.checkBox2.TabIndex = 34;
             this.checkBox2.Text = "Std dev";
             this.checkBox2.UseVisualStyleBackColor = true;
-            // 
-            // uiButton_Cancel
-            // 
-            this.uiButton_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.uiButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.uiButton_Cancel.Location = new System.Drawing.Point(256, 198);
-            this.uiButton_Cancel.Name = "uiButton_Cancel";
-            this.uiButton_Cancel.Size = new System.Drawing.Size(75, 25);
-            this.uiButton_Cancel.TabIndex = 32;
-            this.uiButton_Cancel.Text = "Annuleren";
-            this.uiButton_Cancel.UseVisualStyleBackColor = true;
-            this.uiButton_Cancel.Click += new System.EventHandler(this.uiButton_Cancel_Click);
-            // 
-            // btnOk
-            // 
-            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOk.Location = new System.Drawing.Point(175, 198);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(75, 25);
-            this.btnOk.TabIndex = 31;
-            this.btnOk.Text = "Ok";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // uiDataGridView_Variables
             // 
@@ -184,7 +170,7 @@ namespace NoruST.Forms
             // 
             this.numericUpDown1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown1.Location = new System.Drawing.Point(76, 168);
+            this.numericUpDown1.Location = new System.Drawing.Point(175, 168);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown1.TabIndex = 30;
@@ -193,6 +179,7 @@ namespace NoruST.Forms
             0,
             0,
             0});
+            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
             // 
             // checkBox1
             // 
@@ -214,7 +201,7 @@ namespace NoruST.Forms
             // 
             this.numericUpDown2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.numericUpDown2.Location = new System.Drawing.Point(76, 195);
+            this.numericUpDown2.Location = new System.Drawing.Point(175, 195);
             this.numericUpDown2.Name = "numericUpDown2";
             this.numericUpDown2.Size = new System.Drawing.Size(50, 20);
             this.numericUpDown2.TabIndex = 35;
@@ -223,15 +210,81 @@ namespace NoruST.Forms
             0,
             0,
             0});
+            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
+            // 
+            // btnOk
+            // 
+            this.btnOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnOk.Location = new System.Drawing.Point(175, 233);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(75, 25);
+            this.btnOk.TabIndex = 31;
+            this.btnOk.Text = "Ok";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // uiButton_Cancel
+            // 
+            this.uiButton_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton_Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.uiButton_Cancel.Location = new System.Drawing.Point(256, 233);
+            this.uiButton_Cancel.Name = "uiButton_Cancel";
+            this.uiButton_Cancel.Size = new System.Drawing.Size(75, 25);
+            this.uiButton_Cancel.TabIndex = 32;
+            this.uiButton_Cancel.Text = "Annuleren";
+            this.uiButton_Cancel.UseVisualStyleBackColor = true;
+            this.uiButton_Cancel.Click += new System.EventHandler(this.uiButton_Cancel_Click);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(76, 172);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Confidence Level";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(76, 199);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 13);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "Confidence Level";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(256, 170);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(20, 17);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "%";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(256, 197);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(20, 17);
+            this.label4.TabIndex = 39;
+            this.label4.Text = "%";
             // 
             // confidence1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 226);
+            this.ClientSize = new System.Drawing.Size(334, 261);
             this.Controls.Add(this.tlpForm);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(350, 265);
+            this.MaximumSize = new System.Drawing.Size(350, 300);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 265);
             this.Name = "confidence1";
@@ -259,5 +312,9 @@ namespace NoruST.Forms
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }

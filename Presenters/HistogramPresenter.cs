@@ -98,7 +98,7 @@ namespace NoruST.Presenters
             int[] endCounter = new int[numberOfBins];
             i = 0;
             j = 0;
-            while (i < length)
+            while (i < length - (length % numberOfBins))
             {
                 Startcounter[j] = i;
                 i = i + (length/numberOfBins);
@@ -106,12 +106,13 @@ namespace NoruST.Presenters
             }
             i = 0;
             j = 0;
-            while (i < length)
+            while (i < length - (length % numberOfBins))
             {
                 i = i + (length / numberOfBins);
                 endCounter[j] = i;
                 j = j + 1;
             }
+            endCounter[numberOfBins - 1] = length;
             // Write the needed data to the sheet.
             for (int bin = 0; bin < numberOfBins; bin++)
             {
@@ -121,6 +122,10 @@ namespace NoruST.Presenters
                 int end = endCounter[bin];
                 System.Diagnostics.Debug.WriteLine(start + " " + end);
                 double[] tmp = new double[length/numberOfBins];
+                if (bin == numberOfBins-1)
+                {
+                    tmp = new double[(length / numberOfBins) + (length % numberOfBins)];
+                }
                 i = 0;
                 int temp2 = start;
                 while (temp2 < end)
