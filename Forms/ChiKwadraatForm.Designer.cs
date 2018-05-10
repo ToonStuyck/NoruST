@@ -115,6 +115,7 @@
             this.uiButton_Range.Size = new System.Drawing.Size(32, 28);
             this.uiButton_Range.TabIndex = 9;
             this.uiButton_Range.UseVisualStyleBackColor = true;
+            this.uiButton_Range.Click += new System.EventHandler(this.uiButton_Range_Click);
             // 
             // uiTextBox_DataSetRange
             // 

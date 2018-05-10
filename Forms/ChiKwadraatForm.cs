@@ -8,6 +8,7 @@ namespace NoruST.Forms
     public partial class ChiKwadraatForm : Form
     {
         private ChiKwadraatPresenter presenter;
+        private SelectRangeForm selectRangeForm;
 
         public ChiKwadraatForm()
         {
@@ -60,6 +61,19 @@ namespace NoruST.Forms
 */
 
         }
+
+        internal void rangeSelected(string range)
+        {
+            uiTextBox_DataSetRange.Text = range;
+        }
+
+        private void uiButton_Range_Click(object sender, EventArgs e)
+        {
+            selectRangeForm = selectRangeForm.createAndOrShowForm();
+            selectRangeForm.setPresenter(presenter);
+        }
+
+
 
         private void ChiSquare_OK(object sender, MouseEventArgs e)
         {

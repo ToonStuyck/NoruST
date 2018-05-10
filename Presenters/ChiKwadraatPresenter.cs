@@ -10,7 +10,7 @@ using NoruST.Forms;
 
 namespace NoruST.Presenters
 {
-    public class ChiKwadraatPresenter
+    public class ChiKwadraatPresenter : IRangeSelectionPresenter
 
     {
         private ChiKwadraatForm view;
@@ -30,6 +30,11 @@ namespace NoruST.Presenters
         public BindingList<DataSet> dataSets()
         {
             return dataSetPresenter.getModel().getDataSets();
+        }
+
+        public void rangeSelected(string range)
+        {
+            view.rangeSelected(range);
         }
 
         public void createChiKwadraatPlot(List<Variable> variables)
