@@ -15,14 +15,14 @@ namespace NoruST.Forms
     public partial class SelectRangeForm : ExtendedForm
     {
         private Worksheet worksheet;
-        private DataSetManagerPresenter presenter;
+        private IRangeSelectionPresenter presenter;
 
         public SelectRangeForm()
         {
             InitializeComponent();
         }
 
-        public void setPresenter(DataSetManagerPresenter presenter)
+        public void setPresenter(IRangeSelectionPresenter presenter)
         {
             this.presenter = presenter;
         }

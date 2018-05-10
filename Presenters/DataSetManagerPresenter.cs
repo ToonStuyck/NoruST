@@ -12,7 +12,7 @@ using DataSet = NoruST.Domain.DataSet;
 
 namespace NoruST.Presenters
 {
-    public class DataSetManagerPresenter
+    public class DataSetManagerPresenter : IRangeSelectionPresenter
     {
         private DataSetManagerForm view;
         private DataSetManagerModel model;

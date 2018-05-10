@@ -33,7 +33,7 @@
     <TargetFrameworkProfile />
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsUrl>D:\Kuleuven\Management\Thesis\ThesisOld\NoruST</BootstrapperComponentsUrl>
-    <PublishUrl>C:\Users\stuyc\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\Gebruiker\Desktop\</PublishUrl>
     <InstallUrl />
     <TargetCulture>en</TargetCulture>
     <ApplicationVersion>1.0.0.375</ApplicationVersion>
@@ -428,6 +428,7 @@
     <Compile Include="Presenters\HypothesePresenter1.cs" />
     <Compile Include="Presenters\HypothesePresenter2.cs" />
     <Compile Include="Presenters\InteractionPresenter.cs" />
+    <Compile Include="Presenters\IRangeSelectionPresenter.cs" />
     <Compile Include="Presenters\RegressionPresenter.cs" />
     <Compile Include="Presenters\UnstackedPresenter.cs" />
     <Compile Include="Presenters\DataSetManagerPresenter.cs" />
@@ -641,7 +642,7 @@
     <ManifestKeyFile>NoruST_18_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DCBEB2E91A813163BDBC3978956C442ADC9CE338</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DBF78329B7BCB34267E4A3888AA324F3F26259E5</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
