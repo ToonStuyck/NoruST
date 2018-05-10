@@ -67,6 +67,9 @@ namespace NoruST.Forms
 			List<Variable> variablesI = new List<Variable>();
 			List<Variable> variables = new List<Variable>();
 
+			double confidenceLevel = Convert.ToDouble(nudConfidenceLevel.Value);
+			System.Diagnostics.Debug.WriteLine("confidence level = {0}%", confidenceLevel.ToString());
+
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
 			{
 				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckD.Name].Value))
@@ -79,7 +82,7 @@ namespace NoruST.Forms
 				}
 			}
 
-			presenter.createRegression(variablesD, variablesI, selectedDataSet());
+			presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel);
 			Close();
             
         }
@@ -88,9 +91,10 @@ namespace NoruST.Forms
         {
             uiComboBox_DataSets.DataSource = presenter.dataSets();
             uiComboBox_DataSets.DisplayMember = "Name";
-            //nameDataGridViewTextBoxColumn.DataPropertyName = "name";
-            //rangeDataGridViewTextBoxColumn.DataPropertyName = "Range";
-            uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
+			
+			//nameDataGridViewTextBoxColumn.DataPropertyName = "name";
+			//rangeDataGridViewTextBoxColumn.DataPropertyName = "Range";
+			uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedDataSet() == null) return;
 				uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();

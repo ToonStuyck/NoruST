@@ -41,8 +41,7 @@ namespace NoruST.Presenters
 			return dataSetPresenter.getModel().getDataSets();
 		}
 
-		
-		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet)
+		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel)
 		{
 			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
 			sheet.Cells[100, 100] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variablesI[0].Range + ")";
@@ -85,7 +84,9 @@ namespace NoruST.Presenters
 			sheet.Cells[15, 3] = "Error";
 			sheet.Cells[15, 4] = "t-value";
 			sheet.Cells[15, 5] = "p-value";
-			sheet.Cells[14, 6] = "Confidence Interval";
+			sheet.Cells[14, 6] = "Confidence Interval " + confLevel.ToString() + "%";
+			sheet.Range[sheet.Cells[14, 6], sheet.Cells[14, 7]].Merge();
+			//sheet.Range["A3:C5"].Merge();
 			//sheet.Cells[14, 7] = ""; //value of given confidence interval
 			sheet.Cells[15, 6] = "Lower";
 			sheet.Cells[15, 7] = "Upper";
@@ -113,6 +114,7 @@ namespace NoruST.Presenters
             double[] yData = calcYdata(variablesD, dataSet, length);
             double[,] xData = calcXdata(length, dataSet, variablesI);
 
+
             b = calculateCoefB(yData, xData, b);
             double a = b[0];
 
@@ -137,9 +139,78 @@ namespace NoruST.Presenters
             }
             err = Math.Sqrt(err / (length - 4));
 
-			
+			/*int rij = 10;
+			int kol = 10;
+			int teller = 1;
+			//calculate Rj² values, coefficient of determination when Xj is regressed on all other predictor variables in the model.
+			for (int k = 1; k < xData.GetLength(1); k++) //first column is full of value 1, skip this one, it has no data of parameters
+			{
+				double[,] xDataNew = new double[xData.GetLength(0), xData.GetLength(1)-1]; //will contain xData without data of iterated parameter
+				double[] yDataNew = new double[xData.GetLength(0)]; //contains data of current iterated parameter
+				int writeKol = 0;
+				for(int j = 0; j < xData.GetLength(1); j++)
+				{
+					if (j != k)
+					{
+						for (int l = 0; l < xData.GetLength(0); l++)
+						{
+							xDataNew[l, writeKol] = xData[l, j];
+						}
+						writeKol++;
+					}
+					else
+					{
+						for (int l = 0; l < yData.GetLength(0); l++)
+						{
+							yDataNew[l] = xData[l, j];
+						}
+					}
+
+				}
+				double[] bT = new double[variablesI.Count-1];
+				bT = calculateCoefB(yDataNew, xDataNew, bT);
+				double aT = bT[0];
+
+				var XT = DenseMatrix.OfArray(xDataNew);
+				var BT = new DenseVector(bT);
+				var YT = new DenseVector(yDataNew);
+				var yhT = XT.Multiply(BT);
+				var erT = YT.Subtract(yhT);
+				double[] errorT = erT.ToArray();
+
+				double[] yhatT = yhT.ToArray();
+
+				double R2T = sheet.Application.WorksheetFunction.Correl(yDataNew, yhatT);
+				double RT = Math.Pow(R2T, 2);
+				double VIF = 1 / (1 - RT);
+				sheet.Cells[teller, 10] = VIF;
+				sheet.Cells[teller, 11] = RT;
+				teller++;
+
+				//printing xData
+				for (int j = 0; j < xDataNew.GetLength(1); j++)
+				{
+					for (int l = 0; l < xDataNew.GetLength(0); l++)
+					{
+						sheet.Cells[rij + l, kol + j] = xDataNew[l, j];
+					}
+				}
+				kol += xDataNew.GetLength(1) + 1;
+
+				//printing yData
+				for (int l = 0; l < yDataNew.GetLength(0); l++)
+				{
+					sheet.Cells[rij + l, kol] = yDataNew[l];
+				}
+				kol+=2;
+
+			}*/
+
+
 			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count(), sheet);
 			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
+
+			multicollinearity(sheet, xData, variablesI.Count);
 
 			
 			//Calculate regressionTable
@@ -166,13 +237,10 @@ namespace NoruST.Presenters
 			{
 				tValue[index] = b[index] / std[index];
 				pValue[index] = sheet.Application.WorksheetFunction.TDist(Math.Abs(tValue[index]), length - variablesI.Count - 1, 2);
-				lowerInt[index] = b[index] - sheet.Application.WorksheetFunction.TInv(1-0.95, length - variablesI.Count - 1)*std[index];
-				higherInt[index] = b[index] + sheet.Application.WorksheetFunction.TInv(1-0.95, length - variablesI.Count - 1)*std[index];
+				lowerInt[index] = b[index] - sheet.Application.WorksheetFunction.TInv(1-confLevel/100, length - variablesI.Count - 1)*std[index];
+				higherInt[index] = b[index] + sheet.Application.WorksheetFunction.TInv(1-confLevel/100, length - variablesI.Count - 1)*std[index];
 				//System.Diagnostics.Debug.WriteLine("{0}, p={1}, lower = {2}, n={3}, inv={4}, std={5}, inv2={6}",real_p, pValue[index], lowerInt[index], length - 1, sheet.Application.WorksheetFunction.TInv(1-0.975, length - 1), std[index], sheet.Application.WorksheetFunction.TInv(1 - 0.95, length - 1));
 			}
-
-
-			
 
 			//
 			//print results to excel sheet
@@ -196,6 +264,10 @@ namespace NoruST.Presenters
 			((Range)sheet.Cells[1, 4]).EntireColumn.AutoFit();
 			((Range)sheet.Cells[1, 5]).EntireColumn.AutoFit();
 			((Range)sheet.Cells[1, 6]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 7]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 8]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 9]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 10]).EntireColumn.AutoFit();
 
 		}
 
@@ -277,6 +349,11 @@ namespace NoruST.Presenters
                 double[] vals = new double[length];
                 foreach (var item in arr)
                 {
+					if (item.GetType() ==typeof( string))
+					{
+						MessageBox.Show("Please use numeric data", "Invalid data type error");
+						break;
+					}
                     double temp = Convert.ToDouble(item);
                     xData[i, count + 1] = temp;
                     //xData[count,i] = (temp - meansI[count]);
@@ -340,6 +417,81 @@ namespace NoruST.Presenters
 			results[7] = pVal;
 
 			return results;
+		}
+
+		public void multicollinearity(_Worksheet sheet, double[,] xData, int nrVariablesX)
+		{
+			int row = 15;
+			sheet.Cells[row-1, 8] = "Multicollinearity checking";
+			sheet.Range[sheet.Cells[row-1, 8], sheet.Cells[row-1, 9]].Merge();
+			sheet.Cells[row, 8] = "VIF";
+			sheet.Cells[row, 9] = "R-square";
+			sheet.Range[sheet.Cells[row, 8], sheet.Cells[row, 9]].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
+
+			//int rij = 10;
+			//int kol = 10;
+			//calculate Rj² values, coefficient of determination when Xj is regressed on all other predictor variables in the model.
+			for (int k = 1; k < xData.GetLength(1); k++) //first column is full of value 1, skip this one, it has no data of parameters
+			{
+				double[,] xDataNew = new double[xData.GetLength(0), xData.GetLength(1) - 1]; //will contain xData without data of iterated parameter
+				double[] yDataNew = new double[xData.GetLength(0)]; //contains data of current iterated parameter
+				int writeKol = 0;
+				for (int j = 0; j < xData.GetLength(1); j++)
+				{
+					if (j != k)
+					{
+						for (int l = 0; l < xData.GetLength(0); l++)
+						{
+							xDataNew[l, writeKol] = xData[l, j];
+						}
+						writeKol++;
+					}
+					else
+					{
+						for (int l = 0; l < xData.GetLength(0); l++)
+						{
+							yDataNew[l] = xData[l, j];
+						}
+					}
+
+				}
+				double[] bT = new double[nrVariablesX - 1]; //T = Temp
+				bT = calculateCoefB(yDataNew, xDataNew, bT);
+				double aT = bT[0];
+
+				var XT = DenseMatrix.OfArray(xDataNew);
+				var BT = new DenseVector(bT);
+				var YT = new DenseVector(yDataNew);
+				var yhT = XT.Multiply(BT);
+				//var erT = YT.Subtract(yhT);
+				//double[] errorT = erT.ToArray();
+
+				double[] yhatT = yhT.ToArray();
+
+				double R2T = sheet.Application.WorksheetFunction.Correl(yDataNew, yhatT);
+				double RT = Math.Pow(R2T, 2);
+				double VIF = 1 / (1 - RT);
+				sheet.Cells[row+k+1, 8] = VIF;
+				sheet.Cells[row+k+1, 9] = RT;
+
+				//printing xData
+				/*for (int j = 0; j < xDataNew.GetLength(1); j++)
+				{
+					for (int l = 0; l < xDataNew.GetLength(0); l++)
+					{
+						sheet.Cells[rij + l, kol + j] = xDataNew[l, j];
+					}
+				}
+				kol += xDataNew.GetLength(1) + 1;
+
+				//printing yData
+				for (int l = 0; l < yDataNew.GetLength(0); l++)
+				{
+					sheet.Cells[rij + l, kol] = yDataNew[l];
+				}
+				kol += 2;*/
+
+			}
 		}
 	}
 }
