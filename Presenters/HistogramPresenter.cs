@@ -65,6 +65,19 @@ namespace NoruST.Presenters
             _sheet.Cells[_row, column] = "Prb. Density";
         }
 
+        public List<double> calcVal(List<List<double>> finalList, double[] yData, double start, double end)
+        {
+            List<double> temp = new List<double>();
+            foreach(double val in yData)
+            {
+                if (val >= start && val < end)
+                {
+                    temp.Add(val);
+                }
+            }
+            return temp;
+        }
+
         private void PrintVariables(_Worksheet _sheet, int _row, int _counter, Variable variable, DataSet dataSet)
         {
             var function = Globals.ExcelAddIn.Application.WorksheetFunction;
@@ -94,52 +107,34 @@ namespace NoruST.Presenters
 
             yData = Y.ToArray();
 
-            int[] Startcounter = new int[numberOfBins];
-            int[] endCounter = new int[numberOfBins];
+            double start = yData[0];
+            double end = yData[length-1];
+            double step = (end - start)/numberOfBins;
+            List<List<double>> finalList = new List<List<double>>();
+
             i = 0;
-            j = 0;
-            while (i < length - (length % numberOfBins))
+            double startVal = start;
+            double endVal = startVal + step;
+            while (i < numberOfBins)
             {
-                Startcounter[j] = i;
-                i = i + (length/numberOfBins);
-                j = j + 1;
+                List<double> tempList = calcVal(finalList, yData, startVal, endVal);
+                finalList.Add(tempList);
+                startVal = endVal;
+                endVal = endVal + step;
+                i++;
             }
-            i = 0;
-            j = 0;
-            while (i < length - (length % numberOfBins))
-            {
-                i = i + (length / numberOfBins);
-                endCounter[j] = i;
-                j = j + 1;
-            }
-            endCounter[numberOfBins - 1] = length;
-            // Write the needed data to the sheet.
+
+            startVal = start;
+            endVal = startVal + step;
             for (int bin = 0; bin < numberOfBins; bin++)
             {
                 var column = 1;
                 
-                int start = Startcounter[bin];
-                int end = endCounter[bin];
-                System.Diagnostics.Debug.WriteLine(start + " " + end);
-                double[] tmp = new double[length/numberOfBins];
-                if (bin == numberOfBins-1)
-                {
-                    tmp = new double[(length / numberOfBins) + (length % numberOfBins)];
-                }
-                i = 0;
-                int temp2 = start;
-                while (temp2 < end)
-                {
-                    tmp[i] = yData[temp2];
-                    i++;
-                    temp2++;
-                }
-                
                 var range = variable.getRange().Address(true, true, true);
                 _sheet.Cells[_row, column++] = "Bin #" + bin;
-                _sheet.Cells[_row, column++] = tmp[0];
-                _sheet.Cells[_row, column++] = tmp[i-1];
-                _sheet.Cells[_row, column++] = tmp[(i-1) / 2];
+                _sheet.Cells[_row, column++] = startVal;
+                _sheet.Cells[_row, column++] = endVal;
+                _sheet.Cells[_row, column++] = startVal + (endVal-startVal)/2.0;
                 //_sheet.WriteFunction(_row, column, bin == 0 ? "MIN(" + range + ")" : AddressConverter.CellAddress(_row - 1, column + 1)); column++;
                 //_sheet.WriteFunction(_row, column, AddressConverter.CellAddress(_row, column - 1) + "+" + "ROUND((MAX(" + range + ")-MIN(" + range + "))/" + numberOfBins + ",0)"); column++;
                 //_sheet.Cells[_row, column] = "=(" + AddressConverter.CellAddress(_row, column - 2) + "+" + AddressConverter.CellAddress(_row, column - 1) + ")/2"; column++;
@@ -147,7 +142,9 @@ namespace NoruST.Presenters
                 _sheet.WriteFunction(_row, column, AddressConverter.CellAddress(_row, column - 1) + "/" + "COUNT(" + range + ")");
                 double mean = (_sheet.Cells[_row, column] as Range).Value;
                 column ++;
-                _sheet.Cells[_row, column] = mean / (tmp[i - 1] - tmp[0]);
+                _sheet.Cells[_row, column] = mean / (endVal - startVal);
+                startVal = endVal;
+                endVal = endVal + step;
                 //_sheet.WriteFunction(_row, column, AddressConverter.CellAddress(_row, column - 1) + "/" + "ROUND((MAX(" + range + ")-MIN(" + range + "))/" + numberOfBins + ",0)");
                 _row++;
             }
