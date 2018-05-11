@@ -365,7 +365,7 @@
 			this.MinimizeBox = false;
 			this.Name = "PChartForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "PChart";
+			this.Text = "StatEx - PChart";
 			((System.ComponentModel.ISupportInitialize)(this.variableBindingSource)).EndInit();
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
