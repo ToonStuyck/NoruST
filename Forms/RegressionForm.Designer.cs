@@ -57,17 +57,17 @@
 			// 
 			this.tlpForm.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tlpForm.ColumnCount = 4;
-			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
-			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 101F));
 			this.tlpForm.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 654F));
 			this.tlpForm.Controls.Add(this.uiDataGridView_Variables, 1, 1);
 			this.tlpForm.Controls.Add(this.btnOk, 2, 3);
-			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
 			this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
 			this.tlpForm.Controls.Add(this.btnCancel, 3, 3);
 			this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
 			this.tlpForm.Controls.Add(this.grpOptions, 0, 2);
+			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
 			this.tlpForm.Location = new System.Drawing.Point(0, 0);
 			this.tlpForm.Name = "tlpForm";
 			this.tlpForm.RowCount = 4;
@@ -92,7 +92,7 @@
             this.uiDataGridViewColumn_VariableCheckI});
 			this.tlpForm.SetColumnSpan(this.uiDataGridView_Variables, 3);
 			this.uiDataGridView_Variables.Dock = System.Windows.Forms.DockStyle.Left;
-			this.uiDataGridView_Variables.Location = new System.Drawing.Point(63, 33);
+			this.uiDataGridView_Variables.Location = new System.Drawing.Point(66, 33);
 			this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
 			this.uiDataGridView_Variables.RowHeadersVisible = false;
 			this.uiDataGridView_Variables.Size = new System.Drawing.Size(321, 204);
@@ -126,7 +126,7 @@
 			// 
 			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.lblDataSet.AutoSize = true;
-			this.lblDataSet.Location = new System.Drawing.Point(6, 8);
+			this.lblDataSet.Location = new System.Drawing.Point(8, 8);
 			this.lblDataSet.Name = "lblDataSet";
 			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
 			this.lblDataSet.TabIndex = 19;
@@ -135,14 +135,16 @@
 			// 
 			// lblVariable
 			// 
+			this.lblVariable.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
 			this.lblVariable.AutoSize = true;
-			this.lblVariable.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblVariable.Location = new System.Drawing.Point(3, 30);
+			this.lblVariable.Location = new System.Drawing.Point(5, 35);
+			this.lblVariable.Margin = new System.Windows.Forms.Padding(5);
 			this.lblVariable.Name = "lblVariable";
-			this.lblVariable.Size = new System.Drawing.Size(54, 210);
+			this.lblVariable.Size = new System.Drawing.Size(53, 13);
 			this.lblVariable.TabIndex = 20;
-			this.lblVariable.Text = "Variable";
-			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.lblVariable.Text = "Variables";
+			this.lblVariable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// btnCancel
 			// 
@@ -159,7 +161,7 @@
 			// 
 			this.tlpForm.SetColumnSpan(this.uiComboBox_DataSets, 3);
 			this.uiComboBox_DataSets.FormattingEnabled = true;
-			this.uiComboBox_DataSets.Location = new System.Drawing.Point(63, 3);
+			this.uiComboBox_DataSets.Location = new System.Drawing.Point(66, 3);
 			this.uiComboBox_DataSets.Name = "uiComboBox_DataSets";
 			this.uiComboBox_DataSets.Size = new System.Drawing.Size(321, 21);
 			this.uiComboBox_DataSets.TabIndex = 22;
@@ -295,7 +297,7 @@
 			this.Controls.Add(this.tlpForm);
 			this.MinimumSize = new System.Drawing.Size(400, 400);
 			this.Name = "RegressionForm";
-			this.Text = "NoruST - Regression";
+			this.Text = "StatEx - Regression";
 			this.tlpForm.ResumeLayout(false);
 			this.tlpForm.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).EndInit();
