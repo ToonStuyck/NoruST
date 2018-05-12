@@ -83,18 +83,18 @@
             this.uiDataGridView_Variables.RowHeadersVisible = false;
             this.uiDataGridView_Variables.Size = new System.Drawing.Size(321, 193);
             this.uiDataGridView_Variables.TabIndex = 29;
-            this.uiDataGridView_Variables.Columns[0].Width = 200;
-            this.uiDataGridView_Variables.Columns[1].Width = 200;
             // 
             // uiDataGridViewColumn_VariableCheckD
             // 
             this.uiDataGridViewColumn_VariableCheckD.HeaderText = "D";
             this.uiDataGridViewColumn_VariableCheckD.Name = "uiDataGridViewColumn_VariableCheckD";
+            this.uiDataGridViewColumn_VariableCheckD.Width = 50;
             // 
             // uiDataGridViewColumn_VariableCheckI
             // 
             this.uiDataGridViewColumn_VariableCheckI.HeaderText = "I";
             this.uiDataGridViewColumn_VariableCheckI.Name = "uiDataGridViewColumn_VariableCheckI";
+            this.uiDataGridViewColumn_VariableCheckI.Width = 50;
             // 
             // lblDataSet
             // 
