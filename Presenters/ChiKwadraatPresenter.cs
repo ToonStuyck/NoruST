@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
-using System.ComponentModel;
-using NoruST.Domain;
 using NoruST.Forms;
+using NoruST.Models;
+using NoruST.Presenters;
+using NoruST.Domain;
+using DataSet = NoruST.Domain.DataSet;
+using System.ComponentModel;
+using System.Windows.Forms;
+using Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
+using MathNet.Numerics.LinearRegression;
+using MathNet;
+using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace NoruST.Presenters
 {
@@ -34,13 +42,21 @@ namespace NoruST.Presenters
 
         public void rangeSelected(string range)
         {
-            //view.rangeSelected(range);
+            view.selectRange(range);
         }
 
-        public void createChiKwadraatPlot()
+        public void createChiKwadraatPlot(DataSet dataSet, String range)
         {
+            _Worksheet sheet = WorksheetHelper.NewWorksheet("Chi Square");
+            sheet.Cells[100, 100] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + range + ")";
+            int length = Convert.ToInt32((sheet.Cells[100, 100] as Range).Value);
+            sheet.Cells[100, 100] = "";
 
-
+            
+            sheet.Cells[1, 1] = "Original Counts";
+            
+            
+            }
         }
     }
-}
+

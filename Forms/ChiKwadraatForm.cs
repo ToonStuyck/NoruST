@@ -65,7 +65,7 @@ namespace NoruST.Forms
         private void ChiSquare_OK(object sender, MouseEventArgs e)
         {
            //String range = rangeSelected(string range)
-            //presenter.createChiKwadraatPlot(selectedDataSet(),selectedRange());
+            presenter.createChiKwadraatPlot(selectedDataSet(),selectedRange());
             Close();
         }
 
