@@ -19,51 +19,40 @@ namespace NoruST.Forms
         {
             this.presenter = chiKwadraatPresenter;
             bindModelToView();
-            //selectDataSet(selectedDataSet());
+            selectDataSet(selectedDataSet());
+            selectRange(selectedRange());
         }
 
         private void bindModelToView()
         {
-            /*uiComboBox_DataSets.DataSource = presenter.dataSets();
-            uiComboBox_DataSets.DisplayMember = "name";
-            uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
+            comboBox_dataSelect.DataSource = presenter.dataSets();
+            comboBox_dataSelect.DisplayMember = "name";
+            comboBox_dataSelect.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedDataSet() == null) return;
-                uiComboBox_Variables.DataSource = selectedDataSet().getVariables();
-                uiComboBox_Variables.DisplayMember = "name";
-                presenter.getModel().dataSet = selectedDataSet();
             };
-            uiComboBox_Variables.SelectedIndexChanged += (obj, eventArgs) =>
-            {
-                if (selectedVariable() == null) return;
-                presenter.getModel().variable = selectedVariable();
-            };*/
-
-
-
-
-
-            /*private DataSet selectedDataSet()
-                {
-                    return (DataSet)uiComboBox_DataSets.SelectedItem;
-                }
-
-                private Variable selectedVariable()
-                {
-                    return (Variable)uiComboBox_Variables.SelectedItem;
-                }
-
-                public void selectDataSet(DataSet dataSet)
-                {
-                    uiComboBox_DataSets.SelectedItem = null;
-                    uiComboBox_DataSets.SelectedItem = dataSet;
-                }
-*/
-
+            
         }
 
-        internal void rangeSelected(string range)
+        private DataSet selectedDataSet()
         {
+            return (DataSet)comboBox_dataSelect.SelectedItem;
+        }
+
+        private String selectedRange()
+        {
+            return (String)uiTextBox_DataSetRange.SelectedText;
+        }
+
+        public void selectDataSet(DataSet dataSet)
+        {
+            comboBox_dataSelect.SelectedItem = null;
+            comboBox_dataSelect.SelectedItem = dataSet;
+        }
+
+        internal void selectRange(string range)
+        {
+            uiTextBox_DataSetRange.Text = null;
             uiTextBox_DataSetRange.Text = range;
         }
 
@@ -73,11 +62,10 @@ namespace NoruST.Forms
             selectRangeForm.setPresenter(presenter);
         }
 
-
-
         private void ChiSquare_OK(object sender, MouseEventArgs e)
         {
-            // lalala doe iets nuttig
+           //String range = rangeSelected(string range)
+            presenter.createChiKwadraatPlot(selectedDataSet(),selectedRange());
             Close();
         }
 
@@ -101,6 +89,8 @@ namespace NoruST.Forms
             ChiSquare_Colums(sender,e);
             ChiSquare_Rows(sender,e);
         }
+
+
     }
 }
 
