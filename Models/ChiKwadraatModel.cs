@@ -6,8 +6,9 @@ using System.Text;
 
 namespace NoruST.Models
 {
-    class ChiKwadraatModel
+    public class ChiKwadraatModel
     {
-    public Domain.DataSet dataSet { get; set; }
+        public Domain.DataSet dataSet { get; set; }
+        public string range { get; set; }
     }
 }

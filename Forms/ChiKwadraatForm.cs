@@ -30,6 +30,7 @@ namespace NoruST.Forms
             comboBox_dataSelect.SelectedIndexChanged += (obj, eventArgs) =>
             {
                 if (selectedDataSet() == null) return;
+                
             };
             
         }
@@ -64,8 +65,9 @@ namespace NoruST.Forms
 
         private void ChiSquare_OK(object sender, MouseEventArgs e)
         {
-           //String range = rangeSelected(string range)
-            presenter.createChiKwadraatPlot(selectedDataSet(),selectedRange());
+            //String range = rangeSelected(string range)
+            presenter.getModel().range = uiTextBox_DataSetRange.Text;
+            presenter.createChiKwadraatPlot(selectedDataSet());
             Close();
         }
 

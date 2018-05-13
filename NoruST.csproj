@@ -253,6 +253,7 @@
       <DependentUpon>InteractionForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AutoCorrModel.cs" />
+    <Compile Include="Models\ChiKwadraatModel.cs" />
     <Compile Include="Models\ConfidenceModel1.cs" />
     <Compile Include="Models\ConfidenceModel2.cs" />
     <Compile Include="Models\DiscriminantAnalyseModel.cs" />
@@ -642,7 +643,7 @@
     <ManifestKeyFile>NoruST_18_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>DBF78329B7BCB34267E4A3888AA324F3F26259E5</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>DCBEB2E91A813163BDBC3978956C442ADC9CE338</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
