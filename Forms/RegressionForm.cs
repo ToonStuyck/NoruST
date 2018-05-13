@@ -98,8 +98,8 @@ namespace NoruST.Forms
             {
                 if (selectedDataSet() == null) return;
 				uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
-                uiDataGridViewColumn_VariableCheckD.Width = 20;
-                uiDataGridViewColumn_VariableCheckI.Width = 20;
+                uiDataGridViewColumn_VariableCheckD.Width = 50;
+                uiDataGridViewColumn_VariableCheckI.Width = 50;
                 uiDataGridView_Variables.Columns[2].ReadOnly = true;
                 uiDataGridView_Variables.Columns[3].ReadOnly = true;
             };

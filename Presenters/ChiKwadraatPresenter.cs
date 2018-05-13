@@ -34,7 +34,7 @@ namespace NoruST.Presenters
 
         public void rangeSelected(string range)
         {
-            view.rangeSelected(range);
+            //view.rangeSelected(range);
         }
 
         public void createChiKwadraatPlot()

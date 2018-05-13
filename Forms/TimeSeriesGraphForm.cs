@@ -33,7 +33,7 @@ namespace NoruST.Forms
             {
                 if (selectedDataSet() == null) return;
                 uiDataGridView_Variables.DataSource = selectedDataSet().getVariables();
-                uiDataGridViewColumn_VariableCheckX.Width = 20;
+                uiDataGridViewColumn_VariableCheckX.Width = 50;
                 //uiDataGridViewColumn_VariableCheckY.Width = 20;
                 uiDataGridView_Variables.Columns[1].ReadOnly = true;
                 uiDataGridView_Variables.Columns[2].ReadOnly = true;
