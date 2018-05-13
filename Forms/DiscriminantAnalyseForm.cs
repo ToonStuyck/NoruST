@@ -53,6 +53,26 @@ namespace NoruST.Forms
             List<Variable> variablesI = new List<Variable>();
             List<Variable> variables = new List<Variable>();
 
+            if(presenter.getModel().p == null)
+            {
+                MessageBox.Show("Probability must be filled in and must be a number.");
+                return;
+            }
+
+            double p2 = Convert.ToDouble(presenter.getModel().p);
+            if (p2 < 0 || p2 > 1)
+            {
+                MessageBox.Show("Probabilty must be between 0 and 1.");
+                return;
+            }
+            string cost1 = presenter.getModel().cost1;
+            string cost2 = presenter.getModel().cost2;
+            if (cost1 == null || cost2==null)
+            {
+                MessageBox.Show("Cost must be filled in and must be a number.");
+                return;
+            }
+
             foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
             {
                 if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckD.Name].Value))
@@ -86,7 +106,16 @@ namespace NoruST.Forms
                 uiDataGridView_Variables.Columns[1].ReadOnly = false;
                 uiDataGridView_Variables.Columns[2].ReadOnly = true;
                 uiDataGridView_Variables.Columns[3].ReadOnly = true;
+                Misclassification.DataBindings.Add("Checked", presenter.getModel(), "misclass");
+                textBox1.DataBindings.Add("Text", presenter.getModel(), "p");
+                textBox2.DataBindings.Add("Text", presenter.getModel(), "cost1");
+                textBox3.DataBindings.Add("Text", presenter.getModel(), "cost2");
             };
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

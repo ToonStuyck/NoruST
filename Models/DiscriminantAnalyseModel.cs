@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace NoruST.Models
 {
-    class DiscriminantAnalyseModel
+    public class DiscriminantAnalyseModel
     {
+        public bool misclass { get; set; }
+        public string p { get; set; }
+        public string cost1 { get; set; }
+        public string cost2 { get; set; }
     }
 }

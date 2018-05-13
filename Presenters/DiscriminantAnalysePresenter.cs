@@ -29,6 +29,11 @@ namespace NoruST.Presenters
             model = new DiscriminantAnalyseModel();
         }
 
+        public DiscriminantAnalyseModel getModel()
+        {
+            return model;
+        }
+
         public void openView()
         {
             view = view.createAndOrShowForm();
@@ -342,7 +347,15 @@ namespace NoruST.Presenters
             double z2 = B.DotProduct(x2);
 
             cutoff = (z1 + z2) / 2.0;
-            System.Diagnostics.Debug.WriteLine(cutoff);
+            if (model.misclass)
+            {
+                double p2 = Convert.ToDouble(model.p);
+                double p1 = 1.0 - p2;
+                double cost1 = Convert.ToDouble(model.cost1);
+                double cost2 = Convert.ToDouble(model.cost2);
+                double temp = Math.Log((cost2 * p2) / (cost1 * p1));
+                cutoff = cutoff + temp;
+            }
 
             return cutoff;
         }
@@ -417,6 +430,12 @@ namespace NoruST.Presenters
             //sheet.get_Range("B11", AddressConverter.CellAddress(14, variables.Count + 1, false, false)).NumberFormat = "0.000";
             sheet.get_Range("B18", "B20").NumberFormat = "0.0000";
             sheet.get_Range("D18", "E19").NumberFormat = "0.0000";
+
+            row = row + 3;
+            num = Convert.ToString(row);
+            sheet.Cells[row++, 1] = "Cutoff Score";
+            sheet.get_Range("A" + num, "A" + num).Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
+            sheet.Cells[row, 1] = cut;
 
             //sheet.get_Range("B24", AddressConverter.CellAddress(23 + c, 2, false, false)).NumberFormat = "0.0000";
             //sheet.get_Range("C24", AddressConverter.CellAddress(23 + c, 8, false, false)).NumberFormat = "0.000000";
