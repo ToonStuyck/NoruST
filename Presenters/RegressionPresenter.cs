@@ -49,7 +49,6 @@ namespace NoruST.Presenters
 			sheet.Cells[100, 100] = "";
 
 			int row = 1;
-			int column = 1;
 			sheet.Cells[1, 1] = "Regression Summary";
 			sheet.Cells[2, 1] = "R";
 			sheet.Cells[3, 1] = "R-square";
@@ -86,8 +85,6 @@ namespace NoruST.Presenters
 			sheet.Cells[15, 5] = "p-value";
 			sheet.Cells[14, 6] = "Confidence Interval " + confLevel.ToString() + "%";
 			sheet.Range[sheet.Cells[14, 6], sheet.Cells[14, 7]].Merge();
-			//sheet.Range["A3:C5"].Merge();
-			//sheet.Cells[14, 7] = ""; //value of given confidence interval
 			sheet.Cells[15, 6] = "Lower";
 			sheet.Cells[15, 7] = "Upper";
 
@@ -139,78 +136,12 @@ namespace NoruST.Presenters
             }
             err = Math.Sqrt(err / (length - 4));
 
-			/*int rij = 10;
-			int kol = 10;
-			int teller = 1;
-			//calculate Rj² values, coefficient of determination when Xj is regressed on all other predictor variables in the model.
-			for (int k = 1; k < xData.GetLength(1); k++) //first column is full of value 1, skip this one, it has no data of parameters
-			{
-				double[,] xDataNew = new double[xData.GetLength(0), xData.GetLength(1)-1]; //will contain xData without data of iterated parameter
-				double[] yDataNew = new double[xData.GetLength(0)]; //contains data of current iterated parameter
-				int writeKol = 0;
-				for(int j = 0; j < xData.GetLength(1); j++)
-				{
-					if (j != k)
-					{
-						for (int l = 0; l < xData.GetLength(0); l++)
-						{
-							xDataNew[l, writeKol] = xData[l, j];
-						}
-						writeKol++;
-					}
-					else
-					{
-						for (int l = 0; l < yData.GetLength(0); l++)
-						{
-							yDataNew[l] = xData[l, j];
-						}
-					}
-
-				}
-				double[] bT = new double[variablesI.Count-1];
-				bT = calculateCoefB(yDataNew, xDataNew, bT);
-				double aT = bT[0];
-
-				var XT = DenseMatrix.OfArray(xDataNew);
-				var BT = new DenseVector(bT);
-				var YT = new DenseVector(yDataNew);
-				var yhT = XT.Multiply(BT);
-				var erT = YT.Subtract(yhT);
-				double[] errorT = erT.ToArray();
-
-				double[] yhatT = yhT.ToArray();
-
-				double R2T = sheet.Application.WorksheetFunction.Correl(yDataNew, yhatT);
-				double RT = Math.Pow(R2T, 2);
-				double VIF = 1 / (1 - RT);
-				sheet.Cells[teller, 10] = VIF;
-				sheet.Cells[teller, 11] = RT;
-				teller++;
-
-				//printing xData
-				for (int j = 0; j < xDataNew.GetLength(1); j++)
-				{
-					for (int l = 0; l < xDataNew.GetLength(0); l++)
-					{
-						sheet.Cells[rij + l, kol + j] = xDataNew[l, j];
-					}
-				}
-				kol += xDataNew.GetLength(1) + 1;
-
-				//printing yData
-				for (int l = 0; l < yDataNew.GetLength(0); l++)
-				{
-					sheet.Cells[rij + l, kol] = yDataNew[l];
-				}
-				kol+=2;
-
-			}*/
-
-
+			
 			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count(), sheet);
 			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
 
 			multicollinearity(sheet, xData, variablesI.Count);
+			DurbinWatson(sheet, error);
 
 			
 			//Calculate regressionTable
@@ -278,12 +209,19 @@ namespace NoruST.Presenters
             sheet.Cells[11, 1] = "Unexplained";
             sheet.Cells[10, 3] = values[3]; //SSR
 			sheet.Cells[11, 3] = values[4]; //SSE
-            sheet.Cells[10, 2] = values[2].ToString();	//k, explained degrees of freedom
-            sheet.Cells[11, 2] = (values[1]-values[2]-1).ToString();	//n-k-1, unexplained degrees of freedom
+           /// sheet.Cells[10, 2] = values[2].ToString();	//k, explained degrees of freedom
+            sheet.Cells[10, 2] = values[2];	//k, explained degrees of freedom
+            ///sheet.Cells[11, 2] = (values[1]-values[2]-1).ToString();	//n-k-1, unexplained degrees of freedom
+            sheet.Cells[11, 2] = (values[1]-values[2]-1);	//n-k-1, unexplained degrees of freedom
             sheet.Cells[10, 4] = values[5]; //MSR
             sheet.Cells[11, 4] = values[6]; //MSE
-			sheet.Cells[10, 5] = values[0].ToString();	//f-value
-			sheet.Cells[10, 6] = (values[7]< 0.0001) ? "<0.0001" : (Math.Round(values[7], 4)).ToString();
+			///sheet.Cells[10, 5] = values[0].ToString();	//f-value
+			sheet.Cells[10, 5] = values[0]; //f-value
+			if (values[7] < 0.0001)
+				sheet.Cells[10, 6] = "<0.0001";
+			else
+				sheet.Cells[10, 6] = Math.Round(values[7], 4);
+			//sheet.Cells[10, 6] = (values[7]< 0.0001) ? "<0.0001" : (Math.Round(values[7], 4)).ToString();///
         }
 
         public void FillR(_Worksheet sheet, double R2, double R, double Radj, double err)
@@ -301,7 +239,11 @@ namespace NoruST.Presenters
 			{
 				sheet.Cells[row, 3] = std[row - 16];
 				sheet.Cells[row, 4] = tValue[row - 16];
-				sheet.Cells[row, 5] = (pValue[row - 16] < 0.0001) ? "<0.0001" : Math.Round(pValue[row - 16],4).ToString();
+				//sheet.Cells[row, 5] = (pValue[row - 16] < 0.0001) ? "<0.0001" : Math.Round(pValue[row - 16],4).ToString(); ///
+				if (pValue[row - 16] < 0.0001)
+					sheet.Cells[row, 5] = "<0.0001";
+				else
+					sheet.Cells[row, 5] = Math.Round(pValue[row - 16], 4);
 				sheet.Cells[row, 6] = lowerInt[row - 16];
 				sheet.Cells[row, 7] = higherInt[row - 16];
 				row++;
@@ -492,6 +434,25 @@ namespace NoruST.Presenters
 				kol += 2;*/
 
 			}
+		}
+
+		public double DurbinWatson(_Worksheet sheet, double[] error)
+		{
+			double DW = 0;
+			double Num = 0;	//Numerator
+			double Den = 0; //Denominator
+			for (int i = 1; i < error.Length; i++)
+			{
+				Num += Math.Pow((error[i] - error[i - 1]), 2);
+				Den += Math.Pow(error[i],2);
+			}
+			Den += Math.Pow(error[0], 2); //first element has been skipped in the loop, so still needs te be added
+			DW = Num / Den;
+
+			sheet.Cells[6, 1] = "Durbin Watson ";
+			///sheet.Cells[6, 2] = Math.Round(DW, 3).ToString();
+			sheet.Cells[6, 2] = Math.Round(DW, 3);
+			return DW;
 		}
 	}
 }

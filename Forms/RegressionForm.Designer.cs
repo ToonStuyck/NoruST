@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.Windows.Forms.Application.EnableVisualStyles();
 			this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
 			this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
 			this.uiDataGridViewColumn_VariableCheckD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
