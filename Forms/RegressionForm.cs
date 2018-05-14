@@ -68,7 +68,7 @@ namespace NoruST.Forms
 			List<Variable> variables = new List<Variable>();
 
 			double confidenceLevel = Convert.ToDouble(nudConfidenceLevel.Value);
-			System.Diagnostics.Debug.WriteLine("confidence level = {0}%", confidenceLevel.ToString());
+			bool[] graphs = new bool[5];
 
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
 			{
@@ -81,8 +81,14 @@ namespace NoruST.Forms
 					variablesI.Add((Variable)row.DataBoundItem);
 				}
 			}
+			graphs[0] = (chkFittedValuesVsActualYValues.Checked) ? true : false;
+			graphs[1] = (chkResidualsVsFittedValues.Checked) ?  true : false;
+			graphs[2] = (chkResidualsVsXValues.Checked) ?  true : false;
+			graphs[3] = (chkActualVsX.Checked) ?  true : false;
+			graphs[4] = (chkFittedVsX.Checked) ?  true : false;
 
-			presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel);
+			presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel, selectedDataSet(), graphs);
+			presenter.resetNrofGraphs(); //to make sure when redoing regression, graphs are drawn right below the data
 			Close();
             
         }
@@ -105,5 +111,24 @@ namespace NoruST.Forms
             };
         }
 
+		private void chkCheckAllOptions_CheckedChanged(object sender, EventArgs e)
+		{
+			if (chkCheckAllOptions.Checked)
+			{
+				chkFittedValuesVsActualYValues.Checked = true;
+				chkResidualsVsFittedValues.Checked = true;
+				chkResidualsVsXValues.Checked = true;
+				chkActualVsX.Checked = true;
+				chkFittedVsX.Checked = true;
+			}
+			else
+			{
+				chkFittedValuesVsActualYValues.Checked = false;
+				chkResidualsVsFittedValues.Checked = false;
+				chkResidualsVsXValues.Checked = false;
+				chkActualVsX.Checked = false;
+				chkFittedVsX.Checked = false;
+			}
+		}
 	}
 }

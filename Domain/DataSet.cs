@@ -81,6 +81,11 @@ namespace NoruST.Domain
             return rangeLayout == COLUMNS ? variables[0].getRange().Rows.Count : variables[0].getRange().Columns.Count;
         }
 
+		public int getNrDataRows()
+		{
+			return variables[0].getRange().Rows.Count;
+		}
+
         public void addLags(Variable variable, int numberOfLags, DataSet dataSet)
         {
             //for (int i = 1; i <= numberOfLags; i++)
