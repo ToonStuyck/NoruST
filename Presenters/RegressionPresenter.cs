@@ -23,6 +23,7 @@ namespace NoruST.Presenters
 		private RegressionForm view;
 		private RegressionModel model;
 		private DataSetManagerPresenter dataSetPresenter;
+		private int nrOfGraphs = 0;
 
 		public RegressionPresenter(DataSetManagerPresenter dataSetPresenter)
 		{
@@ -41,7 +42,12 @@ namespace NoruST.Presenters
 			return dataSetPresenter.getModel().getDataSets();
 		}
 
-		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel)
+		public void resetNrofGraphs()
+		{
+			nrOfGraphs = 0;
+		}
+
+		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel, DataSet dataSet2, bool[] graphs)
 		{
 			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
 			sheet.Cells[100, 100] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variablesI[0].Range + ")";
@@ -156,7 +162,7 @@ namespace NoruST.Presenters
 			foreach(double elem in variances)
 			{
 				std[index] = Math.Sqrt(elem);
-				System.Diagnostics.Debug.WriteLine(std[index]);
+				//System.Diagnostics.Debug.WriteLine(std[index]);
 				index++;
 			}
 
@@ -174,6 +180,63 @@ namespace NoruST.Presenters
 			}
 
 			//
+			//double[,] xData = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
+			//prediction(sheet, xData, 10, b, confLevel, length, variablesI.Count, X, MSE);
+			//System.Diagnostics.Debug.WriteLine("nr of datarow = {0}", dataSet.getNrDataRows());
+
+			//Draw graphs
+			if (graphs[0])
+			{
+				drawGraphs(sheet, yData, yhat, "Scatter plot of fitted values vs. actual values");
+			}
+			if (graphs[1])
+			{
+				drawGraphs(sheet, yData, error, "Scatter plot of residuals vs. fitted values");
+			}
+			if (graphs[2])
+			{
+				int varNumber = 1;
+				foreach (Variable var in variablesI)
+				{
+					double[] xDataTemp = new double[xData.GetLength(0)];
+					for(int x = 0; x < xData.GetLength(0); x++)
+					{
+						xDataTemp[x] = xData[x, varNumber];
+					}
+					drawGraphs(sheet, xDataTemp, error, "Scatter plot of residuals vs. " + var.name);
+					varNumber++;
+				}
+			}
+			if (graphs[3])
+			{
+				int varNumber = 1;
+				foreach (Variable var in variablesI)
+				{
+					double[] xDataTemp = new double[xData.GetLength(0)];
+					for(int x = 0; x < xData.GetLength(0); x++)
+					{
+						xDataTemp[x] = xData[x, varNumber];
+					}
+					drawGraphs(sheet, xDataTemp, yData, "Scatter plot of actual Y values vs. " + var.name);
+					varNumber++;
+				}
+			}
+			if (graphs[4])
+			{
+				int varNumber = 1;
+				foreach (Variable var in variablesI)
+				{
+					double[] xDataTemp = new double[xData.GetLength(0)];
+					for(int x = 0; x < xData.GetLength(0); x++)
+					{
+						xDataTemp[x] = xData[x, varNumber];
+					}
+					drawGraphs(sheet, xDataTemp, yhat, "Scatter plot of fitted Y values vs. " + var.name);
+					varNumber++;
+				}
+			}
+
+			//
 			//print results to excel sheet
 			//
 			sheet.Cells[16, 2] = a;
@@ -183,6 +246,7 @@ namespace NoruST.Presenters
 				sheet.Cells[row, 2] = b[row - 16];
 				row++;
 			}
+
 
 			FillR(sheet, R2, R, Radj, err);
             FillAnova(sheet, anovaResults);
@@ -209,13 +273,10 @@ namespace NoruST.Presenters
             sheet.Cells[11, 1] = "Unexplained";
             sheet.Cells[10, 3] = values[3]; //SSR
 			sheet.Cells[11, 3] = values[4]; //SSE
-           /// sheet.Cells[10, 2] = values[2].ToString();	//k, explained degrees of freedom
             sheet.Cells[10, 2] = values[2];	//k, explained degrees of freedom
-            ///sheet.Cells[11, 2] = (values[1]-values[2]-1).ToString();	//n-k-1, unexplained degrees of freedom
             sheet.Cells[11, 2] = (values[1]-values[2]-1);	//n-k-1, unexplained degrees of freedom
             sheet.Cells[10, 4] = values[5]; //MSR
             sheet.Cells[11, 4] = values[6]; //MSE
-			///sheet.Cells[10, 5] = values[0].ToString();	//f-value
 			sheet.Cells[10, 5] = values[0]; //f-value
 			if (values[7] < 0.0001)
 				sheet.Cells[10, 6] = "<0.0001";
@@ -454,5 +515,47 @@ namespace NoruST.Presenters
 			sheet.Cells[6, 2] = Math.Round(DW, 3);
 			return DW;
 		}
+
+		public void drawGraphs(_Worksheet sheet, double[] xData, double[] yData, String name)
+		{
+			
+			var Xcharts = (ChartObjects)sheet.ChartObjects();
+			var XchartObject = Xcharts.Add(20, 450 + nrOfGraphs*250, 350, 200);
+			var Xchart = XchartObject.Chart;
+			Xchart.ChartType = XlChartType.xlXYScatter;
+			Xchart.ChartWizard(Title: name, HasLegend: false);
+			var XseriesCollection = (SeriesCollection)Xchart.SeriesCollection();
+			var graph = XseriesCollection.NewSeries();
+			graph.Values = yData;
+			graph.XValues = xData;
+			nrOfGraphs++;
+
+		}
+
+		//TODO
+		/*public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
+		{
+			
+			double yNew = 0;
+			double[,] xDataNewN = { { 1,1430,35},{ 1,1560,45},{1,1520,40 } };
+			var Xh = DenseMatrix.OfArray(xDataNewN);
+			double s2 =MSE*(1+ Xh.TransposeThisAndMultiply((X.TransposeThisAndMultiply(X)).Inverse()).Multiply(Xh)); //Xh'.(X'.X)^(-1).Xh
+			double s = Math.Sqrt(s2);
+
+			for (int dataNr = 0; dataNr < xDataNewN.GetLength(0);dataNr++)
+			{
+				for (int i = 0; i < coefficients.Length; i++)
+				{
+					yNew += coefficients[i] * xDataNewN[dataNr, i];
+				}
+				
+				
+				double lowLimit= sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n-k-1) * s;
+				System.Diagnostics.Debug.WriteLine("{0}\t{1}",yNew, lowLimit);
+				yNew = 0;
+			}
+
+
+		}*/
 	}
 }

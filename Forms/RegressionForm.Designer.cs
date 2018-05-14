@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.Application.EnableVisualStyles();
 			this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
 			this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
 			this.uiDataGridViewColumn_VariableCheckD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.uiDataGridViewColumn_VariableCheckI = new System.Windows.Forms.DataGridViewCheckBoxColumn();
 			this.btnOk = new System.Windows.Forms.Button();
-			this.lblDataSet = new System.Windows.Forms.Label();
 			this.lblVariable = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
@@ -44,8 +42,10 @@
 			this.chkResidualsVsXValues = new System.Windows.Forms.CheckBox();
 			this.chkFittedValuesVsActualYValues = new System.Windows.Forms.CheckBox();
 			this.chkResidualsVsFittedValues = new System.Windows.Forms.CheckBox();
-			this.chkDisplayRegressionEquation = new System.Windows.Forms.CheckBox();
+			this.chkActualVsX = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
+			this.lblDataSet = new System.Windows.Forms.Label();
+			this.chkFittedVsX = new System.Windows.Forms.CheckBox();
 			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
@@ -67,16 +67,15 @@
 			this.tlpForm.Controls.Add(this.lblVariable, 0, 1);
 			this.tlpForm.Controls.Add(this.btnCancel, 3, 3);
 			this.tlpForm.Controls.Add(this.uiComboBox_DataSets, 1, 0);
-			this.tlpForm.Controls.Add(this.grpOptions, 0, 2);
 			this.tlpForm.Controls.Add(this.lblDataSet, 0, 0);
+			this.tlpForm.Controls.Add(this.grpOptions, 0, 2);
 			this.tlpForm.Location = new System.Drawing.Point(0, 0);
 			this.tlpForm.Name = "tlpForm";
 			this.tlpForm.RowCount = 4;
 			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+			this.tlpForm.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
 			this.tlpForm.Size = new System.Drawing.Size(388, 390);
 			this.tlpForm.TabIndex = 22;
 			// 
@@ -115,24 +114,13 @@
 			// btnOk
 			// 
 			this.btnOk.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnOk.Location = new System.Drawing.Point(165, 363);
+			this.btnOk.Location = new System.Drawing.Point(165, 366);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(95, 24);
+			this.btnOk.Size = new System.Drawing.Size(95, 21);
 			this.btnOk.TabIndex = 17;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
 			this.btnOk.Click += new System.EventHandler(this.uiButton_Ok_Click);
-			// 
-			// lblDataSet
-			// 
-			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.lblDataSet.AutoSize = true;
-			this.lblDataSet.Location = new System.Drawing.Point(8, 8);
-			this.lblDataSet.Name = "lblDataSet";
-			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
-			this.lblDataSet.TabIndex = 19;
-			this.lblDataSet.Text = "Data set";
-			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// lblVariable
 			// 
@@ -150,9 +138,9 @@
 			// btnCancel
 			// 
 			this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.btnCancel.Location = new System.Drawing.Point(266, 363);
+			this.btnCancel.Location = new System.Drawing.Point(266, 366);
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(118, 24);
+			this.btnCancel.Size = new System.Drawing.Size(118, 21);
 			this.btnCancel.TabIndex = 21;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
@@ -169,16 +157,17 @@
 			// 
 			// grpOptions
 			// 
-			this.grpOptions.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+			this.grpOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.grpOptions.AutoSize = true;
 			this.grpOptions.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.tlpForm.SetColumnSpan(this.grpOptions, 4);
 			this.grpOptions.Controls.Add(this.chkCheckAllOptions);
 			this.grpOptions.Controls.Add(this.tlpOptions);
-			this.grpOptions.Location = new System.Drawing.Point(3, 261);
+			this.grpOptions.Location = new System.Drawing.Point(3, 243);
 			this.grpOptions.Name = "grpOptions";
-			this.grpOptions.Size = new System.Drawing.Size(911, 96);
+			this.grpOptions.Size = new System.Drawing.Size(911, 117);
 			this.grpOptions.TabIndex = 18;
 			this.grpOptions.TabStop = false;
 			// 
@@ -187,11 +176,11 @@
 			this.chkCheckAllOptions.AutoSize = true;
 			this.chkCheckAllOptions.Location = new System.Drawing.Point(6, 0);
 			this.chkCheckAllOptions.Name = "chkCheckAllOptions";
-			this.chkCheckAllOptions.Size = new System.Drawing.Size(62, 17);
+			this.chkCheckAllOptions.Size = new System.Drawing.Size(106, 17);
 			this.chkCheckAllOptions.TabIndex = 34;
-			this.chkCheckAllOptions.Text = "Options";
-			this.chkCheckAllOptions.ThreeState = true;
+			this.chkCheckAllOptions.Text = "Select all options";
 			this.chkCheckAllOptions.UseVisualStyleBackColor = true;
+			this.chkCheckAllOptions.CheckedChanged += new System.EventHandler(this.chkCheckAllOptions_CheckedChanged);
 			// 
 			// tlpOptions
 			// 
@@ -201,22 +190,25 @@
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
 			this.tlpOptions.Controls.Add(this.chkResidualsVsXValues, 1, 0);
 			this.tlpOptions.Controls.Add(this.chkFittedValuesVsActualYValues, 0, 0);
 			this.tlpOptions.Controls.Add(this.chkResidualsVsFittedValues, 0, 1);
-			this.tlpOptions.Controls.Add(this.chkDisplayRegressionEquation, 1, 1);
-			this.tlpOptions.Controls.Add(this.lblConfidenceLevel, 0, 2);
-			this.tlpOptions.Controls.Add(this.nudConfidenceLevel, 1, 2);
-			this.tlpOptions.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tlpOptions.Controls.Add(this.chkActualVsX, 1, 1);
+			this.tlpOptions.Controls.Add(this.nudConfidenceLevel, 1, 3);
+			this.tlpOptions.Controls.Add(this.chkFittedVsX, 1, 2);
+			this.tlpOptions.Controls.Add(this.lblConfidenceLevel, 0, 3);
+			this.tlpOptions.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tlpOptions.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
 			this.tlpOptions.Location = new System.Drawing.Point(3, 16);
 			this.tlpOptions.Name = "tlpOptions";
 			this.tlpOptions.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-			this.tlpOptions.RowCount = 3;
+			this.tlpOptions.RowCount = 4;
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.tlpOptions.Size = new System.Drawing.Size(905, 77);
+			this.tlpOptions.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+			this.tlpOptions.Size = new System.Drawing.Size(905, 98);
 			this.tlpOptions.TabIndex = 32;
 			// 
 			// chkResidualsVsXValues
@@ -253,33 +245,56 @@
 			this.chkResidualsVsFittedValues.Text = "Residuals vs Fitted Values";
 			this.chkResidualsVsFittedValues.UseVisualStyleBackColor = true;
 			// 
-			// chkDisplayRegressionEquation
+			// chkActualVsX
 			// 
-			this.chkDisplayRegressionEquation.AutoSize = true;
-			this.tlpOptions.SetColumnSpan(this.chkDisplayRegressionEquation, 2);
-			this.chkDisplayRegressionEquation.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.chkDisplayRegressionEquation.Location = new System.Drawing.Point(188, 31);
-			this.chkDisplayRegressionEquation.Name = "chkDisplayRegressionEquation";
-			this.chkDisplayRegressionEquation.Size = new System.Drawing.Size(714, 17);
-			this.chkDisplayRegressionEquation.TabIndex = 18;
-			this.chkDisplayRegressionEquation.Text = "Display Regression Equation";
-			this.chkDisplayRegressionEquation.UseVisualStyleBackColor = true;
+			this.chkActualVsX.AutoSize = true;
+			this.tlpOptions.SetColumnSpan(this.chkActualVsX, 2);
+			this.chkActualVsX.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkActualVsX.Location = new System.Drawing.Point(188, 31);
+			this.chkActualVsX.Name = "chkActualVsX";
+			this.chkActualVsX.Size = new System.Drawing.Size(714, 17);
+			this.chkActualVsX.TabIndex = 18;
+			this.chkActualVsX.Text = "Actual Y-values vs X-Values";
+			this.chkActualVsX.UseVisualStyleBackColor = true;
 			// 
 			// lblConfidenceLevel
 			// 
 			this.lblConfidenceLevel.AutoSize = true;
 			this.lblConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblConfidenceLevel.Location = new System.Drawing.Point(3, 51);
+			this.lblConfidenceLevel.Location = new System.Drawing.Point(3, 74);
 			this.lblConfidenceLevel.Name = "lblConfidenceLevel";
-			this.lblConfidenceLevel.Size = new System.Drawing.Size(179, 26);
+			this.lblConfidenceLevel.Size = new System.Drawing.Size(179, 24);
 			this.lblConfidenceLevel.TabIndex = 20;
 			this.lblConfidenceLevel.Text = "Confidence level (%)";
 			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
+			// lblDataSet
+			// 
+			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.lblDataSet.AutoSize = true;
+			this.lblDataSet.Location = new System.Drawing.Point(8, 8);
+			this.lblDataSet.Name = "lblDataSet";
+			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
+			this.lblDataSet.TabIndex = 19;
+			this.lblDataSet.Text = "Data set";
+			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// chkFittedVsX
+			// 
+			this.chkFittedVsX.AutoSize = true;
+			this.tlpOptions.SetColumnSpan(this.chkFittedVsX, 2);
+			this.chkFittedVsX.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkFittedVsX.Location = new System.Drawing.Point(188, 54);
+			this.chkFittedVsX.Name = "chkFittedVsX";
+			this.chkFittedVsX.Size = new System.Drawing.Size(714, 17);
+			this.chkFittedVsX.TabIndex = 21;
+			this.chkFittedVsX.Text = "Fitted Values vs X-values";
+			this.chkFittedVsX.UseVisualStyleBackColor = true;
+			// 
 			// nudConfidenceLevel
 			// 
 			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 54);
+			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 77);
 			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
 			this.nudConfidenceLevel.Size = new System.Drawing.Size(50, 20);
 			this.nudConfidenceLevel.TabIndex = 21;
@@ -322,7 +337,7 @@
 		private System.Windows.Forms.CheckBox chkResidualsVsXValues;
 		private System.Windows.Forms.CheckBox chkFittedValuesVsActualYValues;
 		private System.Windows.Forms.CheckBox chkResidualsVsFittedValues;
-		private System.Windows.Forms.CheckBox chkDisplayRegressionEquation;
+		private System.Windows.Forms.CheckBox chkActualVsX;
 		private System.Windows.Forms.Label lblConfidenceLevel;
 		private Controls.PercentageNumericUpDown nudConfidenceLevel;
 		private System.Windows.Forms.Button btnOk;
@@ -331,5 +346,6 @@
 		private System.Windows.Forms.DataGridView uiDataGridView_Variables;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheckD;
 		private System.Windows.Forms.DataGridViewCheckBoxColumn uiDataGridViewColumn_VariableCheckI;
+		private System.Windows.Forms.CheckBox chkFittedVsX;
 	}
 }
