@@ -36,6 +36,7 @@
 			this.lblVariable = new System.Windows.Forms.Label();
 			this.btnCancel = new System.Windows.Forms.Button();
 			this.uiComboBox_DataSets = new System.Windows.Forms.ComboBox();
+			this.lblDataSet = new System.Windows.Forms.Label();
 			this.grpOptions = new System.Windows.Forms.GroupBox();
 			this.chkCheckAllOptions = new System.Windows.Forms.CheckBox();
 			this.tlpOptions = new System.Windows.Forms.TableLayoutPanel();
@@ -43,10 +44,9 @@
 			this.chkFittedValuesVsActualYValues = new System.Windows.Forms.CheckBox();
 			this.chkResidualsVsFittedValues = new System.Windows.Forms.CheckBox();
 			this.chkActualVsX = new System.Windows.Forms.CheckBox();
-			this.lblConfidenceLevel = new System.Windows.Forms.Label();
-			this.lblDataSet = new System.Windows.Forms.Label();
-			this.chkFittedVsX = new System.Windows.Forms.CheckBox();
 			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
+			this.chkFittedVsX = new System.Windows.Forms.CheckBox();
+			this.lblConfidenceLevel = new System.Windows.Forms.Label();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
 			this.grpOptions.SuspendLayout();
@@ -155,6 +155,17 @@
 			this.uiComboBox_DataSets.Size = new System.Drawing.Size(321, 21);
 			this.uiComboBox_DataSets.TabIndex = 22;
 			// 
+			// lblDataSet
+			// 
+			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.lblDataSet.AutoSize = true;
+			this.lblDataSet.Location = new System.Drawing.Point(8, 8);
+			this.lblDataSet.Name = "lblDataSet";
+			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
+			this.lblDataSet.TabIndex = 19;
+			this.lblDataSet.Text = "Data set";
+			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// grpOptions
 			// 
 			this.grpOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -257,27 +268,18 @@
 			this.chkActualVsX.Text = "Actual Y-values vs X-Values";
 			this.chkActualVsX.UseVisualStyleBackColor = true;
 			// 
-			// lblConfidenceLevel
+			// nudConfidenceLevel
 			// 
-			this.lblConfidenceLevel.AutoSize = true;
-			this.lblConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.lblConfidenceLevel.Location = new System.Drawing.Point(3, 74);
-			this.lblConfidenceLevel.Name = "lblConfidenceLevel";
-			this.lblConfidenceLevel.Size = new System.Drawing.Size(179, 24);
-			this.lblConfidenceLevel.TabIndex = 20;
-			this.lblConfidenceLevel.Text = "Confidence level (%)";
-			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			// 
-			// lblDataSet
-			// 
-			this.lblDataSet.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.lblDataSet.AutoSize = true;
-			this.lblDataSet.Location = new System.Drawing.Point(8, 8);
-			this.lblDataSet.Name = "lblDataSet";
-			this.lblDataSet.Size = new System.Drawing.Size(47, 13);
-			this.lblDataSet.TabIndex = 19;
-			this.lblDataSet.Text = "Data set";
-			this.lblDataSet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 77);
+			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
+			this.nudConfidenceLevel.Size = new System.Drawing.Size(50, 20);
+			this.nudConfidenceLevel.TabIndex = 21;
+			this.nudConfidenceLevel.Value = new decimal(new int[] {
+            95,
+            0,
+            0,
+            0});
 			// 
 			// chkFittedVsX
 			// 
@@ -291,18 +293,16 @@
 			this.chkFittedVsX.Text = "Fitted Values vs X-values";
 			this.chkFittedVsX.UseVisualStyleBackColor = true;
 			// 
-			// nudConfidenceLevel
+			// lblConfidenceLevel
 			// 
-			this.nudConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.nudConfidenceLevel.Location = new System.Drawing.Point(188, 77);
-			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
-			this.nudConfidenceLevel.Size = new System.Drawing.Size(50, 20);
-			this.nudConfidenceLevel.TabIndex = 21;
-			this.nudConfidenceLevel.Value = new decimal(new int[] {
-            95,
-            0,
-            0,
-            0});
+			this.lblConfidenceLevel.AutoSize = true;
+			this.lblConfidenceLevel.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.lblConfidenceLevel.Location = new System.Drawing.Point(3, 74);
+			this.lblConfidenceLevel.Name = "lblConfidenceLevel";
+			this.lblConfidenceLevel.Size = new System.Drawing.Size(179, 24);
+			this.lblConfidenceLevel.TabIndex = 20;
+			this.lblConfidenceLevel.Text = "Confidence level (%)";
+			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			// 
 			// RegressionForm
 			// 

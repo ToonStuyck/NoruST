@@ -149,8 +149,9 @@ namespace NoruST.Presenters
 			multicollinearity(sheet, xData, variablesI.Count);
 			DurbinWatson(sheet, error);
 
-			
+			//
 			//Calculate regressionTable
+			//
 			double MSE = anovaResults[6];
 			var Xt = X.Transpose();
 			var tempM = (Xt.Multiply(X)).Inverse();
@@ -180,11 +181,15 @@ namespace NoruST.Presenters
 			}
 
 			//
-			//double[,] xData = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
-			//prediction(sheet, xData, 10, b, confLevel, length, variablesI.Count, X, MSE);
+			//Prediction
+			//
+			//double[,] xDataNew = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
+			//prediction(sheet, xDataNew, 10, b, confLevel, length, variablesI.Count, X, MSE);
 			//System.Diagnostics.Debug.WriteLine("nr of datarow = {0}", dataSet.getNrDataRows());
 
+			//
 			//Draw graphs
+			//
 			if (graphs[0])
 			{
 				drawGraphs(sheet, yData, yhat, "Scatter plot of fitted values vs. actual values");
@@ -533,29 +538,44 @@ namespace NoruST.Presenters
 		}
 
 		//TODO
-		/*public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
+		public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
 		{
-			
-			double yNew = 0;
+			//source: http://www.real-statistics.com/multiple-regression/confidence-and-prediction-intervals/
+
 			double[,] xDataNewN = { { 1,1430,35},{ 1,1560,45},{1,1520,40 } };
-			var Xh = DenseMatrix.OfArray(xDataNewN);
-			double s2 =MSE*(1+ Xh.TransposeThisAndMultiply((X.TransposeThisAndMultiply(X)).Inverse()).Multiply(Xh)); //Xh'.(X'.X)^(-1).Xh
-			double s = Math.Sqrt(s2);
 
 			for (int dataNr = 0; dataNr < xDataNewN.GetLength(0);dataNr++)
 			{
+				double yNew = 0;
+				double[] currentXdata = new double[xDataNewN.GetLength(1)];
+				for(int xIndex = 0; xIndex< xDataNewN.GetLength(1); xIndex++)
+				{
+					currentXdata[xIndex] = xDataNewN[dataNr, xIndex];
+				}
+
+				var XhVector = DenseVector.OfArray(currentXdata);
+				var Xh = XhVector.ToColumnMatrix();
+				var Xht = Xh.Transpose();
+				var Xt = X.Transpose();
+				var XproductInv = (Xt.Multiply(X)).Inverse();
+				var XhtXproduct = Xht.Multiply(XproductInv);
+				var XhtXproductXh = XhtXproduct.Multiply(Xh);
+				double[][] productArray = XhtXproductXh.ToColumnArrays();
+				double product = productArray[0][0];
+				double s2 = MSE * (1 + product); //MSE*(1 + Xh'.(X'.X)^(-1).Xh)
+				double s = Math.Sqrt(s2);
 				for (int i = 0; i < coefficients.Length; i++)
 				{
 					yNew += coefficients[i] * xDataNewN[dataNr, i];
 				}
+
+				yNew = Math.Round(yNew, 2);
+				double lowLimit= Math.Round((yNew - sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n-k-1) * s), 2);
+				double highLimit = Math.Round((yNew + sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n - k - 1) * s), 2);
+				System.Diagnostics.Debug.WriteLine("{0}\t\t{1}\t\t{2}",yNew, lowLimit, highLimit);
 				
-				
-				double lowLimit= sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n-k-1) * s;
-				System.Diagnostics.Debug.WriteLine("{0}\t{1}",yNew, lowLimit);
-				yNew = 0;
 			}
-
-
-		}*/
+				
+		}
 	}
 }
