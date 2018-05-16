@@ -10,5 +10,10 @@ namespace NoruST.Models
     {
         public Domain.DataSet dataSet { get; set; }
         public string range { get; set; }
+        public string rowTitle { get; set; }
+        public string colTitle { get; set; }
+        public bool hasRowTitle { get; set; }
+        public bool hasColTitle { get; set; }
+        public bool hasRowColHeaders { get; set; }
     }
 }
