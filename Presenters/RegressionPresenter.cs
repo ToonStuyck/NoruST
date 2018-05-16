@@ -24,6 +24,7 @@ namespace NoruST.Presenters
 		private RegressionModel model;
 		private DataSetManagerPresenter dataSetPresenter;
 		private int nrOfGraphs = 0;
+		private int lowestDataRow = 0;
 
 		public RegressionPresenter(DataSetManagerPresenter dataSetPresenter)
 		{
@@ -59,6 +60,10 @@ namespace NoruST.Presenters
 		public void setPredictionLevel(double value)
 		{
 			model.predictionLevel = value;
+		}
+		public void setDW(bool value)
+		{
+			model.doDurbinWatson = value;
 		}
 
 		//public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel, DataSet dataSet2, bool[] graphs)
@@ -100,6 +105,7 @@ namespace NoruST.Presenters
 				sheet.Cells[row, 1] = var.name;
 				row++;
 			}
+			lowestDataRow = row;
 
 			sheet.Cells[15, 2] = "Coefficient";
 			sheet.Cells[14, 3] = "Standard";
@@ -164,7 +170,8 @@ namespace NoruST.Presenters
 			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
 
 			multicollinearity(sheet, xData, variablesI.Count);
-			DurbinWatson(sheet, error);
+			if (model.doDurbinWatson == true)
+				DurbinWatson(sheet, error);
 
 			//
 			//Calculate regressionTable
@@ -204,16 +211,16 @@ namespace NoruST.Presenters
 			// //prediction(sheet, xDataNew, 10, b, confLevel, length, variablesI.Count, X, MSE);
 			//prediction(sheet, xDataNew, 10, b, length, variablesI.Count, X, MSE);
 			//System.Diagnostics.Debug.WriteLine("nr of datarow = {0}", dataSet.getNrDataRows());
-			if (model.doPrediction)
+			/*if (model.doPrediction)
 			{
-				//double[,] xDataPred = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
+				double[,] xDataPred = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
 				//prediction(sheet, xDataPred, b, length, variablesI.Count, X, MSE); 
 				prediction(sheet, xData, b, length, variablesI.Count, X, MSE); //DELETE
 				System.Diagnostics.Debug.WriteLine("prediction wordt opgevraagd");
 				setPrediction(false);
 			}
 			else
-				System.Diagnostics.Debug.WriteLine("geen extra optie gevraagd");
+				System.Diagnostics.Debug.WriteLine("geen extra optie gevraagd");*/
 			
 
 
@@ -370,7 +377,8 @@ namespace NoruST.Presenters
 
         public double[,] calcXdata(int length, DataSet dataSet, List<Variable> variablesI)
         {
-            int count = 0;
+			System.Diagnostics.Debug.WriteLine("lengte xdata is = {0}", length);
+			int count = 0;
             double[,] xData = new double[length, variablesI.Count + 1];
             //bereken (Xi-Xgem)
             while (count < length)
@@ -383,9 +391,10 @@ namespace NoruST.Presenters
             {
                 int i = 0;
                 string ran = variablesI[count].Range.ToString();
-                Array arr = dataSet.getWorksheet().Range[ran].Value;
+				System.Diagnostics.Debug.WriteLine("RAN = "+ ran);
+				Array arr = dataSet.getWorksheet().Range[ran].Value;
                 double[] vals = new double[length];
-                foreach (var item in arr)
+				foreach (var item in arr)
                 {
 					if (item.GetType() ==typeof( string))
 					{
@@ -394,8 +403,9 @@ namespace NoruST.Presenters
 					}
                     double temp = Convert.ToDouble(item);
                     xData[i, count + 1] = temp;
-                    //xData[count,i] = (temp - meansI[count]);
-                    i++;
+					//xData[count,i] = (temp - meansI[count]);
+					System.Diagnostics.Debug.WriteLine("i = {0} ", i);
+					i++;
                 }
                 count++;
             }
@@ -555,7 +565,7 @@ namespace NoruST.Presenters
 		{
 			
 			var Xcharts = (ChartObjects)sheet.ChartObjects();
-			var XchartObject = Xcharts.Add(20, 450 + nrOfGraphs*250, 350, 200);
+			var XchartObject = Xcharts.Add(20, (lowestDataRow+2)*15 + nrOfGraphs*230, 350, 200);
 			var Xchart = XchartObject.Chart;
 			Xchart.ChartType = XlChartType.xlXYScatter;
 			Xchart.ChartWizard(Title: name, HasLegend: false);

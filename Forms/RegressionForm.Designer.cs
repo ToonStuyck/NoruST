@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.tlpForm = new System.Windows.Forms.TableLayoutPanel();
 			this.uiDataGridView_Variables = new System.Windows.Forms.DataGridView();
 			this.uiDataGridViewColumn_VariableCheckD = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -52,11 +52,12 @@
 			this.tlpOptions = new System.Windows.Forms.TableLayoutPanel();
 			this.chckBoxPrediction = new System.Windows.Forms.CheckBox();
 			this.lblConfidenceLevel = new System.Windows.Forms.Label();
-			this.lblPredLevel = new System.Windows.Forms.Label();
-			this.nudPredictionLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.lblPredData = new System.Windows.Forms.Label();
-			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.comboBoxPredData = new System.Windows.Forms.ComboBox();
+			this.lblPredLevel = new System.Windows.Forms.Label();
+			this.chkBoxDW = new System.Windows.Forms.CheckBox();
+			this.nudPredictionLevel = new NoruST.Controls.PercentageNumericUpDown();
+			this.nudConfidenceLevel = new NoruST.Controls.PercentageNumericUpDown();
 			this.tlpForm.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.uiDataGridView_Variables)).BeginInit();
 			this.grpBoxGraphs.SuspendLayout();
@@ -101,38 +102,38 @@
 			this.uiDataGridView_Variables.AllowUserToResizeColumns = false;
 			this.uiDataGridView_Variables.AllowUserToResizeRows = false;
 			this.uiDataGridView_Variables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.uiDataGridView_Variables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.uiDataGridView_Variables.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			this.uiDataGridView_Variables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.uiDataGridView_Variables.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.uiDataGridViewColumn_VariableCheckD,
             this.uiDataGridViewColumn_VariableCheckI});
 			this.tlpForm.SetColumnSpan(this.uiDataGridView_Variables, 3);
-			dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-			dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-			dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-			this.uiDataGridView_Variables.DefaultCellStyle = dataGridViewCellStyle5;
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+			dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+			dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.uiDataGridView_Variables.DefaultCellStyle = dataGridViewCellStyle2;
 			this.uiDataGridView_Variables.Dock = System.Windows.Forms.DockStyle.Left;
 			this.uiDataGridView_Variables.Location = new System.Drawing.Point(118, 33);
 			this.uiDataGridView_Variables.Name = "uiDataGridView_Variables";
-			dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-			dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-			dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-			dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-			dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-			dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-			this.uiDataGridView_Variables.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+			dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+			this.uiDataGridView_Variables.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
 			this.uiDataGridView_Variables.RowHeadersVisible = false;
 			this.uiDataGridView_Variables.Size = new System.Drawing.Size(344, 146);
 			this.uiDataGridView_Variables.TabIndex = 29;
@@ -291,9 +292,9 @@
 			// btnCancel
 			// 
 			this.btnCancel.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.btnCancel.Location = new System.Drawing.Point(373, 445);
+			this.btnCancel.Location = new System.Drawing.Point(373, 444);
 			this.btnCancel.Name = "btnCancel";
-			this.btnCancel.Size = new System.Drawing.Size(89, 21);
+			this.btnCancel.Size = new System.Drawing.Size(89, 24);
 			this.btnCancel.TabIndex = 21;
 			this.btnCancel.Text = "Cancel";
 			this.btnCancel.UseVisualStyleBackColor = true;
@@ -303,7 +304,7 @@
 			// 
 			this.btnOk.Location = new System.Drawing.Point(280, 444);
 			this.btnOk.Name = "btnOk";
-			this.btnOk.Size = new System.Drawing.Size(87, 21);
+			this.btnOk.Size = new System.Drawing.Size(87, 24);
 			this.btnOk.TabIndex = 17;
 			this.btnOk.Text = "Ok";
 			this.btnOk.UseVisualStyleBackColor = true;
@@ -328,7 +329,7 @@
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.23108F));
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 54F));
 			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+			this.tlpOptions.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 64F));
 			this.tlpOptions.Controls.Add(this.chckBoxPrediction, 0, 2);
 			this.tlpOptions.Controls.Add(this.lblConfidenceLevel, 1, 0);
 			this.tlpOptions.Controls.Add(this.lblPredData, 1, 3);
@@ -336,6 +337,7 @@
 			this.tlpOptions.Controls.Add(this.nudPredictionLevel, 3, 2);
 			this.tlpOptions.Controls.Add(this.lblPredLevel, 1, 2);
 			this.tlpOptions.Controls.Add(this.nudConfidenceLevel, 3, 0);
+			this.tlpOptions.Controls.Add(this.chkBoxDW, 0, 0);
 			this.tlpOptions.Location = new System.Drawing.Point(3, 19);
 			this.tlpOptions.Name = "tlpOptions";
 			this.tlpOptions.RowCount = 4;
@@ -352,36 +354,72 @@
 			this.chckBoxPrediction.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.chckBoxPrediction.Location = new System.Drawing.Point(3, 45);
 			this.chckBoxPrediction.Name = "chckBoxPrediction";
-			this.chckBoxPrediction.Size = new System.Drawing.Size(158, 21);
+			this.chckBoxPrediction.Size = new System.Drawing.Size(155, 21);
 			this.chckBoxPrediction.TabIndex = 0;
 			this.chckBoxPrediction.Text = "Prediction";
 			this.chckBoxPrediction.UseVisualStyleBackColor = true;
+			this.chckBoxPrediction.CheckedChanged += new System.EventHandler(this.chckBoxPrediction_CheckedChanged);
 			// 
 			// lblConfidenceLevel
 			// 
 			this.lblConfidenceLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.lblConfidenceLevel.AutoSize = true;
-			this.lblConfidenceLevel.Location = new System.Drawing.Point(167, 7);
+			this.lblConfidenceLevel.Location = new System.Drawing.Point(164, 7);
 			this.lblConfidenceLevel.Name = "lblConfidenceLevel";
 			this.lblConfidenceLevel.Size = new System.Drawing.Size(103, 13);
 			this.lblConfidenceLevel.TabIndex = 20;
 			this.lblConfidenceLevel.Text = "Confidence level (%)";
 			this.lblConfidenceLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// lblPredData
+			// 
+			this.lblPredData.Anchor = System.Windows.Forms.AnchorStyles.Left;
+			this.lblPredData.AutoSize = true;
+			this.lblPredData.Enabled = false;
+			this.lblPredData.Location = new System.Drawing.Point(164, 77);
+			this.lblPredData.Name = "lblPredData";
+			this.lblPredData.Size = new System.Drawing.Size(80, 13);
+			this.lblPredData.TabIndex = 23;
+			this.lblPredData.Text = "Prediction Data";
+			this.lblPredData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// comboBoxPredData
+			// 
+			this.tlpOptions.SetColumnSpan(this.comboBoxPredData, 2);
+			this.comboBoxPredData.Enabled = false;
+			this.comboBoxPredData.FormattingEnabled = true;
+			this.comboBoxPredData.Location = new System.Drawing.Point(281, 72);
+			this.comboBoxPredData.Name = "comboBoxPredData";
+			this.comboBoxPredData.Size = new System.Drawing.Size(107, 21);
+			this.comboBoxPredData.TabIndex = 24;
+			// 
 			// lblPredLevel
 			// 
 			this.lblPredLevel.Anchor = System.Windows.Forms.AnchorStyles.Left;
 			this.lblPredLevel.AutoSize = true;
-			this.lblPredLevel.Location = new System.Drawing.Point(167, 49);
+			this.lblPredLevel.Enabled = false;
+			this.lblPredLevel.Location = new System.Drawing.Point(164, 49);
 			this.lblPredLevel.Name = "lblPredLevel";
 			this.lblPredLevel.Size = new System.Drawing.Size(96, 13);
 			this.lblPredLevel.TabIndex = 21;
 			this.lblPredLevel.Text = "Prediction level (%)";
 			this.lblPredLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
+			// chkBoxDW
+			// 
+			this.chkBoxDW.AutoSize = true;
+			this.chkBoxDW.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.chkBoxDW.Location = new System.Drawing.Point(3, 3);
+			this.chkBoxDW.Name = "chkBoxDW";
+			this.chkBoxDW.Size = new System.Drawing.Size(155, 21);
+			this.chkBoxDW.TabIndex = 25;
+			this.chkBoxDW.Text = "Durbin Watson Test";
+			this.chkBoxDW.UseVisualStyleBackColor = true;
+			// 
 			// nudPredictionLevel
 			// 
-			this.nudPredictionLevel.Location = new System.Drawing.Point(340, 45);
+			this.nudPredictionLevel.Enabled = false;
+			this.nudPredictionLevel.Location = new System.Drawing.Point(335, 45);
 			this.nudPredictionLevel.Name = "nudPredictionLevel";
 			this.nudPredictionLevel.Size = new System.Drawing.Size(53, 20);
 			this.nudPredictionLevel.TabIndex = 22;
@@ -391,20 +429,9 @@
             0,
             0});
 			// 
-			// lblPredData
-			// 
-			this.lblPredData.Anchor = System.Windows.Forms.AnchorStyles.Left;
-			this.lblPredData.AutoSize = true;
-			this.lblPredData.Location = new System.Drawing.Point(167, 77);
-			this.lblPredData.Name = "lblPredData";
-			this.lblPredData.Size = new System.Drawing.Size(80, 13);
-			this.lblPredData.TabIndex = 23;
-			this.lblPredData.Text = "Prediction Data";
-			this.lblPredData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
 			// nudConfidenceLevel
 			// 
-			this.nudConfidenceLevel.Location = new System.Drawing.Point(340, 3);
+			this.nudConfidenceLevel.Location = new System.Drawing.Point(335, 3);
 			this.nudConfidenceLevel.Name = "nudConfidenceLevel";
 			this.nudConfidenceLevel.Size = new System.Drawing.Size(53, 20);
 			this.nudConfidenceLevel.TabIndex = 21;
@@ -413,15 +440,6 @@
             0,
             0,
             0});
-			// 
-			// comboBoxPredData
-			// 
-			this.tlpOptions.SetColumnSpan(this.comboBoxPredData, 2);
-			this.comboBoxPredData.FormattingEnabled = true;
-			this.comboBoxPredData.Location = new System.Drawing.Point(286, 72);
-			this.comboBoxPredData.Name = "comboBoxPredData";
-			this.comboBoxPredData.Size = new System.Drawing.Size(107, 21);
-			this.comboBoxPredData.TabIndex = 24;
 			// 
 			// RegressionForm
 			// 
@@ -477,5 +495,6 @@
 		private Controls.PercentageNumericUpDown nudPredictionLevel;
 		private System.Windows.Forms.Label lblPredData;
 		private System.Windows.Forms.ComboBox comboBoxPredData;
+		private System.Windows.Forms.CheckBox chkBoxDW;
 	}
 }

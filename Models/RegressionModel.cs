@@ -12,7 +12,8 @@ namespace NoruST.Models
 	{
         public Domain.DataSet dataSet { get; set; }
         public bool doPrediction { get; set; }
-        public double confidenceLevel { get; set; }
+		public bool doDurbinWatson { get; set; }
+		public double confidenceLevel { get; set; }
         public double predictionLevel { get; set; }
 
     }

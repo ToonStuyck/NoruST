@@ -70,22 +70,23 @@ namespace NoruST.Forms
         {
 			List<Variable> variablesD = new List<Variable>();
 			List<Variable> variablesI = new List<Variable>();
-			List<Variable> variables = new List<Variable>();
+			List<Variable> variablesPrediction = new List<Variable>();
 
-			presenter.setConfLevel(Convert.ToDouble(nudConfidenceLevel.Value));
-			presenter.setPredictionLevel(Convert.ToDouble(nudPredictionLevel.Value));
-			//double confidenceLevel = Convert.ToDouble(nudConfidenceLevel.Value);
 			bool[] graphs = new bool[5];
+
+			//selectedPredictionDataSet().getVariables()
 
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
 			{
 				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckD.Name].Value))
 				{
 					variablesD.Add((Variable)row.DataBoundItem);
+
 				}
 				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckI.Name].Value))
 				{
 					variablesI.Add((Variable)row.DataBoundItem);
+					System.Diagnostics.Debug.WriteLine("row.headercell = {0} ", row.HeaderCell); 
 				}
 			}
 			graphs[0] = (chkFittedValuesVsActualYValues.Checked) ? true : false;
@@ -94,17 +95,7 @@ namespace NoruST.Forms
 			graphs[3] = (chkActualVsX.Checked) ?  true : false;
 			graphs[4] = (chkFittedVsX.Checked) ?  true : false;
 
-			if (chckBoxPrediction.Checked)
-			{
-				if (uiComboBox_DataSets.SelectedItem == comboBoxPredData.SelectedItem)
-				{
-					MessageBox.Show("Data set for prediction can't be the same as regression dataset");
-					return;
-					
-				}
-				presenter.setPrediction(true);
-			}
-				
+			checkOptions();
 
 			//presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel, selectedDataSet(), graphs);
 			presenter.createRegression(variablesD, variablesI, selectedDataSet(), selectedPredictionDataSet(), graphs);
@@ -112,6 +103,29 @@ namespace NoruST.Forms
 			Close();
             
         }
+
+		private void checkOptions()
+		{
+			presenter.setConfLevel(Convert.ToDouble(nudConfidenceLevel.Value));
+			if (chkBoxDW.Checked)
+				presenter.setDW(true);
+			else
+				presenter.setDW(false);
+
+			if (chckBoxPrediction.Checked)
+			{
+				if (uiComboBox_DataSets.SelectedItem == comboBoxPredData.SelectedItem)
+				{
+					MessageBox.Show("Data set for prediction can't be the same as regression dataset");
+					return;
+
+				}
+				presenter.setPrediction(true);
+				presenter.setPredictionLevel(Convert.ToDouble(nudPredictionLevel.Value));
+			}
+			else
+				presenter.setPrediction(false);
+		}
 
         private void bindModelToView()
         {
@@ -159,6 +173,22 @@ namespace NoruST.Forms
 			}
 		}
 
-	
+		private void chckBoxPrediction_CheckedChanged(object sender, EventArgs e)
+		{
+			if (chckBoxPrediction.Checked)
+			{
+				lblPredLevel.Enabled = true;
+				lblPredData.Enabled = true;
+				nudPredictionLevel.Enabled = true;
+				comboBoxPredData.Enabled = true;
+			}
+			else
+			{
+				lblPredLevel.Enabled = false;
+				lblPredData.Enabled = false;
+				nudPredictionLevel.Enabled = false;
+				comboBoxPredData.Enabled = false;
+			}
+		}
 	}
 }
