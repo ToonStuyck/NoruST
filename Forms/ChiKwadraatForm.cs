@@ -67,6 +67,12 @@ namespace NoruST.Forms
         {
             //String range = rangeSelected(string range)
             presenter.getModel().range = uiTextBox_DataSetRange.Text;
+            presenter.getModel().colTitle = uiTextBox_ColTitle.Text;
+            presenter.getModel().rowTitle = uiTextBox_RowTitle.Text;
+            presenter.getModel().hasColTitle = ColumsIncluded.Checked;
+            presenter.getModel().hasRowTitle = RowsIncluded.Checked;
+            presenter.getModel().hasRowColHeaders = RowsAndColumsIncluded.Checked;
+
             presenter.createChiKwadraatPlot(selectedDataSet());
             Close();
         }
@@ -76,23 +82,15 @@ namespace NoruST.Forms
             Close();
         }
 
-        private void ChiSquare_Colums(object sender, EventArgs e)
+        private void uiTextBox_ColTitle_TextChanged(object sender, EventArgs e)
         {
-
+            ColumsIncluded.Checked = (uiTextBox_ColTitle.Text != "");
         }
 
-        private void ChiSquare_Rows(object sender, EventArgs e)
+        private void uiTextBox_RowTitle_TextChanged(object sender, EventArgs e)
         {
-
+            RowsIncluded.Checked = (uiTextBox_RowTitle.Text != "");
         }
-
-        private void ChiSquare_both(object sender, EventArgs e)
-        {
-            ChiSquare_Colums(sender,e);
-            ChiSquare_Rows(sender,e);
-        }
-
-
     }
 }
 

@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.uiTextBox_RowTitle = new System.Windows.Forms.TextBox();
+            this.uiTextBox_ColTitle = new System.Windows.Forms.TextBox();
             this.RowsIncluded = new System.Windows.Forms.CheckBox();
             this.ColumsIncluded = new System.Windows.Forms.CheckBox();
             this.RowsAndColumsIncluded = new System.Windows.Forms.CheckBox();
@@ -44,6 +46,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.uiTextBox_RowTitle);
+            this.groupBox2.Controls.Add(this.uiTextBox_ColTitle);
             this.groupBox2.Controls.Add(this.RowsIncluded);
             this.groupBox2.Controls.Add(this.ColumsIncluded);
             this.groupBox2.Controls.Add(this.RowsAndColumsIncluded);
@@ -57,6 +61,22 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Row and Culumn Headers and Titles";
             // 
+            // uiTextBox_RowTitle
+            // 
+            this.uiTextBox_RowTitle.Location = new System.Drawing.Point(136, 85);
+            this.uiTextBox_RowTitle.Name = "uiTextBox_RowTitle";
+            this.uiTextBox_RowTitle.Size = new System.Drawing.Size(169, 22);
+            this.uiTextBox_RowTitle.TabIndex = 4;
+            this.uiTextBox_RowTitle.TextChanged += new System.EventHandler(this.uiTextBox_RowTitle_TextChanged);
+            // 
+            // uiTextBox_ColTitle
+            // 
+            this.uiTextBox_ColTitle.Location = new System.Drawing.Point(136, 57);
+            this.uiTextBox_ColTitle.Name = "uiTextBox_ColTitle";
+            this.uiTextBox_ColTitle.Size = new System.Drawing.Size(169, 22);
+            this.uiTextBox_ColTitle.TabIndex = 3;
+            this.uiTextBox_ColTitle.TextChanged += new System.EventHandler(this.uiTextBox_ColTitle_TextChanged);
+            // 
             // RowsIncluded
             // 
             this.RowsIncluded.AutoSize = true;
@@ -67,7 +87,6 @@
             this.RowsIncluded.TabIndex = 2;
             this.RowsIncluded.Text = "Rows Title";
             this.RowsIncluded.UseVisualStyleBackColor = true;
-            this.RowsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_Rows);
             // 
             // ColumsIncluded
             // 
@@ -79,11 +98,12 @@
             this.ColumsIncluded.TabIndex = 1;
             this.ColumsIncluded.Text = "Columns Title";
             this.ColumsIncluded.UseVisualStyleBackColor = true;
-            this.ColumsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_Colums);
             // 
             // RowsAndColumsIncluded
             // 
             this.RowsAndColumsIncluded.AutoSize = true;
+            this.RowsAndColumsIncluded.Checked = true;
+            this.RowsAndColumsIncluded.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RowsAndColumsIncluded.Location = new System.Drawing.Point(15, 30);
             this.RowsAndColumsIncluded.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.RowsAndColumsIncluded.Name = "RowsAndColumsIncluded";
@@ -91,7 +111,6 @@
             this.RowsAndColumsIncluded.TabIndex = 0;
             this.RowsAndColumsIncluded.Text = "Table includes Row and Column Headers";
             this.RowsAndColumsIncluded.UseVisualStyleBackColor = true;
-            this.RowsAndColumsIncluded.CheckedChanged += new System.EventHandler(this.ChiSquare_both);
             // 
             // ChiSquareOk
             // 
@@ -196,5 +215,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboBox_dataSelect;
+        private System.Windows.Forms.TextBox uiTextBox_RowTitle;
+        private System.Windows.Forms.TextBox uiTextBox_ColTitle;
     }
 }
