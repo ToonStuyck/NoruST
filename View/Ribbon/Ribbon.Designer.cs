@@ -36,6 +36,12 @@
         {
 			this.tabNoruST = this.Factory.CreateRibbonTab();
 			this.grpData = this.Factory.CreateRibbonGroup();
+			this.grpAnalysis = this.Factory.CreateRibbonGroup();
+			this.separator1 = this.Factory.CreateRibbonSeparator();
+			this.separator2 = this.Factory.CreateRibbonSeparator();
+			this.separator6 = this.Factory.CreateRibbonSeparator();
+			this.separator4 = this.Factory.CreateRibbonSeparator();
+			this.separator5 = this.Factory.CreateRibbonSeparator();
 			this.btnDataSetManager = this.Factory.CreateRibbonButton();
 			this.btnDataViewer = this.Factory.CreateRibbonButton();
 			this.btnDataUtilities = this.Factory.CreateRibbonMenu();
@@ -43,7 +49,6 @@
 			this.btnLag = this.Factory.CreateRibbonButton();
 			this.btnInteraction = this.Factory.CreateRibbonButton();
 			this.btnUnstacked = this.Factory.CreateRibbonButton();
-			this.grpAnalysis = this.Factory.CreateRibbonGroup();
 			this.menuVisualization = this.Factory.CreateRibbonMenu();
 			this.btnHistogram = this.Factory.CreateRibbonButton();
 			this.btnScatterplot = this.Factory.CreateRibbonButton();
@@ -51,7 +56,6 @@
 			this.menuDescriptiveStatistics = this.Factory.CreateRibbonMenu();
 			this.btnOneVariableSummary = this.Factory.CreateRibbonButton();
 			this.btnCorrelationAndCovariance = this.Factory.CreateRibbonButton();
-			this.separator1 = this.Factory.CreateRibbonSeparator();
 			this.menuStatisticalInference = this.Factory.CreateRibbonMenu();
 			this.splitButtonConfidence = this.Factory.CreateRibbonSplitButton();
 			this.btnMeanConf = this.Factory.CreateRibbonButton();
@@ -62,22 +66,18 @@
 			this.btnSampleSize = this.Factory.CreateRibbonButton();
 			this.btnAnova = this.Factory.CreateRibbonButton();
 			this.button3 = this.Factory.CreateRibbonButton();
-			this.separator2 = this.Factory.CreateRibbonSeparator();
 			this.menuRegression = this.Factory.CreateRibbonMenu();
 			this.btnWhiteTest = this.Factory.CreateRibbonButton();
 			this.btnSimpleRegression = this.Factory.CreateRibbonButton();
-			this.separator6 = this.Factory.CreateRibbonSeparator();
 			this.menuTimeseriesandForecasting = this.Factory.CreateRibbonMenu();
 			this.btnTimeSeriesGraph = this.Factory.CreateRibbonButton();
 			this.btnRunsTestForRandomness = this.Factory.CreateRibbonButton();
 			this.button4 = this.Factory.CreateRibbonButton();
 			this.btnForecast = this.Factory.CreateRibbonButton();
-			this.separator4 = this.Factory.CreateRibbonSeparator();
 			this.menuClassification = this.Factory.CreateRibbonMenu();
 			this.btnLogisticRegression = this.Factory.CreateRibbonButton();
 			this.btnDiscriminantAnalysis = this.Factory.CreateRibbonButton();
 			this.menuNormalityTests = this.Factory.CreateRibbonMenu();
-			this.separator5 = this.Factory.CreateRibbonSeparator();
 			this.menuStatisticalProcessControl = this.Factory.CreateRibbonMenu();
 			this.btnXRChart = this.Factory.CreateRibbonButton();
 			this.btnPChart = this.Factory.CreateRibbonButton();
@@ -101,6 +101,44 @@
 			this.grpData.Items.Add(this.btnDataUtilities);
 			this.grpData.Label = "Data";
 			this.grpData.Name = "grpData";
+			// 
+			// grpAnalysis
+			// 
+			this.grpAnalysis.Items.Add(this.menuVisualization);
+			this.grpAnalysis.Items.Add(this.menuDescriptiveStatistics);
+			this.grpAnalysis.Items.Add(this.separator1);
+			this.grpAnalysis.Items.Add(this.menuStatisticalInference);
+			this.grpAnalysis.Items.Add(this.separator2);
+			this.grpAnalysis.Items.Add(this.menuRegression);
+			this.grpAnalysis.Items.Add(this.separator6);
+			this.grpAnalysis.Items.Add(this.menuTimeseriesandForecasting);
+			this.grpAnalysis.Items.Add(this.separator4);
+			this.grpAnalysis.Items.Add(this.menuClassification);
+			this.grpAnalysis.Items.Add(this.menuNormalityTests);
+			this.grpAnalysis.Items.Add(this.separator5);
+			this.grpAnalysis.Items.Add(this.menuStatisticalProcessControl);
+			this.grpAnalysis.Label = "Analysis";
+			this.grpAnalysis.Name = "grpAnalysis";
+			// 
+			// separator1
+			// 
+			this.separator1.Name = "separator1";
+			// 
+			// separator2
+			// 
+			this.separator2.Name = "separator2";
+			// 
+			// separator6
+			// 
+			this.separator6.Name = "separator6";
+			// 
+			// separator4
+			// 
+			this.separator4.Name = "separator4";
+			// 
+			// separator5
+			// 
+			this.separator5.Name = "separator5";
 			// 
 			// btnDataSetManager
 			// 
@@ -162,24 +200,6 @@
 			this.btnUnstacked.ScreenTip = "Converts a set of variables from stacked format to unstacked format";
 			this.btnUnstacked.ShowImage = true;
 			// 
-			// grpAnalysis
-			// 
-			this.grpAnalysis.Items.Add(this.menuVisualization);
-			this.grpAnalysis.Items.Add(this.menuDescriptiveStatistics);
-			this.grpAnalysis.Items.Add(this.separator1);
-			this.grpAnalysis.Items.Add(this.menuStatisticalInference);
-			this.grpAnalysis.Items.Add(this.separator2);
-			this.grpAnalysis.Items.Add(this.menuRegression);
-			this.grpAnalysis.Items.Add(this.separator6);
-			this.grpAnalysis.Items.Add(this.menuTimeseriesandForecasting);
-			this.grpAnalysis.Items.Add(this.separator4);
-			this.grpAnalysis.Items.Add(this.menuClassification);
-			this.grpAnalysis.Items.Add(this.menuNormalityTests);
-			this.grpAnalysis.Items.Add(this.separator5);
-			this.grpAnalysis.Items.Add(this.menuStatisticalProcessControl);
-			this.grpAnalysis.Label = "Analysis";
-			this.grpAnalysis.Name = "grpAnalysis";
-			// 
 			// menuVisualization
 			// 
 			this.menuVisualization.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -237,10 +257,6 @@
 			this.btnCorrelationAndCovariance.Name = "btnCorrelationAndCovariance";
 			this.btnCorrelationAndCovariance.ScreenTip = "Produces a table of correlations and/or a table of covariances between variables";
 			this.btnCorrelationAndCovariance.ShowImage = true;
-			// 
-			// separator1
-			// 
-			this.separator1.Name = "separator1";
 			// 
 			// menuStatisticalInference
 			// 
@@ -321,10 +337,6 @@
     "e";
 			this.button3.ShowImage = true;
 			// 
-			// separator2
-			// 
-			this.separator2.Name = "separator2";
-			// 
 			// menuRegression
 			// 
 			this.menuRegression.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -341,16 +353,13 @@
 			this.btnWhiteTest.Label = "White Test";
 			this.btnWhiteTest.Name = "btnWhiteTest";
 			this.btnWhiteTest.ShowImage = true;
+			this.btnWhiteTest.Visible = false;
 			// 
 			// btnSimpleRegression
 			// 
 			this.btnSimpleRegression.Label = "Multiple Regression";
 			this.btnSimpleRegression.Name = "btnSimpleRegression";
 			this.btnSimpleRegression.ShowImage = true;
-			// 
-			// separator6
-			// 
-			this.separator6.Name = "separator6";
 			// 
 			// menuTimeseriesandForecasting
 			// 
@@ -394,10 +403,6 @@
 			this.btnForecast.ScreenTip = "Generates forecasts for time series variables ";
 			this.btnForecast.ShowImage = true;
 			// 
-			// separator4
-			// 
-			this.separator4.Name = "separator4";
-			// 
 			// menuClassification
 			// 
 			this.menuClassification.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -431,10 +436,6 @@
 			this.menuNormalityTests.Name = "menuNormalityTests";
 			this.menuNormalityTests.ShowImage = true;
 			this.menuNormalityTests.Visible = false;
-			// 
-			// separator5
-			// 
-			this.separator5.Name = "separator5";
 			// 
 			// menuStatisticalProcessControl
 			// 
