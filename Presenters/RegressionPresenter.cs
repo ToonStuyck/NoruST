@@ -47,9 +47,26 @@ namespace NoruST.Presenters
 			nrOfGraphs = 0;
 		}
 
-		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel, DataSet dataSet2, bool[] graphs)
+		public void setPrediction(bool value)
+		{
+			model.doPrediction = value;
+		}
+
+		public void setConfLevel(double value)
+		{
+			model.confidenceLevel = value;
+		}
+		public void setPredictionLevel(double value)
+		{
+			model.predictionLevel = value;
+		}
+
+		//public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel, DataSet dataSet2, bool[] graphs)
+		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, DataSet dataSet2, bool[] graphs)
 		{
 			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
+			double confLevel = model.confidenceLevel;
+
 			sheet.Cells[100, 100] = "=ROWS(" + dataSet.getWorksheet().Name + "!" + variablesI[0].Range + ")";
 			int length = Convert.ToInt32((sheet.Cells[100,100] as Range).Value);
 			sheet.Cells[100, 100] = "";
@@ -184,8 +201,21 @@ namespace NoruST.Presenters
 			//Prediction
 			//
 			//double[,] xDataNew = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
-			//prediction(sheet, xDataNew, 10, b, confLevel, length, variablesI.Count, X, MSE);
+			// //prediction(sheet, xDataNew, 10, b, confLevel, length, variablesI.Count, X, MSE);
+			//prediction(sheet, xDataNew, 10, b, length, variablesI.Count, X, MSE);
 			//System.Diagnostics.Debug.WriteLine("nr of datarow = {0}", dataSet.getNrDataRows());
+			if (model.doPrediction)
+			{
+				//double[,] xDataPred = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
+				//prediction(sheet, xDataPred, b, length, variablesI.Count, X, MSE); 
+				prediction(sheet, xData, b, length, variablesI.Count, X, MSE); //DELETE
+				System.Diagnostics.Debug.WriteLine("prediction wordt opgevraagd");
+				setPrediction(false);
+			}
+			else
+				System.Diagnostics.Debug.WriteLine("geen extra optie gevraagd");
+			
+
 
 			//
 			//Draw graphs
@@ -263,10 +293,10 @@ namespace NoruST.Presenters
 			((Range)sheet.Cells[1, 3]).EntireColumn.AutoFit();
 			((Range)sheet.Cells[1, 4]).EntireColumn.AutoFit();
 			((Range)sheet.Cells[1, 5]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 6]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 7]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 8]).EntireColumn.AutoFit();
-			((Range)sheet.Cells[1, 9]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[1, 6]).EntireColumn.ColumnWidth = 13;
+			((Range)sheet.Cells[1, 7]).EntireColumn.ColumnWidth = 13;
+			((Range)sheet.Cells[1, 8]).EntireColumn.ColumnWidth = 13;
+			((Range)sheet.Cells[1, 9]).EntireColumn.ColumnWidth = 13;
 			((Range)sheet.Cells[1, 10]).EntireColumn.AutoFit();
 
 		}
@@ -538,10 +568,12 @@ namespace NoruST.Presenters
 		}
 
 		//TODO
-		public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
+		//public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
+		public void prediction(_Worksheet sheet, double[,]xDataNew, double[] coefficients, int n, int k, DenseMatrix X, double MSE)
 		{
 			//source: http://www.real-statistics.com/multiple-regression/confidence-and-prediction-intervals/
 
+			double predLevel = model.predictionLevel;
 			double[,] xDataNewN = { { 1,1430,35},{ 1,1560,45},{1,1520,40 } };
 
 			for (int dataNr = 0; dataNr < xDataNewN.GetLength(0);dataNr++)
@@ -570,8 +602,8 @@ namespace NoruST.Presenters
 				}
 
 				yNew = Math.Round(yNew, 2);
-				double lowLimit= Math.Round((yNew - sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n-k-1) * s), 2);
-				double highLimit = Math.Round((yNew + sheet.Application.WorksheetFunction.TInv(1 - confLevel / 100, n - k - 1) * s), 2);
+				double lowLimit= Math.Round((yNew - sheet.Application.WorksheetFunction.TInv(1 - predLevel / 100, n-k-1) * s), 2);
+				double highLimit = Math.Round((yNew + sheet.Application.WorksheetFunction.TInv(1 - predLevel / 100, n - k - 1) * s), 2);
 				System.Diagnostics.Debug.WriteLine("{0}\t\t{1}\t\t{2}",yNew, lowLimit, highLimit);
 				
 			}

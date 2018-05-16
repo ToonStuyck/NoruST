@@ -50,7 +50,12 @@ namespace NoruST.Forms
             return (DataSet)uiComboBox_DataSets.SelectedItem;
         }
 
-        public RegressionForm()
+		private DataSet selectedPredictionDataSet()
+		{
+			return (DataSet)comboBoxPredData.SelectedItem;
+		}
+
+		public RegressionForm()
         {
             InitializeComponent();
         }
@@ -67,7 +72,9 @@ namespace NoruST.Forms
 			List<Variable> variablesI = new List<Variable>();
 			List<Variable> variables = new List<Variable>();
 
-			double confidenceLevel = Convert.ToDouble(nudConfidenceLevel.Value);
+			presenter.setConfLevel(Convert.ToDouble(nudConfidenceLevel.Value));
+			presenter.setPredictionLevel(Convert.ToDouble(nudPredictionLevel.Value));
+			//double confidenceLevel = Convert.ToDouble(nudConfidenceLevel.Value);
 			bool[] graphs = new bool[5];
 
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
@@ -87,8 +94,21 @@ namespace NoruST.Forms
 			graphs[3] = (chkActualVsX.Checked) ?  true : false;
 			graphs[4] = (chkFittedVsX.Checked) ?  true : false;
 
-			presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel, selectedDataSet(), graphs);
-			presenter.resetNrofGraphs(); //to make sure when redoing regression, graphs are drawn right below the data
+			if (chckBoxPrediction.Checked)
+			{
+				if (uiComboBox_DataSets.SelectedItem == comboBoxPredData.SelectedItem)
+				{
+					MessageBox.Show("Data set for prediction can't be the same as regression dataset");
+					return;
+					
+				}
+				presenter.setPrediction(true);
+			}
+				
+
+			//presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel, selectedDataSet(), graphs);
+			presenter.createRegression(variablesD, variablesI, selectedDataSet(), selectedPredictionDataSet(), graphs);
+			presenter.resetNrofGraphs(); //to make sure that when redoing regression, the new graphs are drawn right below the data, io under previous graphs
 			Close();
             
         }
@@ -97,7 +117,15 @@ namespace NoruST.Forms
         {
             uiComboBox_DataSets.DataSource = presenter.dataSets();
             uiComboBox_DataSets.DisplayMember = "Name";
-			
+
+			var DataSetListCopy = new BindingList<DataSet>();//make copy of datasets
+			foreach(DataSet v in presenter.dataSets())
+			{
+				DataSetListCopy.Add(v);
+			}
+			comboBoxPredData.DataSource = DataSetListCopy;
+			comboBoxPredData.DisplayMember = "name";
+
 			//nameDataGridViewTextBoxColumn.DataPropertyName = "name";
 			//rangeDataGridViewTextBoxColumn.DataPropertyName = "Range";
 			uiComboBox_DataSets.SelectedIndexChanged += (obj, eventArgs) =>
@@ -130,5 +158,7 @@ namespace NoruST.Forms
 				chkFittedVsX.Checked = false;
 			}
 		}
+
+	
 	}
 }
