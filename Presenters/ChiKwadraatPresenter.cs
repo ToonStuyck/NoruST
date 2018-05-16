@@ -217,6 +217,8 @@ namespace NoruST.Presenters
             //chi square dings
             sheet.Cells[5 * rangeHeight + 18, 1] = "Chi-Square Statistic";
             sheet.Cells[5 * rangeHeight + 19, 1] = "CHi-Square";
+            sheet.Cells[5 * rangeHeight + 20, 1] = "p-value";
+            //=1-CHIKW.VERD(B39;3*3;1)
             sheet.get_Range("A2", AddressConverter.CellAddress(5 * rangeHeight + 18, 2, false, false)).Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
             int rowg = 4 * rangeHeight + 16;
             double som = 0;
@@ -232,8 +234,7 @@ namespace NoruST.Presenters
                 rowg++;
             }
             sheet.Cells[5 * rangeHeight + 19, 2] = som;
-
-
+            sheet.Cells[5 * rangeHeight + 20, 2] = sheet.Application.WorksheetFunction.ChiSq_Dist(som, (rangeHeight - 1)*(rangeWidth - 1),false);
 
             //autofit
             ((Range)sheet.Cells[1, 1]).EntireColumn.AutoFit();
