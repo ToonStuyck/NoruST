@@ -62,7 +62,6 @@ namespace NoruST.Forms
 
         private void ui_Button_Cancel_Click(object sender, EventArgs e)
         {
-			//Debug.WriteLine("PRINTENNNNNNNNNNNNNNNN");
 			Close();
         }
 
@@ -71,10 +70,10 @@ namespace NoruST.Forms
 			List<Variable> variablesD = new List<Variable>();
 			List<Variable> variablesI = new List<Variable>();
 			List<Variable> variablesPrediction = new List<Variable>();
+			List<Variable> allvariablesPrediction = new List<Variable>();
+			List<String> variablesNamesI = new List<String>();
 
 			bool[] graphs = new bool[5];
-
-			//selectedPredictionDataSet().getVariables()
 
 			foreach (DataGridViewRow row in uiDataGridView_Variables.Rows)
 			{
@@ -86,7 +85,20 @@ namespace NoruST.Forms
 				if (Convert.ToBoolean(row.Cells[uiDataGridViewColumn_VariableCheckI.Name].Value))
 				{
 					variablesI.Add((Variable)row.DataBoundItem);
-					System.Diagnostics.Debug.WriteLine("row.headercell = {0} ", row.HeaderCell); 
+				}
+				
+			}
+
+			foreach (Variable elem in variablesI)
+			{
+				foreach (Variable elemP in selectedPredictionDataSet().getVariables())
+				{
+					if (elemP.name.Equals(elem.name))
+					{
+						variablesPrediction.Add(elemP);
+						//System.Diagnostics.Debug.WriteLine("variableP name = " + elemP.name + "added to variablesPrediction");
+					}
+
 				}
 			}
 			graphs[0] = (chkFittedValuesVsActualYValues.Checked) ? true : false;
@@ -95,29 +107,27 @@ namespace NoruST.Forms
 			graphs[3] = (chkActualVsX.Checked) ?  true : false;
 			graphs[4] = (chkFittedVsX.Checked) ?  true : false;
 
-			checkOptions();
+			if(!checkOptions()) return;
+			System.Diagnostics.Debug.WriteLine("selectedDataset.getRange= " + selectedDataSet().getRange().ToString());
+			System.Diagnostics.Debug.WriteLine("selectedPredictionDataset.getRange= " + selectedPredictionDataSet().getRange().ToString());
 
-			//presenter.createRegression(variablesD, variablesI, selectedDataSet(), confidenceLevel, selectedDataSet(), graphs);
-			presenter.createRegression(variablesD, variablesI, selectedDataSet(), selectedPredictionDataSet(), graphs);
+			presenter.createRegression(variablesD, variablesI, selectedDataSet(), selectedPredictionDataSet(), graphs, variablesPrediction);
 			presenter.resetNrofGraphs(); //to make sure that when redoing regression, the new graphs are drawn right below the data, io under previous graphs
 			Close();
             
         }
 
-		private void checkOptions()
+		private bool checkOptions()
 		{
 			presenter.setConfLevel(Convert.ToDouble(nudConfidenceLevel.Value));
-			if (chkBoxDW.Checked)
-				presenter.setDW(true);
-			else
-				presenter.setDW(false);
+			presenter.setDW(chkBoxDW.Checked);
 
 			if (chckBoxPrediction.Checked)
 			{
 				if (uiComboBox_DataSets.SelectedItem == comboBoxPredData.SelectedItem)
 				{
 					MessageBox.Show("Data set for prediction can't be the same as regression dataset");
-					return;
+					return false;
 
 				}
 				presenter.setPrediction(true);
@@ -125,6 +135,7 @@ namespace NoruST.Forms
 			}
 			else
 				presenter.setPrediction(false);
+			return true;
 		}
 
         private void bindModelToView()
@@ -155,40 +166,19 @@ namespace NoruST.Forms
 
 		private void chkCheckAllOptions_CheckedChanged(object sender, EventArgs e)
 		{
-			if (chkCheckAllOptions.Checked)
-			{
-				chkFittedValuesVsActualYValues.Checked = true;
-				chkResidualsVsFittedValues.Checked = true;
-				chkResidualsVsXValues.Checked = true;
-				chkActualVsX.Checked = true;
-				chkFittedVsX.Checked = true;
-			}
-			else
-			{
-				chkFittedValuesVsActualYValues.Checked = false;
-				chkResidualsVsFittedValues.Checked = false;
-				chkResidualsVsXValues.Checked = false;
-				chkActualVsX.Checked = false;
-				chkFittedVsX.Checked = false;
-			}
+			chkFittedValuesVsActualYValues.Checked = chkCheckAllOptions.Checked;
+			chkResidualsVsFittedValues.Checked = chkCheckAllOptions.Checked;
+			chkResidualsVsXValues.Checked = chkCheckAllOptions.Checked;
+			chkActualVsX.Checked = chkCheckAllOptions.Checked;
+			chkFittedVsX.Checked = chkCheckAllOptions.Checked;
 		}
 
 		private void chckBoxPrediction_CheckedChanged(object sender, EventArgs e)
 		{
-			if (chckBoxPrediction.Checked)
-			{
-				lblPredLevel.Enabled = true;
-				lblPredData.Enabled = true;
-				nudPredictionLevel.Enabled = true;
-				comboBoxPredData.Enabled = true;
-			}
-			else
-			{
-				lblPredLevel.Enabled = false;
-				lblPredData.Enabled = false;
-				nudPredictionLevel.Enabled = false;
-				comboBoxPredData.Enabled = false;
-			}
+				lblPredLevel.Enabled = chckBoxPrediction.Checked;
+				lblPredData.Enabled = chckBoxPrediction.Checked;
+				nudPredictionLevel.Enabled = chckBoxPrediction.Checked;
+				comboBoxPredData.Enabled = chckBoxPrediction.Checked;
 		}
 	}
 }

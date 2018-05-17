@@ -66,8 +66,7 @@ namespace NoruST.Presenters
 			model.doDurbinWatson = value;
 		}
 
-		//public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, double confLevel, DataSet dataSet2, bool[] graphs)
-		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, DataSet dataSet2, bool[] graphs)
+		public void createRegression(List<Variable> variablesD, List<Variable> variablesI, DataSet dataSet, DataSet dataSet2, bool[] graphs, List<Variable> variablesPrediction)
 		{
 			_Worksheet sheet = WorksheetHelper.NewWorksheet("Regression");
 			double confLevel = model.confidenceLevel;
@@ -123,14 +122,10 @@ namespace NoruST.Presenters
 			sheet.get_Range("A9", "F9").Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
 			sheet.get_Range("A15", "G15").Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
 			sheet.get_Range("B3", "B5").NumberFormat = "0.0000";
-			//sheet.get_Range("B11", AddressConverter.CellAddress(14, variables.Count + 1, false, false)).NumberFormat = "0.000";
 			sheet.get_Range("B18", "B20").NumberFormat = "0.0000";
 			sheet.get_Range("D18", "E19").NumberFormat = "0.0000";
 
-			//sheet.get_Range("B24", AddressConverter.CellAddress(23 + c, 2, false, false)).NumberFormat = "0.0000";
-			//sheet.get_Range("C24", AddressConverter.CellAddress(23 + c, 8, false, false)).NumberFormat = "0.000000";
-			//sheet.get_Range("C24", AddressConverter.CellAddress(23 + c, 8, false, false)).Cells.HorizontalAlignment = XlHAlign.xlHAlignRight;
-			Globals.ExcelAddIn.Application.ActiveWindow.DisplayGridlines = false;
+		Globals.ExcelAddIn.Application.ActiveWindow.DisplayGridlines = false;
 
 
 			//
@@ -167,7 +162,6 @@ namespace NoruST.Presenters
 
 			
 			double[] anovaResults = calculateAnova(yData, yhat, variablesI.Count(), sheet);
-			//System.Diagnostics.Debug.WriteLine("variablesI count = {0}", variablesI.Count());
 
 			multicollinearity(sheet, xData, variablesI.Count);
 			if (model.doDurbinWatson == true)
@@ -207,20 +201,14 @@ namespace NoruST.Presenters
 			//
 			//Prediction
 			//
-			//double[,] xDataNew = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
-			// //prediction(sheet, xDataNew, 10, b, confLevel, length, variablesI.Count, X, MSE);
-			//prediction(sheet, xDataNew, 10, b, length, variablesI.Count, X, MSE);
-			//System.Diagnostics.Debug.WriteLine("nr of datarow = {0}", dataSet.getNrDataRows());
-			/*if (model.doPrediction)
+			if (model.doPrediction)
 			{
-				double[,] xDataPred = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesI);
-				//prediction(sheet, xDataPred, b, length, variablesI.Count, X, MSE); 
-				prediction(sheet, xData, b, length, variablesI.Count, X, MSE); //DELETE
-				System.Diagnostics.Debug.WriteLine("prediction wordt opgevraagd");
+				double[,] xDataPred = calcXdata(dataSet2.getNrDataRows(), dataSet2, variablesPrediction);
+				int[] rightCell = { dataSet2.getRange().Row, dataSet2.getRange().Column + dataSet2.amountOfVariables() }; //{row, column}
+
+				prediction(dataSet2.getWorksheet(), xDataPred, b, length, variablesI.Count, X, MSE, rightCell, variablesD[0].name); 
 				setPrediction(false);
 			}
-			else
-				System.Diagnostics.Debug.WriteLine("geen extra optie gevraagd");*/
 			
 
 
@@ -324,7 +312,6 @@ namespace NoruST.Presenters
 				sheet.Cells[10, 6] = "<0.0001";
 			else
 				sheet.Cells[10, 6] = Math.Round(values[7], 4);
-			//sheet.Cells[10, 6] = (values[7]< 0.0001) ? "<0.0001" : (Math.Round(values[7], 4)).ToString();///
         }
 
         public void FillR(_Worksheet sheet, double R2, double R, double Radj, double err)
@@ -342,7 +329,6 @@ namespace NoruST.Presenters
 			{
 				sheet.Cells[row, 3] = std[row - 16];
 				sheet.Cells[row, 4] = tValue[row - 16];
-				//sheet.Cells[row, 5] = (pValue[row - 16] < 0.0001) ? "<0.0001" : Math.Round(pValue[row - 16],4).ToString(); ///
 				if (pValue[row - 16] < 0.0001)
 					sheet.Cells[row, 5] = "<0.0001";
 				else
@@ -391,7 +377,6 @@ namespace NoruST.Presenters
             {
                 int i = 0;
                 string ran = variablesI[count].Range.ToString();
-				System.Diagnostics.Debug.WriteLine("RAN = "+ ran);
 				Array arr = dataSet.getWorksheet().Range[ran].Value;
                 double[] vals = new double[length];
 				foreach (var item in arr)
@@ -404,7 +389,6 @@ namespace NoruST.Presenters
                     double temp = Convert.ToDouble(item);
                     xData[i, count + 1] = temp;
 					//xData[count,i] = (temp - meansI[count]);
-					System.Diagnostics.Debug.WriteLine("i = {0} ", i);
 					i++;
                 }
                 count++;
@@ -441,14 +425,14 @@ namespace NoruST.Presenters
 			var SSR_sub = yHoedM.Subtract(yGem);	//yHat-yGem
 			var SSR_exp = SSR_sub.PointwiseMultiply(SSR_sub);
 			double MSR = SSR_exp.Sum()/k;
-			System.Diagnostics.Debug.WriteLine("sum of squares explained = {0}", SSR_exp.Sum());
+			System.Diagnostics.Debug.WriteLine("sum of squares R = {0}", SSR_exp.Sum());
 			System.Diagnostics.Debug.WriteLine("MSR = {0}", MSR);
 
 			var SSE_sub = yDataM.Subtract(yHoedM);	//yi-yHat
 			var SSE_exp = SSE_sub.PointwiseMultiply(SSE_sub);
 			double MSE = SSE_exp.Sum() / ((n - k - 1));
-			System.Diagnostics.Debug.WriteLine("sum of squares explained = {0}", SSE_exp.Sum());
-			System.Diagnostics.Debug.WriteLine("MSR = {0}", MSE);
+			System.Diagnostics.Debug.WriteLine("sum of squares E = {0}", SSE_exp.Sum());
+			System.Diagnostics.Debug.WriteLine("MSE = {0}", MSE);
 
 			double pVal = sheet.Application.WorksheetFunction.F_Dist(results[0], k, n - k, true);
 			
@@ -476,8 +460,6 @@ namespace NoruST.Presenters
 			sheet.Cells[row, 9] = "R-square";
 			sheet.Range[sheet.Cells[row, 8], sheet.Cells[row, 9]].Borders[XlBordersIndex.xlEdgeBottom].LineStyle = XlLineStyle.xlDouble;
 
-			//int rij = 10;
-			//int kol = 10;
 			//calculate Rj² values, coefficient of determination when Xj is regressed on all other predictor variables in the model.
 			for (int k = 1; k < xData.GetLength(1); k++) //first column is full of value 1, skip this one, it has no data of parameters
 			{
@@ -511,8 +493,6 @@ namespace NoruST.Presenters
 				var BT = new DenseVector(bT);
 				var YT = new DenseVector(yDataNew);
 				var yhT = XT.Multiply(BT);
-				//var erT = YT.Subtract(yhT);
-				//double[] errorT = erT.ToArray();
 
 				double[] yhatT = yhT.ToArray();
 
@@ -577,14 +557,16 @@ namespace NoruST.Presenters
 
 		}
 
-		//TODO
-		//public void prediction(_Worksheet sheet, double[,]xDataNew, double xAvg, double[] coefficients, double confLevel, int n, int k, DenseMatrix X, double MSE)
-		public void prediction(_Worksheet sheet, double[,]xDataNew, double[] coefficients, int n, int k, DenseMatrix X, double MSE)
+		public void prediction(_Worksheet sheet, double[,]xDataNewN, double[] coefficients, int n, int k, DenseMatrix X, double MSE, int[] topRightCell, String predVarName)
 		{
-			//source: http://www.real-statistics.com/multiple-regression/confidence-and-prediction-intervals/
+			//source for calculations: http://www.real-statistics.com/multiple-regression/confidence-and-prediction-intervals/
+
+			sheet.Cells[topRightCell[0], topRightCell[1]] = predVarName;
+			sheet.Cells[topRightCell[0], topRightCell[1] + 1] = "lower limit";
+			sheet.Cells[topRightCell[0], topRightCell[1] + 2] = "higher limit";
 
 			double predLevel = model.predictionLevel;
-			double[,] xDataNewN = { { 1,1430,35},{ 1,1560,45},{1,1520,40 } };
+			double[,] results = new double[xDataNewN.GetLength(0), 3];
 
 			for (int dataNr = 0; dataNr < xDataNewN.GetLength(0);dataNr++)
 			{
@@ -614,10 +596,16 @@ namespace NoruST.Presenters
 				yNew = Math.Round(yNew, 2);
 				double lowLimit= Math.Round((yNew - sheet.Application.WorksheetFunction.TInv(1 - predLevel / 100, n-k-1) * s), 2);
 				double highLimit = Math.Round((yNew + sheet.Application.WorksheetFunction.TInv(1 - predLevel / 100, n - k - 1) * s), 2);
-				System.Diagnostics.Debug.WriteLine("{0}\t\t{1}\t\t{2}",yNew, lowLimit, highLimit);
-				
+				//System.Diagnostics.Debug.WriteLine("{0}\t\t{1}\t\t{2}",yNew, lowLimit, highLimit);
+
+				sheet.Cells[topRightCell[0]+dataNr+1, topRightCell[1]] = yNew;
+				sheet.Cells[topRightCell[0]+dataNr+1, topRightCell[1]+1] = lowLimit;
+				sheet.Cells[topRightCell[0]+dataNr+1, topRightCell[1]+2] = highLimit;
 			}
-				
+			((Range)sheet.Cells[topRightCell[0], topRightCell[1]]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[topRightCell[0], topRightCell[1]+1]).EntireColumn.AutoFit();
+			((Range)sheet.Cells[topRightCell[0], topRightCell[1]+2]).EntireColumn.AutoFit();
+
 		}
 	}
 }
